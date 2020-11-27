@@ -17,10 +17,21 @@ resources:
       branch: master
 
 jobs:
-  - name: smoke-test
+  - name: linting
     public: true
     plan:
       - get: src
         trigger: true
-      - task: lint
-        file: src/build/ci/lint-task.yml
+      - task: tox
+        file: src/build/ci/tox-task.yml
+      - task: shellcheck
+        file: src/build/ci/shellcheck-task.yml
+      - task: hadolint
+        file: src/build/ci/hadolint-task.yml
+  - name: unit-tests
+    public: true
+    plan:
+      - get: src
+        trigger: true
+      - task: go-test
+        file: src/build/ci/go-test-task.yml
