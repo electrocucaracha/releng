@@ -14,6 +14,11 @@ $no_proxy = ENV['NO_PROXY'] || ENV['no_proxy'] || "127.0.0.1,localhost"
   $no_proxy += ",192.168.121.#{i}"
 end
 $no_proxy += ",10.0.2.15"
+$registry_ip_address="192.168.123.3"
+$ci_ip_address="192.168.123.4"
+$volume_file="registry.vdi"
+$fly_version="6.7.1"
+$kubectl_version="v1.18.8"
 
 Vagrant.configure("2") do |config|
   config.vm.provider :libvirt
@@ -21,23 +26,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/ubuntu2004"
   config.vm.box_check_update = false
-  config.vm.synced_folder './', '/vagrant'
-  config.vm.hostname = "releng"
 
-  config.vm.provision 'shell', privileged: false, inline: <<-SHELL
-    set -o errexit
-
-    cd /vagrant/
-    ./installer.sh | tee ~/installer.log
-    ./setup.sh | tee ~/setup.log
-  SHELL
-
-  [:virtualbox, :libvirt].each do |provider|
-  config.vm.provider provider do |p|
-      p.cpus = ENV["CPUS"] || 2
-      p.memory = ENV['MEMORY'] || 6144
-    end
-  end
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false
@@ -56,5 +45,67 @@ Vagrant.configure("2") do |config|
       config.proxy.enabled = { docker: false }
     end
   end
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.define :registry do |registry|
+    registry.vm.network "private_network", ip: $registry_ip_address
+    registry.vm.synced_folder './registry', '/vagrant'
+
+    [:virtualbox, :libvirt].each do |provider|
+      registry.vm.provider provider do |p|
+        p.cpus = 1
+        p.memory = 512
+      end
+    end
+    registry.vm.provider "virtualbox" do |v|
+      unless File.exist?($volume_file)
+        v.customize ['createmedium', 'disk', '--filename', $volume_file, '--size', 25600]
+      end
+      v.customize ['storageattach', :id, '--storagectl', "IDE Controller" , '--port', 1, '--device', 1, '--type', 'hdd', '--medium', $volume_file]
+    end
+
+    registry.vm.provider :libvirt do |v|
+      v.storage :file, :bus => 'sata', :device => "sdb", :size => 25
+    end
+    registry.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
+        'PKG_FLY_VERSION': $fly_version,
+        'PKG_KUBECTL_VERSION': $kubectl_version,
+      }
+      sh.inline = <<-SHELL
+        set -o errexit
+
+        cd /vagrant/
+        ./install.sh | tee ~/install.log
+        ./setup.sh | tee ~/setup.log
+      SHELL
+    end
+  end # registry
+
+  config.vm.define :ci, primary: true, autostart: false do |ci|
+    ci.vm.network "private_network", ip: $ci_ip_address
+    ci.vm.synced_folder './ci', '/vagrant'
+    ci.vm.network "forwarded_port", guest: 80, host: 8080
+
+    [:virtualbox, :libvirt].each do |provider|
+      ci.vm.provider provider do |p|
+        p.cpus = ENV["CPUS"] || 2
+        p.memory = ENV['MEMORY'] || 6144
+      end
+    end
+    ci.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
+        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$registry_ip_address}:5000\"",
+        'PKG_FLY_VERSION': $fly_version,
+        'PKG_KUBECTL_VERSION': $kubectl_version,
+      }
+      sh.inline = <<-SHELL
+        set -o errexit
+
+        cd /vagrant/
+        ./install.sh | tee ~/install.log
+        ./deploy.sh | tee ~/deploy.log
+        ./setup.sh | tee ~/setup.log
+      SHELL
+    end
+  end # ci
 end

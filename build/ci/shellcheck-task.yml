@@ -8,19 +8,20 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
-resources:
-  - name: src
-    type: git
-    icon: github
-    source:
-      uri: https://github.com/electrocucaracha/releng.git
-      branch: master
+platform: linux
 
-jobs:
-  - name: smoke-test
-    public: true
-    plan:
-      - get: src
-        trigger: true
-      - task: lint
-        file: src/build/ci/lint-task.yml
+image_resource:
+  type: docker-image
+  source:
+    repository: electrocucaracha/linter
+
+inputs:
+  - name: src
+
+run:
+  dir: src
+  path: bash
+  args:
+    - -c
+    - |
+       shopt -s globstar; shellcheck -x **/*.sh

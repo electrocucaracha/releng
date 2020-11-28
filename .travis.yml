@@ -13,13 +13,26 @@ os: linux
 git:
   depth: 1
 dist: bionic
+cache:
+  directories:
+    - /home/travis/.vagrant.d/boxes
+before_install:
+  - sudo apt update
+  - sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends curl
 jobs:
   include:
     - name: Lint validation
-      script:
-        - sudo ./build/ci/linting.sh
-    - name: Ubuntu 20.04 LTS Vagrant validation
       install:
-        - ./installer.sh
+        - curl -fsSL http://bit.ly/install_pkg | PKG="tox hadolint" bash
       script:
-        - ./setup.sh
+        - tox -e lint
+        - bash -c 'shopt -s globstar; shellcheck -x **/*.sh'
+    - name: Ubuntu 20.04 LTS Vagrant validation
+      before_install:
+        - sudo apt update
+      install:
+        - sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends curl qemu
+        - curl -fsSL http://bit.ly/initVagrant | PROVIDER=libvirt bash
+      script:
+        - sudo -E vagrant up registry
+        - sudo -E vagrant up ci

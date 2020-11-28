@@ -13,29 +13,18 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-mkdir -p  /usr/local/bin/
+reg_name=local-registry
 
-# Install dependencies
-pkgs=""
-if ! command -v pip; then
-    pkgs+=" python3-pip"
-fi
-for pkg in shellcheck wget; do
-    if ! command -v "$pkg"; then
-        pkgs+=" $pkg"
-    fi
-done
-if [ -n "$pkgs" ]; then
-    apt update
-    apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends $pkgs
-    if command -v pip3; then
-        ln -s "$(command -v pip3)" /usr/local/bin/pip
-    fi
-fi
-if ! command -v tox; then
-    pip install tox
+# Start local registry
+running="$(sudo docker inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)"
+if [ "${running}" != 'true' ]; then
+    sudo -E docker run -d --name "${reg_name}" --restart=always \
+    -p 5000:5000 \
+    -v registry:/var/lib/registry registry:2
 fi
 
-# Run Linting tasks
-tox -e lint
-shellcheck -x *.sh
+while IFS= read -r image; do
+    skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/${image#*/}"
+done < images.txt
+
+curl -s -X GET http://localhost:5000/v2/_catalog

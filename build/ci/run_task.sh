@@ -1,4 +1,4 @@
----
+#!/bin/bash
 # SPDX-license-identifier: Apache-2.0
 ##############################################################################
 # Copyright (c)
@@ -8,17 +8,13 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
-platform: linux
+set -o pipefail
+set -o errexit
+set -o nounset
 
-image_resource:
-  type: docker-image
-  source:
-    repository: ubuntu
-    tag: 18.04
+if ! command -v fly; then
+    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+    curl -fsSL http://bit.ly/install_pkg | PKG=fly bash
+fi
 
-inputs:
-  - name: src
-
-run:
-  dir: src
-  path: build/ci/linting.sh
+fly --target "${RELENG_TARGET:-releng}" execute -c "$1-task.yml" -i src=../../

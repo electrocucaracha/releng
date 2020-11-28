@@ -1,0 +1,5 @@
+docker.io/kindest/node:v1.18.8
+docker.io/concourse/concourse:6.7.1
+docker.io/jettech/kube-webhook-certgen:v1.5.0
+k8s.gcr.io/ingress-nginx/controller:v0.41.2
+docker.io/bitnami/postgresql:11.8.0-debian-10-r76
