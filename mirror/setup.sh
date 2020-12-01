@@ -13,18 +13,10 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-reg_name=local-registry
-
-# Start local registry
-running="$(sudo docker inspect -f '{{.State.Running}}' "${reg_name}" 2>/dev/null || true)"
-if [ "${running}" != 'true' ]; then
-    sudo -E docker run -d --name "${reg_name}" --restart=always \
-    -p 5000:5000 \
-    -v registry:/var/lib/registry registry:2
-fi
+sudo docker-compose up -d
 
 while IFS= read -r image; do
-    skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/${image#*/}"
+    skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost/${image#*/}"
 done < images.txt
 
-curl -s -X GET http://localhost:5000/v2/_catalog
+curl -s -X GET http://localhost/v2/_catalog

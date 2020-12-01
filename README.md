@@ -21,7 +21,8 @@ are determine by the **PROVIDER** environment variable.
 Once Vagrant is installed, it's possible to provision a Virtual
 Machine using the following instructions:
 
-    $ vagrant up
+    $ VAGRANT_EXPERIMENTAL=disks vagrant up
+    $ vagrant up ci
 
 The provisioning process will take some time to install all
 dependencies required by this project and perform a Kubernetes

@@ -1,0 +1,48 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c) 2020
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+version: '3.8'
+
+services:
+  mirror:
+    build:
+      context: .
+      dockerfile: apt/Dockerfile
+    volumes:
+      - ./apt/mirror.list:/etc/apt/mirror.list:ro
+      - packages:/var/spool/apt-mirror
+  registry:
+    image: registry:2
+    volumes:
+      - images:/var/lib/registry
+  web-server:
+    links:
+      - "registry:docker-registry"
+    image: nginx:1.19-alpine
+    ports:
+      - "80:8080"
+    volumes:
+      - packages:/var/mirrors/apt-mirror/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  images:
+    driver: local
+    driver_opts:
+      type: bind
+      device: ${DOCKER_REGISTRY_PATH}
+      o: bind
+  packages:
+    driver: local
+    driver_opts:
+      type: bind
+      device: ${APT_MIRROR_PATH}
+      o: bind

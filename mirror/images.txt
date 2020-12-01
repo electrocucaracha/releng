@@ -1,0 +1,2 @@
+docker.io/kindest/node:v1.18.8
+docker.io/concourse/concourse:6.7.1

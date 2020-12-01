@@ -14,9 +14,8 @@ $no_proxy = ENV['NO_PROXY'] || ENV['no_proxy'] || "127.0.0.1,localhost"
   $no_proxy += ",192.168.121.#{i}"
 end
 $no_proxy += ",10.0.2.15"
-$registry_ip_address="192.168.123.3"
+$mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
-$volume_file="registry.vdi"
 $fly_version="6.7.1"
 $kubectl_version="v1.18.8"
 
@@ -46,27 +45,20 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define :registry do |registry|
-    registry.vm.network "private_network", ip: $registry_ip_address
-    registry.vm.synced_folder './registry', '/vagrant'
+  config.vm.define :mirror do |mirror|
+    mirror.vm.network "private_network", ip: $mirror_ip_address
+    mirror.vm.synced_folder './mirror', '/vagrant'
 
     [:virtualbox, :libvirt].each do |provider|
-      registry.vm.provider provider do |p|
+      mirror.vm.provider provider do |p|
         p.cpus = 1
         p.memory = 512
       end
     end
-    registry.vm.provider "virtualbox" do |v|
-      unless File.exist?($volume_file)
-        v.customize ['createmedium', 'disk', '--filename', $volume_file, '--size', 25600]
-      end
-      v.customize ['storageattach', :id, '--storagectl', "IDE Controller" , '--port', 1, '--device', 1, '--type', 'hdd', '--medium', $volume_file]
-    end
+    mirror.vm.disk :disk, name: "packages", size: "50GB"
+    mirror.vm.disk :disk, name: "images", size: "10GB"
 
-    registry.vm.provider :libvirt do |v|
-      v.storage :file, :bus => 'sata', :device => "sdb", :size => 25
-    end
-    registry.vm.provision 'shell', privileged: false do |sh|
+    mirror.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
@@ -79,7 +71,7 @@ Vagrant.configure("2") do |config|
         ./setup.sh | tee ~/setup.log
       SHELL
     end
-  end # registry
+  end # mirror
 
   config.vm.define :ci, primary: true, autostart: false do |ci|
     ci.vm.network "private_network", ip: $ci_ip_address
@@ -94,7 +86,7 @@ Vagrant.configure("2") do |config|
     end
     ci.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
-        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$registry_ip_address}:5000\"",
+        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}\"",
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
       }

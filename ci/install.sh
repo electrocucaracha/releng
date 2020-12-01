@@ -30,7 +30,7 @@ if ! sudo kind get clusters | grep -q kind; then
     if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
         containerd_patch+="containerdConfigPatches:
     - |
-        [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors.\"registry:5000\"]
+        [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors.\"local-mirror:5000\"]
             endpoint = [$PKG_DOCKER_REGISTRY_MIRRORS]"
     fi
     cat << EOF | sudo kind create cluster --wait=300s --config=-
