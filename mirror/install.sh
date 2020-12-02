@@ -31,8 +31,8 @@ EOF
     fi
 }
 
-mount_dev sdb "${APT_MIRROR_PATH:-/mnt/vol1}"
-mount_dev sdc "${DOCKER_REGISTRY_PATH:-/mnt/vol2}"
+mount_dev sdb "${APT_MIRROR_PATH:-/var/local/packages}"
+mount_dev sdc "${DOCKER_REGISTRY_PATH:-/var/local/images}"
 
 # Install dependencies
 pkgs=""
