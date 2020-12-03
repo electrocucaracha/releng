@@ -17,4 +17,4 @@ if ! command -v fly; then
     curl -fsSL http://bit.ly/install_pkg | PKG=fly bash
 fi
 
-fly --target "${RELENG_TARGET:-releng}" execute -c "$1-task.yml" -i src=../../
+fly --target "${RELENG_TARGET:-releng}" execute -c "${TASK_NAME}-task.yml" -i src=../../ "$@"
