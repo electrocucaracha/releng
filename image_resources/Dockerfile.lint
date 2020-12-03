@@ -19,5 +19,6 @@ RUN apk update --quiet --no-cache && apk add --no-cache bash==5.0.17-r0
 
 COPY --from=getter /tmp/hadolint /usr/local/bin/hadolint
 COPY --from=getter /tmp/shellcheck /usr/local/bin/shellcheck
+COPY ./linter_entrypoint.sh /usr/local/bin/linter.sh
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/usr/local/bin/linter.sh"]
