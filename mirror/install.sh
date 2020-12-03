@@ -45,3 +45,11 @@ if [ -n "$pkgs" ]; then
     # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
     curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
+
+sudo docker-compose pull
+sudo docker-compose build
+
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+
+echo "nameserver 127.0.0.1" | sudo tee /etc/resolv.conf

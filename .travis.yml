@@ -34,7 +34,6 @@ jobs:
         - sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends curl qemu
         - curl -fsSL http://bit.ly/initVagrant | PROVIDER=libvirt bash
       script:
-        - sed -i '/^deb/d' mirror/apt/mirror.list
         - sudo -E vagrant up
         - sudo -E vagrant up ci
       env:

@@ -16,7 +16,7 @@ set -o nounset
 sudo docker-compose up -d
 
 while IFS= read -r image; do
-    skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost/${image#*/}"
-done < images.txt
+    skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/${image#*/}"
+done < releng_images.txt
 
-curl -s -X GET http://localhost/v2/_catalog
+curl -s -X GET http://localhost:5000/v2/_catalog

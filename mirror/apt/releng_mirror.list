@@ -1,0 +1,5 @@
+set base_path /var/spool/apt-mirror
+set nthreads 20
+set _tilde 0
+
+clean http://archive.ubuntu.com/ubuntu

@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false
+    v.auto_nat_dns_proxy = false
   end
 
   config.vm.provider :libvirt do |v|
@@ -62,6 +63,7 @@ Vagrant.configure("2") do |config|
       sh.env = {
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
+        'MIRROR_FILENAME': 'releng_mirror.list',
       }
       sh.inline = <<-SHELL
         set -o errexit
@@ -86,13 +88,14 @@ Vagrant.configure("2") do |config|
     end
     ci.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
-        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}\"",
+        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
       }
       sh.inline = <<-SHELL
         set -o errexit
 
+        echo "nameserver #{$mirror_ip_address}" | sudo tee  /etc/resolv.conf
         cd /vagrant/
         ./install.sh | tee ~/install.log
         ./deploy.sh | tee ~/deploy.log
