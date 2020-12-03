@@ -16,20 +16,35 @@ resources:
       uri: https://github.com/electrocucaracha/k8s-HorizontalPodAutoscaler-demo.git
       branch: master
 
+groups:
+  - name: develop
+    jobs:
+      - linting
+      - unit-tests
+
 jobs:
   - name: linting
     public: true
+    serial: true
     plan:
       - get: src
         trigger: true
-      - task: tox
-        file: src/build/ci/tox-task.yml
-      - task: shellcheck
-        file: src/build/ci/shellcheck-task.yml
-      - task: hadolint
-        file: src/build/ci/hadolint-task.yml
+      - in_parallel:
+          - task: tox
+            file: src/build/ci/linter-task.yml
+            params:
+              RELENG_LINTER_TOOL: tox
+          - task: shellcheck
+            file: src/build/ci/linter-task.yml
+            params:
+              RELENG_LINTER_TOOL: shellcheck
+          - task: hadolint
+            file: src/build/ci/linter-task.yml
+            params:
+              RELENG_LINTER_TOOL: hadolint
   - name: unit-tests
     public: true
+    serial: true
     plan:
       - get: src
         trigger: true
