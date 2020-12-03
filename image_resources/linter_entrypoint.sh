@@ -20,11 +20,10 @@ fi
 
 case ${RELENG_LINTER_TOOL} in
     hadolint)
-        find . -type f -iname "*Dockerfile*" -print0 | xargs hadolint
+        find . -type f -iname "*Dockerfile*" -exec hadolint {} \;
     ;;
     shellcheck)
-        # shellcheck disable=SC2035
-        shellcheck -x **/*.sh
+        find . -type f -iname "*sh" -exec shellcheck -x {} \;
     ;;
     tox)
         tox -v
