@@ -2,6 +2,7 @@ FROM alpine:3.12 as getter
 
 ENV HADOLINT_VERSION=v1.19.0
 ENV SHELLCHECK_VERSION=v0.7.1
+ENV GOLANGCI_LINT_VERSION=v1.33.0
 
 SHELL ["/bin/sh", "-o", "pipefail", "-c"]
 
@@ -11,14 +12,18 @@ RUN wget -nv --no-cache "https://github.com/hadolint/hadolint/releases/download/
 RUN wget -nv --no-cache "https://github.com/koalaman/shellcheck/releases/download/$SHELLCHECK_VERSION/shellcheck-$SHELLCHECK_VERSION.$(uname | tr '[:upper:]' '[:lower:]').$(uname -m).tar.xz" -O - | tar -xJ -C /tmp/
 RUN mv "/tmp/shellcheck-$SHELLCHECK_VERSION/shellcheck" /tmp/shellcheck
 RUN chmod +x /tmp/hadolint
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s $GOLANGCI_LINT_VERSION
 
 FROM python:3.9.0-alpine3.12
 
-RUN pip install --no-cache-dir tox==3.20.1
-RUN apk update --quiet --no-cache && apk add --no-cache bash==5.0.17-r0
+RUN apk update --quiet --no-cache
+RUN apk add --no-cache bash==5.0.17-r0 go==1.13.15-r0
 
+RUN pip install --no-cache-dir tox==3.20.1
 COPY --from=getter /tmp/hadolint /usr/local/bin/hadolint
 COPY --from=getter /tmp/shellcheck /usr/local/bin/shellcheck
+COPY --from=getter /bin/golangci-lint /usr/local/bin/golangci-lint
+
 COPY ./linter_entrypoint.sh /usr/local/bin/linter.sh
 
 ENTRYPOINT ["/usr/local/bin/linter.sh"]

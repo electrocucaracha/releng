@@ -28,4 +28,7 @@ case ${RELENG_LINTER_TOOL} in
     tox)
         tox -v
     ;;
+    golangci-lint)
+        golangci-lint run --enable-all ./...
+    ;;
 esac
