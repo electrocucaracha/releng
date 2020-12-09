@@ -17,6 +17,6 @@ sudo docker-compose up -d
 
 while IFS= read -r image; do
     skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/${image#*/}"
-done < releng_images.txt
+done < "${RELENG_K8S_TYPE:-kind}_images.txt"
 
 curl -s -X GET http://localhost:5000/v2/_catalog

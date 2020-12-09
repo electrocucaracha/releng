@@ -18,6 +18,7 @@ $mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
 $fly_version="6.7.1"
 $kubectl_version="v1.18.8"
+$k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
 
 Vagrant.configure("2") do |config|
   config.vm.provider :libvirt
@@ -25,7 +26,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/ubuntu2004"
   config.vm.box_check_update = false
-
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false
@@ -64,6 +64,7 @@ Vagrant.configure("2") do |config|
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
         'MIRROR_FILENAME': 'releng_mirror.list',
+        'RELENG_K8S_TYPE': $k8s_type,
       }
       sh.inline = <<-SHELL
         set -o errexit
@@ -92,13 +93,14 @@ Vagrant.configure("2") do |config|
         'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
+        'RELENG_K8S_TYPE': $k8s_type,
       }
       sh.inline = <<-SHELL
         set -o errexit
 
         echo "nameserver #{$mirror_ip_address}" | sudo tee  /etc/resolv.conf
         cd /vagrant/
-        ./install.sh | tee ~/install.log
+        ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy.sh | tee ~/deploy.log
         ./setup.sh | tee ~/setup.log
       SHELL

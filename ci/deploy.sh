@@ -13,6 +13,18 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
+# Install dependencies
+pkgs=""
+for pkg in helm kubectl; do
+    if ! command -v "$pkg"; then
+        pkgs+=" $pkg"
+    fi
+done
+if [ -n "$pkgs" ]; then
+    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+    curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
+fi
+
 if ! helm repo list | grep -e concourse; then
     helm repo add concourse https://concourse-charts.storage.googleapis.com/
     helm repo update

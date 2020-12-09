@@ -13,6 +13,12 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
+# Install dependencies
+if ! command -v fly; then
+    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+    curl -fsSL http://bit.ly/install_pkg | PKG=fly bash
+fi
+
 fly_target="${RELENG_TARGET:-releng}"
 
 fly --target "$fly_target" login -c http://localhost -u "${RELENG_LOCAL_USER:-test}" -p "${RELENG_LOCAL_PASSWORD:-test}"
