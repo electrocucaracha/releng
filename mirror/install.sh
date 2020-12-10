@@ -13,27 +13,6 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-
-function mount_dev {
-    dev_name="/dev/$1"
-    mount_dir="$2"
-
-    sudo mkdir -p "$mount_dir"
-
-    # Format registry volume
-    if lsblk --list | grep -q "^${dev_name##*/} .*disk" &&  ! mount | grep -q "${dev_name}1 on $mount_dir"; then
-    sudo sfdisk "$dev_name" --no-reread << EOF
-;
-EOF
-        sudo mkfs -t ext4 "${dev_name}1"
-        sudo mount "${dev_name}1" "$mount_dir"
-        echo "${dev_name}1 $mount_dir           ext4    errors=remount-ro,noatime,barrier=0 0       1" | sudo tee --append /etc/fstab
-    fi
-}
-
-mount_dev sdb "${APT_MIRROR_PATH:-/var/local/packages}"
-mount_dev sdc "${DOCKER_REGISTRY_PATH:-/var/local/images}"
-
 # Install dependencies
 pkgs=""
 for pkg in docker skopeo docker-compose; do

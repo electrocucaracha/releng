@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :mirror do |mirror|
+    mirror.vm.hostname = "mirror"
     mirror.vm.network "private_network", ip: $mirror_ip_address
     mirror.vm.synced_folder './mirror', '/vagrant'
 
@@ -58,6 +59,16 @@ Vagrant.configure("2") do |config|
     end
     mirror.vm.disk :disk, name: "packages", size: "50GB"
     mirror.vm.disk :disk, name: "images", size: "10GB"
+    {
+      "sdb"=>"/var/local/packages",
+      "sdc"=>"/var/local/images",
+      "sdd"=>"/var/local/postgresql/data",
+    }.each do |device, mount_path|
+      mirror.vm.provision "shell" do |s|
+        s.path   = "pre-install.sh"
+        s.args   = [device, mount_path]
+      end
+    end
 
     mirror.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
@@ -68,6 +79,7 @@ Vagrant.configure("2") do |config|
       }
       sh.inline = <<-SHELL
         set -o errexit
+        set -o pipefail
 
         cd /vagrant/
         ./install.sh | tee ~/install.log
@@ -77,6 +89,7 @@ Vagrant.configure("2") do |config|
   end # mirror
 
   config.vm.define :ci, primary: true, autostart: false do |ci|
+    ci.vm.hostname = "ci"
     ci.vm.network "private_network", ip: $ci_ip_address
     ci.vm.synced_folder './ci', '/vagrant'
     ci.vm.synced_folder './', '/opt/releng'
@@ -97,6 +110,7 @@ Vagrant.configure("2") do |config|
       }
       sh.inline = <<-SHELL
         set -o errexit
+        set -o pipefail
 
         echo "nameserver #{$mirror_ip_address}" | sudo tee  /etc/resolv.conf
         cd /vagrant/
