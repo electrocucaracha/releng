@@ -31,7 +31,9 @@ if ! helm repo list | grep -e concourse; then
 fi
 
 concourse_image=""
-if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ] && [ -n "$(curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")')" ]; then
+if [ "${RELENG_K8S_TYPE:-kind}" == "kind" ] && \
+[ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ] && \
+[ -n "$(curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")')" ]; then
     curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")'
     concourse_image="local-mirror:5000/"
 fi

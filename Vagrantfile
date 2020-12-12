@@ -101,12 +101,32 @@ Vagrant.configure("2") do |config|
         p.memory = ENV['MEMORY'] || 6144
       end
     end
+    ci.vm.disk :disk, name: "postgresql", size: "10GB"
+    ci.vm.disk :disk, name: "worker0", size: "25GB"
+    ci.vm.disk :disk, name: "worker1", size: "25GB"
+    ci.vm.provider :libvirt do |v|
+      v.storage :file, :bus => 'sata', :device => "sdb", :size => '10G'
+      v.storage :file, :bus => 'sata', :device => "sdc", :size => '25G'
+      v.storage :file, :bus => 'sata', :device => "sdd", :size => '25G'
+    end
+    {
+      "sdb"=>"/mnt/disks/postgresql",
+      "sdc"=>"/mnt/disks/worker0",
+      "sdd"=>"/mnt/disks/worker1",
+    }.each do |device, mount_path|
+      ci.vm.provision "shell" do |s|
+        s.path   = "pre-install.sh"
+        s.args   = [device, mount_path]
+      end
+    end
+
     ci.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
         'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
         'RELENG_K8S_TYPE': $k8s_type,
+        'RELENG_DNS_SERVER': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
         set -o errexit
