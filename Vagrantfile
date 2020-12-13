@@ -134,6 +134,7 @@ Vagrant.configure("2") do |config|
         echo "nameserver #{$mirror_ip_address}" | sudo tee  /etc/resolv.conf
         cd /vagrant/
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
+        ./deploy_hpa.sh | tee ~/deploy_hpa.log
         ./deploy_ci.sh | tee ~/deploy_ci.log
         ./setup.sh | tee ~/setup.log
         kubectl describe nodes
