@@ -93,7 +93,6 @@ Vagrant.configure("2") do |config|
     ci.vm.network "private_network", ip: $ci_ip_address
     ci.vm.synced_folder './ci', '/vagrant'
     ci.vm.synced_folder './', '/opt/releng'
-    ci.vm.network "forwarded_port", guest: 80, host: 8080
 
     [:virtualbox, :libvirt].each do |provider|
       ci.vm.provider provider do |p|

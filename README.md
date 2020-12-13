@@ -28,5 +28,8 @@ The provisioning process will take some time to install all
 dependencies required by this project and perform a Kubernetes
 deployment on it.
 
+The Concourse CI Dashboard is accesible through
+[this URL.](http://192.168.123.4/)
+
 [1]: https://www.vagrantup.com/
 [2]: https://github.com/electrocucaracha/bootstrap-vagrant
