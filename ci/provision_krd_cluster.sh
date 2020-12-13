@@ -29,6 +29,8 @@ export KRD_CERT_MANAGER_ENABLED=false
 export KRD_DOWNLOAD_LOCALHOST=false
 export KRD_DOWNLOAD_RUN_ONCE=false
 export KRD_HUGEPAGES_ENABLED=false
+export KRD_ACTIONS_LIST=install_k8s,install_helm
+export KRD_HELM_VERSION=3
 
 # Provsion KRD cluster
 curl -fsSL http://bit.ly/KRDaio | bash

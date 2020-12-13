@@ -15,7 +15,7 @@ set -o nounset
 
 # Install dependencies
 pkgs=""
-for pkg in docker kind kubectl; do
+for pkg in docker kind kubectl helm; do
     if ! command -v "$pkg"; then
         pkgs+=" $pkg"
     fi
