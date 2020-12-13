@@ -13,6 +13,18 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
+function exit_trap {
+    set +o xtrace
+    printf "CPU usage: "
+    grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage " %"}'
+    printf "Memory free(Kb):"
+    awk -v low="$(grep low /proc/zoneinfo | awk '{k+=$2}END{print k}')" '{a[$1]=$2}  END{ print a["MemFree:"]+a["Active(file):"]+a["Inactive(file):"]+a["SReclaimable:"]-(12*low);}' /proc/meminfo
+    if command -v kubectl; then
+        kubectl get all -A -o wide
+        kubectl get nodes -o wide
+    fi
+}
+
 # Install dependencies
 pkgs=""
 for pkg in helm kubectl; do
@@ -39,10 +51,12 @@ if [ "${RELENG_K8S_TYPE:-kind}" == "kind" ] && \
 fi
 concourse_image+="concourse/concourse"
 
+trap exit_trap ERR
 if ! helm ls | grep -q concourse-ci; then
     helm upgrade --install concourse-ci concourse/concourse --wait \
         --set secrets.localUsers="${RELENG_LOCAL_USER:-test}:${RELENG_LOCAL_PASSWORD:-test}" \
         --set image="$concourse_image" \
+        --set worker.replicas="$(kubectl get nodes --no-headers | wc -l)" \
         --set imageTag="${PKG_FLY_VERSION:-6.7.1}" -f values.yml
 fi
 
@@ -50,3 +64,4 @@ kubectl rollout status deployment/concourse-ci-web --timeout=5m
 until curl --output /dev/null --silent --head --fail http://localhost; do
     sleep 5
 done
+trap ERR
