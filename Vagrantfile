@@ -136,6 +136,7 @@ Vagrant.configure("2") do |config|
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy_ci.sh | tee ~/deploy_ci.log
         ./setup.sh | tee ~/setup.log
+        kubectl describe nodes
       SHELL
     end
   end # ci
