@@ -16,19 +16,22 @@ if [ "${DEBUG:-false}" == "true" ]; then
     set -o xtrace
     printenv
     pwd
+    for tool in hadolint shellcheck tox golangci-lint; do
+        $tool --version
+    done
 fi
 
 case ${RELENG_LINTER_TOOL} in
     hadolint)
-        find . -type f -iname "*Dockerfile*" -exec hadolint {} \;
+        find . -type f -iname "*Dockerfile*" -print0 | xargs -0 hadolint
     ;;
     shellcheck)
-        find . -type f -iname "*sh" -exec shellcheck -x {} \;
+        find . -type f -iname "*sh" -print0 | xargs -0 shellcheck -x
     ;;
     tox)
         tox -v
     ;;
     golangci-lint)
-        golangci-lint run --enable-all ./...
+        CGO_ENABLED=0 golangci-lint run --enable-all ./...
     ;;
 esac
