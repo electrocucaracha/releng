@@ -42,6 +42,10 @@ jobs:
             file: src/build/ci/linter-task.yml
             params:
               RELENG_LINTER_TOOL: hadolint
+          - task: golangci-lint
+            file: src/build/ci/linter-task.yml
+            params:
+              RELENG_LINTER_TOOL: golangci-lint
   - name: unit-tests
     public: true
     serial: true
