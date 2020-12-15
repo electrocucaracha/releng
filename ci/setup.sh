@@ -21,8 +21,12 @@ fi
 
 fly_target="${RELENG_TARGET:-releng}"
 
-fly --target "$fly_target" login -c http://localhost -u "${RELENG_LOCAL_USER:-test}" -p "${RELENG_LOCAL_PASSWORD:-test}"
+if ! fly targets | grep -e "$fly_target"; then
+    fly --target "$fly_target" login -c "http://${RELENG_CI_SERVER:-localhost}" -u "${RELENG_CI_USER:-test}" -p "${RELENG_CI_PASSWORD:-test}"
+fi
+
 for pipeline in k8s-HorizontalPodAutoscaler-demo releng; do
-    fly --target "$fly_target" set-pipeline -c "pipelines/${pipeline}.yml" -p "${pipeline,,}" -n
-    fly --target "$fly_target" unpause-pipeline -p "${pipeline,,}"
+    pipeline_lower=$(echo "$pipeline" | tr '[:upper:]' '[:lower:]')
+    fly --target "$fly_target" set-pipeline -c "pipelines/${pipeline}.yml" -p "${pipeline_lower}" -n
+    fly --target "$fly_target" unpause-pipeline -p "${pipeline_lower}"
 done
