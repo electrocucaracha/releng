@@ -17,14 +17,19 @@ resources:
       branch: master
 
 groups:
-  - name: develop
+  - name: unit-test
     jobs:
       - linting
-      - unit-tests
+      - go-unit-test
+  - name: integration-test
+    jobs:
+      - build-image-test
+  - name: system-test
+    jobs:
+      - smoke-test
 
 jobs:
   - name: linting
-    public: true
     serial: true
     plan:
       - get: src
@@ -46,11 +51,33 @@ jobs:
             file: src/build/ci/linter-task.yml
             params:
               RELENG_LINTER_TOOL: golangci-lint
-  - name: unit-tests
-    public: true
+  - name: go-unit-test
     serial: true
     plan:
       - get: src
         trigger: true
-      - task: go-test
+      - task: go-unit-test
         file: src/build/ci/go-test-task.yml
+      - task: container-unit-test
+        privileged: true
+        file: src/build/ci/docker-task.yml
+        params:
+          MAKE_ACTION: unit-test
+  - name: build-image-test
+    serial: true
+    plan:
+      - get: src
+        trigger: true
+      - task: build
+        privileged: true
+        file: src/build/ci/docker-task.yml
+        params:
+          MAKE_ACTION: build
+  - name: smoke-test
+    serial: true
+    plan:
+      - get: src
+        trigger: true
+      - task: increase-processed-reqs-test
+        privileged: true
+        file: src/build/ci/integration-task.yml
