@@ -29,7 +29,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false
-    v.auto_nat_dns_proxy = false
   end
 
   config.vm.provider :libvirt do |v|
@@ -62,7 +61,6 @@ Vagrant.configure("2") do |config|
     {
       "sdb"=>"/var/local/packages",
       "sdc"=>"/var/local/images",
-      "sdd"=>"/var/local/postgresql/data",
     }.each do |device, mount_path|
       mirror.vm.provision "shell" do |s|
         s.path   = "pre-install.sh"
@@ -100,18 +98,21 @@ Vagrant.configure("2") do |config|
         p.memory = ENV['MEMORY'] || 6144
       end
     end
+
+    ci.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--nested-hw-virt","on"]
+    end
     ci.vm.disk :disk, name: "postgresql", size: "10GB"
     ci.vm.disk :disk, name: "worker0", size: "25GB"
-    ci.vm.disk :disk, name: "worker1", size: "25GB"
     ci.vm.provider :libvirt do |v|
+      v.nested = true
       v.storage :file, :bus => 'sata', :device => "sdb", :size => '10G'
       v.storage :file, :bus => 'sata', :device => "sdc", :size => '25G'
-      v.storage :file, :bus => 'sata', :device => "sdd", :size => '25G'
     end
+
     {
       "sdb"=>"/mnt/disks/postgresql",
       "sdc"=>"/mnt/disks/worker0",
-      "sdd"=>"/mnt/disks/worker1",
     }.each do |device, mount_path|
       ci.vm.provision "shell" do |s|
         s.path   = "pre-install.sh"
