@@ -36,8 +36,6 @@ jobs:
       script:
         - sudo -E vagrant up
         - sudo -E vagrant up ci
-      env:
-        - VAGRANT_EXPERIMENTAL=disks
     - name: KRD - Ubuntu 20.04 LTS Vagrant validation
       before_install:
         - sudo apt update
@@ -48,5 +46,4 @@ jobs:
         - sudo -E vagrant up
         - sudo -E vagrant up ci
       env:
-        - VAGRANT_EXPERIMENTAL=disks
         - RELENG_K8S_TYPE=krd
