@@ -26,7 +26,6 @@ if [ -n "$pkgs" ]; then
 fi
 
 sudo docker-compose pull
-sudo docker-compose build
 
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved

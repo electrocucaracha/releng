@@ -9,5 +9,5 @@
 
 .PHONY: build
 build:
-	@docker buildx build --platform linux/amd64,linux/arm64 -t electrocucaracha/linter:0.0.5 --push --file image_resources/Dockerfile.lint image_resources
+	@docker buildx build --platform linux/amd64,linux/arm64 -t electrocucaracha/apt-mirror:0.0.1 --push --file mirror/apt/Dockerfile mirror/apt
 	@docker image prune --force

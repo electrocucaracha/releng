@@ -12,6 +12,7 @@ version: '3.8'
 
 services:
   mirror:
+    image: electrocucaracha/apt-mirror:0.0.1
     build:
       context: .
       dockerfile: apt/Dockerfile
