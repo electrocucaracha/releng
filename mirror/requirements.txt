@@ -1,0 +1,2 @@
+kolla
+docker-squash

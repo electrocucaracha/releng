@@ -2,3 +2,4 @@
 .tox/
 *.swp
 *.vdi
+mirror/apt/sources.list

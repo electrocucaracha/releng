@@ -81,7 +81,11 @@ Vagrant.configure("2") do |config|
 
         cd /vagrant/
         ./install.sh | tee ~/install.log
-        ./setup.sh | tee ~/setup.log
+        ./deploy.sh | tee ~/deploy.log
+        ./setup_k8s.sh | tee ~/setup_k8s.log
+        ./setup_kolla.sh | tee ~/setup_kolla.log
+
+        curl -s -X GET http://localhost:5000/v2/_catalog
       SHELL
     end
   end # mirror

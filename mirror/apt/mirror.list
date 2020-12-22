@@ -2,6 +2,23 @@ set base_path /var/spool/apt-mirror
 set nthreads 20
 set _tilde 0
 
+# Ubuntu 16.04 LTS
+deb http://ports.ubuntu.com/ubuntu-ports xenial main restricted
+deb http://ports.ubuntu.com/ubuntu-ports xenial-updates main restricted
+deb http://ports.ubuntu.com/ubuntu-ports xenial universe
+deb http://ports.ubuntu.com/ubuntu-ports xenial-updates universe
+deb http://ports.ubuntu.com/ubuntu-ports xenial multiverse
+deb http://ports.ubuntu.com/ubuntu-ports xenial-updates multiverse
+deb http://ports.ubuntu.com/ubuntu-ports xenial-backports main restricted universe multiverse
+deb http://ports.ubuntu.com/ubuntu-ports xenial-security main restricted
+deb http://ports.ubuntu.com/ubuntu-ports xenial-security universe
+deb http://ports.ubuntu.com/ubuntu-ports xenial-security multiverse
+
+# Docker CE
+deb https://download.docker.com/linux/ubuntu xenial stable
+deb https://download.docker.com/linux/ubuntu xenial stable
+
+# Ubuntu 18.04 LTS
 deb http://ports.ubuntu.com/ubuntu-ports bionic main restricted
 deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted
 deb http://ports.ubuntu.com/ubuntu-ports bionic universe
@@ -13,6 +30,27 @@ deb http://ports.ubuntu.com/ubuntu-ports bionic-security main restricted
 deb http://ports.ubuntu.com/ubuntu-ports bionic-security universe
 deb http://ports.ubuntu.com/ubuntu-ports bionic-security multiverse
 
-deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable
+# Docker CE
+deb https://download.docker.com/linux/ubuntu bionic stable
+deb https://download.docker.com/linux/ubuntu bionic stable
+
+# Ubuntu 20.04 LTS
+deb http://ports.ubuntu.com/ubuntu-ports focal main restricted
+deb http://ports.ubuntu.com/ubuntu-ports focal-updates main restricted
+deb http://ports.ubuntu.com/ubuntu-ports focal universe
+deb http://ports.ubuntu.com/ubuntu-ports focal-updates universe
+deb http://ports.ubuntu.com/ubuntu-ports focal multiverse
+deb http://ports.ubuntu.com/ubuntu-ports focal-updates multiverse
+deb http://ports.ubuntu.com/ubuntu-ports focal-backports main restricted universe multiverse
+deb http://ports.ubuntu.com/ubuntu-ports focal-security main restricted
+deb http://ports.ubuntu.com/ubuntu-ports focal-security universe
+deb http://ports.ubuntu.com/ubuntu-ports focal-security multiverse
+
+# Docker CE
+deb https://download.docker.com/linux/ubuntu focal stable
+deb https://download.docker.com/linux/ubuntu focal stable
+
+# OpenStack Victoria Release
+deb http://ubuntu-cloud.archive.canonical.com/ubuntu focal-updates/victoria main
 
 clean http://archive.ubuntu.com/ubuntu

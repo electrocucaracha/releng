@@ -24,10 +24,13 @@ if [ -n "$pkgs" ]; then
     # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
     curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
+pip install -r requirements.txt
 
-sudo docker-compose pull
-
-sudo systemctl stop systemd-resolved
-sudo systemctl disable systemd-resolved
-
-echo "nameserver 127.0.0.1" | sudo tee /etc/resolv.conf
+# Configure custom values
+sudo mkdir -p /etc/kolla
+sudo cp ./kolla/kolla-build.ini /etc/kolla/kolla-build.ini
+sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-victoria}/g" /etc/kolla/kolla-build.ini
+sudo sed -i "s/^profile = .*$/profile = ${OS_KOLLA_PROFILE:-custom}/g" /etc/kolla/kolla-build.ini
+sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-victoria}\"/g" /etc/kolla/kolla-build.ini
+sed 's|ports\.ubuntu\.com|localhost|g' apt/mirror.list | grep localhost > apt/sources.list
+sudo sed -i "s|^#apt_sources_list = .*$|apt_sources_list = \"$(pwd)/apt/sources.list\"|g" /etc/kolla/kolla-build.ini
