@@ -16,7 +16,7 @@ end
 $no_proxy += ",10.0.2.15"
 $mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
-$fly_version="6.7.1"
+$fly_version="6.7.2"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
 
