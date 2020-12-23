@@ -16,6 +16,8 @@ end
 $no_proxy += ",10.0.2.15"
 $mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
+$cloud_ip_address="192.168.123.5"
+$cloud_vip_address="192.168.123.6"
 $fly_version="6.7.2"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
@@ -146,4 +148,51 @@ Vagrant.configure("2") do |config|
       SHELL
     end
   end # ci
+
+  config.vm.define :cloud, autostart: false do |cloud|
+    cloud.vm.hostname = "cloud"
+    cloud.vm.network "private_network", ip: $cloud_ip_address
+    cloud.vm.synced_folder './cloud', '/vagrant'
+    cloud.vm.network :private_network, ip: '172.24.4.225', :netmask => "255.255.255.224", :auto_config => false
+    cloud.vm.box = "generic/ubuntu1804"
+
+    [:virtualbox, :libvirt].each do |provider|
+      cloud.vm.provider provider do |p|
+        p.cpus = ENV["CPUS"] || 2
+        p.memory = ENV['MEMORY'] || 6144
+      end
+    end
+
+    cloud.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--nested-hw-virt","on"]
+    end
+    cloud.vm.disk :disk, name: "cinder", size: "50GB"
+    cloud.vm.provider :libvirt do |v|
+      v.nested = true
+      v.storage :file, :bus => 'sata', :device => "sdb", :size => '50G'
+    end
+
+    cloud.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
+        'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
+        'RELENG_CINDER_VOLUME': "/dev/sdb",
+        'RELENG_DNS_SERVER': $mirror_ip_address,
+        'RELENG_ENABLE_CINDER': "yes",
+        'RELENG_INTERNAL_VIP_ADDRESS': $cloud_vip_address,
+        'RELENG_NETWORK_INTERFACE': "eth1",
+        'RELENG_NEUTRON_EXTERNAL_INTERFACE': "eth2",
+      }
+      sh.inline = <<-SHELL
+        set -o errexit
+        set -o pipefail
+
+        for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
+        cd /vagrant
+        ./pre-install.sh | tee ~/pre-install.log
+        ./install.sh | tee ~/install.log
+        echo "127.0.0.1 localhost" | sudo tee /etc/hosts
+        ./provision_openstack_cluster.sh | tee ~/provision_openstack_cluster.log
+      SHELL
+    end
+  end # cloud
 end

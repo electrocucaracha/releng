@@ -1,0 +1,4 @@
+ansible<2.10 # LGPLv3+
+# https://review.opendev.org/c/openstack/kolla-ansible/+/766183
+git+https://github.com/openstack/kolla-ansible@stable/victoria
+python-openstackclient==5.4.0 # Apache-2.0

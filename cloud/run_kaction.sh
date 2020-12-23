@@ -1,4 +1,4 @@
----
+#!/bin/bash
 # SPDX-license-identifier: Apache-2.0
 ##############################################################################
 # Copyright (c) 2020
@@ -8,9 +8,14 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
-extends: default
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
 
-rules:
-  line-length: disable
-  comments:
-    require-starting-space: false
+SNAP=$HOME/.local/ kolla-ansible \
+    -e "ansible_user=root" \
+    -e "ansible_python_interpreter=$(command -v python)" \
+    -e 'ansible_become=true' -e 'ansible_become_method=sudo' "$1" \
+    -i "${OS_INVENTORY_FILE:-./inventory/hosts.ini}" \
+    --yes-i-really-really-mean-it
