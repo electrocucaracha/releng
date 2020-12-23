@@ -132,13 +132,11 @@ Vagrant.configure("2") do |config|
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
         'RELENG_K8S_TYPE': $k8s_type,
-        'RELENG_DNS_SERVER': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
         set -o errexit
         set -o pipefail
 
-        echo "nameserver #{$mirror_ip_address}" | sudo tee  /etc/resolv.conf
         cd /vagrant/
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy_hpa.sh | tee ~/deploy_hpa.log
@@ -175,7 +173,6 @@ Vagrant.configure("2") do |config|
       sh.env = {
         'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
         'RELENG_CINDER_VOLUME': "/dev/sdb",
-        'RELENG_DNS_SERVER': $mirror_ip_address,
         'RELENG_ENABLE_CINDER': "yes",
         'RELENG_INTERNAL_VIP_ADDRESS': $cloud_vip_address,
         'RELENG_NETWORK_INTERFACE': "eth1",

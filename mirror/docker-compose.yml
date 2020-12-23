@@ -13,31 +13,25 @@ version: '3.8'
 services:
   mirror:
     image: electrocucaracha/apt-mirror:0.0.1
-    build:
-      context: .
-      dockerfile: apt/Dockerfile
     volumes:
-      - ./apt/${MIRROR_FILENAME}:/etc/apt/mirror.list:ro
+      - ./apt-mirror/${MIRROR_FILENAME}:/etc/apt/mirror.list:ro
       - packages:/var/spool/apt-mirror
   registry:
     image: registry:2
     volumes:
       - images:/var/lib/registry
-  dns:
-    image: coredns/coredns:1.8.0
-    volumes:
-      - ./coredns/Corefile:/Corefile:ro
-      - ./coredns/entries.db:/etc/coredns/entries.db
+  ntp:
+    image: electrocucaracha/ntpd:0.0.1
   web-server:
     links:
       - registry:docker-registry
-      - dns:dns-server
+      - ntp:ntp-server
     image: nginx:1.19-alpine
     ports:
       - 80:30080/tcp
       - 5000:35000/tcp
-      - 53:30053/udp
-      - 53:30053/tcp
+      - 123:30123/udp
+      - 123:30123/tcp
     volumes:
       - packages:/var/mirrors/apt-mirror/
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro

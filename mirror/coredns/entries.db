@@ -1,6 +1,0 @@
-electrocucaracha.com.        IN  SOA dns.electrocucarcha.com. electrocucaracha.gmail.com. 2015082541 7200 3600 1209600 3600
-dns.electrocucaracha.com.    IN  A   10.10.0.3
-rasp4-node02.electrocucaracha.com.   IN  CNAME   dns.electrocucaracha.com.
-rasp4-node03.electrocucaracha.com.   IN  A   10.10.0.4
-rasp4-node04.electrocucaracha.com.   IN  A   10.10.0.5
-rasp4-node05.electrocucaracha.com.   IN  A   10.10.0.6

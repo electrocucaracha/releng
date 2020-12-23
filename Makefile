@@ -9,5 +9,7 @@
 
 .PHONY: build
 build:
-	@docker buildx build --platform linux/amd64,linux/arm64 -t electrocucaracha/apt-mirror:0.0.1 --push --file mirror/apt/Dockerfile mirror/apt
+	for image in apt-mirror ntpd; do \
+		docker buildx build --platform linux/amd64,linux/arm64 -t electrocucaracha/$$image:0.0.1 --push --file mirror/$$image/Dockerfile mirror/$$image ; \
+	done
 	@docker image prune --force

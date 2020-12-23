@@ -13,8 +13,4 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-sudo systemctl stop systemd-resolved
-if [ -f /etc/resolv.conf ]; then
-    echo "nameserver 127.0.0.1" | sudo tee /etc/resolv.conf
-fi
 sudo "$(command -v docker-compose)" up -d

@@ -32,5 +32,5 @@ sudo cp ./kolla/kolla-build.ini /etc/kolla/kolla-build.ini
 sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-victoria}/g" /etc/kolla/kolla-build.ini
 sudo sed -i "s/^profile = .*$/profile = ${OS_KOLLA_PROFILE:-custom}/g" /etc/kolla/kolla-build.ini
 sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-victoria}\"/g" /etc/kolla/kolla-build.ini
-sed 's|ports\.ubuntu\.com|localhost|g' apt/mirror.list | grep localhost > apt/sources.list
-sudo sed -i "s|^#apt_sources_list = .*$|apt_sources_list = \"$(pwd)/apt/sources.list\"|g" /etc/kolla/kolla-build.ini
+sed 's|ports\.ubuntu\.com|localhost|g' apt-mirror/mirror.list | grep localhost > apt-mirror/sources.list
+sudo sed -i "s|^#apt_sources_list = .*$|apt_sources_list = \"$(pwd)/apt-mirror/sources.list\"|g" /etc/kolla/kolla-build.ini
