@@ -14,10 +14,20 @@ set -o errexit
 set -o nounset
 
 # Install dependencies
+pkgs=""
 if ! command -v pip; then
-    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
-    curl -fsSL http://bit.ly/install_pkg | PKG=pip bash
+    pkgs=" pip"
 fi
+if service --status-all | grep -Fq 'openntpd'; then
+    pkgs=" openntpd"
+fi
+if [ -n "$pkgs" ]; then
+    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+    curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
+fi
+echo "server ${RELENG_NTP_SERVER}" | sudo tee /etc/openntpd/ntpd.conf
+sudo systemctl start openntpd
+sudo systemctl enable openntpd
 pip install -r requeriments.txt
 
 # Configure kolla-ansible

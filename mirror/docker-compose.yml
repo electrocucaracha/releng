@@ -22,6 +22,9 @@ services:
       - images:/var/lib/registry
   ntp:
     image: electrocucaracha/ntpd:0.0.1
+    privileged: true
+    volumes:
+      - ./ntpd/ntpd.conf:/etc/ntpd.conf:ro
   web-server:
     links:
       - registry:docker-registry

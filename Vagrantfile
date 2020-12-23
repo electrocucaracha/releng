@@ -132,12 +132,15 @@ Vagrant.configure("2") do |config|
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
         'RELENG_K8S_TYPE': $k8s_type,
+        'RELENG_NTP_SERVER': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
         set -o errexit
         set -o pipefail
 
+        for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
         cd /vagrant/
+        ./install.sh | tee ~/install.log
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy_hpa.sh | tee ~/deploy_hpa.log
         ./deploy_ci.sh | tee ~/deploy_ci.log
@@ -177,6 +180,7 @@ Vagrant.configure("2") do |config|
         'RELENG_INTERNAL_VIP_ADDRESS': $cloud_vip_address,
         'RELENG_NETWORK_INTERFACE': "eth1",
         'RELENG_NEUTRON_EXTERNAL_INTERFACE': "eth2",
+        'RELENG_NTP_SERVER': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
         set -o errexit
