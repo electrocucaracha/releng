@@ -27,7 +27,7 @@ jobs:
       script:
         - tox -e lint
         - bash -c 'shopt -s globstar; shellcheck -x **/*.sh'
-    - name: KinD - Ubuntu 20.04 LTS Vagrant validation
+    - name: KinD - Ubuntu 18.04 LTS Vagrant validation
       before_install:
         - sudo apt update
       install:
@@ -36,7 +36,7 @@ jobs:
       script:
         - sudo -E vagrant up
         - sudo -E vagrant up ci
-    - name: KRD - Ubuntu 20.04 LTS Vagrant validation
+    - name: KRD - Ubuntu 18.04 LTS Vagrant validation
       before_install:
         - sudo apt update
       install:

@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :libvirt
   config.vm.provider :virtualbox
 
-  config.vm.box = "generic/ubuntu2004"
+  config.vm.box = "generic/ubuntu1804"
   config.vm.box_check_update = false
 
   config.vm.provider "virtualbox" do |v|
@@ -154,7 +154,6 @@ Vagrant.configure("2") do |config|
     cloud.vm.network "private_network", ip: $cloud_ip_address
     cloud.vm.synced_folder './cloud', '/vagrant'
     cloud.vm.network :private_network, ip: '172.24.4.225', :netmask => "255.255.255.224", :auto_config => false
-    cloud.vm.box = "generic/ubuntu1804"
 
     [:virtualbox, :libvirt].each do |provider|
       cloud.vm.provider provider do |p|
