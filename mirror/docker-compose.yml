@@ -11,6 +11,22 @@
 version: '3.8'
 
 services:
+  devpi-init:
+    image: electrocucaracha/devpi:0.0.1
+    entrypoint:
+      - /usr/local/bin/devpi-init
+      - --role
+      - standalone
+      - --serverdir
+      - /devpi/server
+    volumes:
+      - pypi_packages:/devpi/server
+  devpi:
+    image: electrocucaracha/devpi:0.0.1
+    depends_on:
+      - devpi-init
+    volumes:
+      - pypi_packages:/devpi/server
   mirror:
     image: electrocucaracha/apt-mirror:0.0.1
     volumes:
@@ -29,14 +45,17 @@ services:
     links:
       - registry:docker-registry
       - ntp:ntp-server
+      - devpi:pipy-server
     image: nginx:1.19-alpine
     ports:
       - 80:30080/tcp
       - 5000:35000/tcp
       - 123:30123/udp
       - 123:30123/tcp
+      - 3141:33141/tcp
     volumes:
       - packages:/var/mirrors/apt-mirror/
+      - pypi_packages:/opt/devpi-server/state
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
 
@@ -52,4 +71,10 @@ volumes:
     driver_opts:
       type: bind
       device: ${APT_MIRROR_PATH}
+      o: bind
+  pypi_packages:
+    driver: local
+    driver_opts:
+      type: bind
+      device: ${DEVPI_MIRROR_PATH}
       o: bind

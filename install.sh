@@ -13,11 +13,29 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-# Intall dependencies
-if service --status-all | grep -Fq 'openntpd'; then
-    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
-    curl -fsSL http://bit.ly/install_pkg | PKG=openntpd bash
-    echo "server ${RELENG_NTP_SERVER}" | sudo tee /etc/openntpd/ntpd.conf
+# Install dependencies
+pkgs=""
+if ! command -v pip; then
+    pkgs+=" pip"
 fi
+if ! systemctl list-unit-files | grep -q "openntpd.*enabled"; then
+    pkgs+=" openntpd"
+fi
+if [ -n "$pkgs" ]; then
+    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+    curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
+fi
+echo "server ${RELENG_NTP_SERVER}" | sudo tee /etc/openntpd/ntpd.conf
 sudo systemctl start openntpd
 sudo systemctl enable openntpd
+
+# Configure pip mirror
+mkdir -p "$HOME/.pip/"
+cat <<EOL > "$HOME/.pip/pip.conf"
+[global]
+trusted-host = $RELENG_DEVPI_HOST
+index-url = http://$RELENG_DEVPI_HOST:3141/root/pypi/+simple/
+
+[search]
+index = http://$RELENG_DEVPI_HOST:3141/root/pypi
+EOL

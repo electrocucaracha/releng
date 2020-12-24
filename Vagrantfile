@@ -60,9 +60,11 @@ Vagrant.configure("2") do |config|
     end
     mirror.vm.disk :disk, name: "packages", size: "50GB"
     mirror.vm.disk :disk, name: "images", size: "10GB"
+    mirror.vm.disk :disk, name: "pypi", size: "10GB"
     {
       "sdb"=>"/var/local/packages",
       "sdc"=>"/var/local/images",
+      "sdd"=>"/var/local/pypi_packages",
     }.each do |device, mount_path|
       mirror.vm.provision "shell" do |s|
         s.path   = "pre-install.sh"
@@ -125,7 +127,13 @@ Vagrant.configure("2") do |config|
         s.args   = [device, mount_path]
       end
     end
-
+    ci.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
+        'RELENG_DEVPI_HOST': $mirror_ip_address,
+        'RELENG_NTP_SERVER': $mirror_ip_address,
+      }
+      sh.path = "install.sh"
+    end
     ci.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
         'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
@@ -140,7 +148,6 @@ Vagrant.configure("2") do |config|
 
         for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
         cd /vagrant/
-        ./install.sh | tee ~/install.log
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy_hpa.sh | tee ~/deploy_hpa.log
         ./deploy_ci.sh | tee ~/deploy_ci.log
@@ -174,6 +181,19 @@ Vagrant.configure("2") do |config|
 
     cloud.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
+        'RELENG_CINDER_VOLUME': "/dev/sdb",
+      }
+      sh.path = "cloud/pre-install.sh"
+    end
+    cloud.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
+        'RELENG_DEVPI_HOST': $mirror_ip_address,
+        'RELENG_NTP_SERVER': $mirror_ip_address,
+      }
+      sh.path = "install.sh"
+    end
+    cloud.vm.provision 'shell', privileged: false do |sh|
+      sh.env = {
         'PKG_DOCKER_REGISTRY_MIRRORS': "\"http://#{$mirror_ip_address}:5000\"",
         'RELENG_CINDER_VOLUME': "/dev/sdb",
         'RELENG_ENABLE_CINDER': "yes",
@@ -181,6 +201,7 @@ Vagrant.configure("2") do |config|
         'RELENG_NETWORK_INTERFACE': "eth1",
         'RELENG_NEUTRON_EXTERNAL_INTERFACE': "eth2",
         'RELENG_NTP_SERVER': $mirror_ip_address,
+        'RELENG_DEVPI_HOST': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
         set -o errexit
@@ -188,8 +209,7 @@ Vagrant.configure("2") do |config|
 
         for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
         cd /vagrant
-        ./pre-install.sh | tee ~/pre-install.log
-        ./install.sh | tee ~/install.log
+        ./post-install.sh | tee ~/post-install.log
         echo "127.0.0.1 localhost" | sudo tee /etc/hosts
         ./provision_openstack_cluster.sh | tee ~/provision_openstack_cluster.log
       SHELL
