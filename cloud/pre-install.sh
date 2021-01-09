@@ -13,6 +13,15 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
+
+function exit_trap {
+    set +o xtrace
+    sudo fdisk -l
+}
+
+
+trap exit_trap ERR
+
 if [ -n "${RELENG_CINDER_VOLUME:-}" ]; then
     if ! command -v vgs; then
         # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts

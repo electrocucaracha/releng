@@ -36,6 +36,9 @@ Vagrant.configure("2") do |config|
   config.vm.provider :libvirt do |v|
     v.random_hostname = true
     v.management_network_address = "192.168.121.0/24"
+    v.cpu_mode = 'host-passthrough'
+    v.disk_device = 'sda'
+    v.disk_bus = 'sata'
   end
 
   if ENV['http_proxy'] != nil and ENV['https_proxy'] != nil
@@ -97,6 +100,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :ci, primary: true, autostart: false do |ci|
     ci.vm.hostname = "ci"
     ci.vm.network "private_network", ip: $ci_ip_address
+    ci.vm.network :forwarded_port, guest: 80, host: 8080
     ci.vm.synced_folder './ci', '/vagrant'
     ci.vm.synced_folder './', '/opt/releng'
 
