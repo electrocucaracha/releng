@@ -141,7 +141,8 @@ kolla_internal_vip_address: "10.10.13.3"
 # though an IP address can exist on this interface, it will be unusable in most
 # configurations. It is recommended this interface not be configured with any IP
 # addresses for that reason.
-# NOTE: This interface is used by Neutron for vm-to-vm traffic over tunneled networks (like VxLan).
+# NOTE: This interface is used for communication with the external world, for
+# example provider networks and floating IPs.
 #neutron_external_interface: "{{ network_interface }}"
 
 # Valid options are [ openvswitch, ovn, linuxbridge, vmware_nsxv, vmware_nsxv3, vmware_dvs ]
