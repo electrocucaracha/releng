@@ -23,7 +23,7 @@ if [ -n "${PKG_KUBECTL_VERSION:-}" ]; then
     export KRD_KUBE_VERSION=${PKG_KUBECTL_VERSION}
 fi
 if [ -n "${RELENG_DNS_SERVER:-}" ]; then
-    export KRD_DNS_SERVER=${RELENG_DNS_SERVER}
+    export KRD_MANUAL_DNS_SERVER=${RELENG_DNS_SERVER}
 fi
 export KRD_CERT_MANAGER_ENABLED=false
 export KRD_CONTAINER_RUNTIME=containerd
