@@ -16,8 +16,9 @@ $mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
 $cloud_ip_address="192.168.123.5"
 $cloud_vip_address="192.168.123.6"
-$cloud_floating_ip_range="10.0.2.0/24"
-$cloud_public_nic=`ip route get 1.1.1.1 | awk 'NR==1{print $5}'`.strip!
+$cloud_public_nic=`ip r get 1.1.1.1 | awk 'NR==1{print $5}'`.strip! || "eth0"
+$cloud_public_cidr=`ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}') .* scope link" | awk '{print $1}'`.strip! || "192.168.0.0/24"
+$cloud_public_gw=`ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 $fly_version="6.7.2"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
@@ -50,7 +51,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :libvirt do |v|
     v.random_hostname = true
-    v.management_network_address = $cloud_floating_ip_range
+    v.management_network_address = "10.0.2.0/24"
     v.management_network_name = "administration" # Administration - Provides Internet access for all nodes and is used for administration to install software packages
     v.management_network_mode = "nat" # NATed forwarding typically to reach networks outside of hypervisor
     v.cpu_mode = 'host-passthrough'
@@ -184,7 +185,7 @@ Vagrant.configure("2") do |config|
     cloud.vm.network :forwarded_port, guest_ip: $cloud_vip_address, guest: 80, host: 9090
     cloud.vm.network :forwarded_port, guest_ip: $cloud_vip_address, guest: 6080, host: 6080
     cloud.vm.synced_folder './cloud', '/vagrant'
-    cloud.vm.network :public_network, :dev => $cloud_public_nic, :bridge => $vb_cloud_public_nic, :network_name => "public", :auto_config => false # Public - Provides external access to OpenStack services. For instances, it provides the route out to the external network and the IP addresses to enable inbound connections to the instances. This network can also provide the public API endpoints to connect to OpenStack services.
+    cloud.vm.network :public_network, :dev => $cloud_public_nic, :bridge => $vb_cloud_public_nic, :auto_config => false # Public - Provides external access to OpenStack services. For instances, it provides the route out to the external network and the IP addresses to enable inbound connections to the instances. This network can also provide the public API endpoints to connect to OpenStack services.
 
     [:virtualbox, :libvirt].each do |provider|
       cloud.vm.provider provider do |p|
@@ -233,24 +234,30 @@ Vagrant.configure("2") do |config|
         'RELENG_NEUTRON_EXTERNAL_INTERFACE': "eth2",
         'RELENG_NTP_SERVER': $mirror_ip_address,
         'RELENG_DEVPI_HOST': $mirror_ip_address,
+        'EXT_NET_RANGE': "start=#{$cloud_public_cidr.sub('0/24','50')},end=#{$cloud_public_cidr.sub('0/24','100')}",
+        'EXT_NET_CIDR': "#{$cloud_public_cidr}",
+        'EXT_NET_GATEWAY': "#{$cloud_public_gw}",
       }
       sh.inline = <<-SHELL
         set -o errexit
         set -o pipefail
 
         sudo ip link set $RELENG_NEUTRON_EXTERNAL_INTERFACE promisc on
+        echo "127.0.0.1 localhost" | sudo tee /etc/hosts
 
-        for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
+        for os_var in $(printenv | grep "RELENG_\|EXT_NET_" ); do
+            echo "export $os_var" | sudo tee --append /etc/environment
+        done
+
         cd /vagrant
         ./post-install.sh | tee ~/post-install.log
-        echo "127.0.0.1 localhost" | sudo tee /etc/hosts
         ./provision_openstack_cluster.sh | tee ~/provision_openstack_cluster.log
 
         cd $HOME
         source <(sudo cat /etc/kolla/admin-openrc.sh)
         # PEP 370 -- Per user site-packages directory
         [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
-        EXT_NET_RANGE='start=10.0.2.20,end=10.0.2.100' EXT_NET_CIDR=#{$cloud_floating_ip_range} EXT_NET_GATEWAY=$(ip r | grep "^default" | awk 'NR==1{print $3}') ./.local/share/kolla-ansible/init-runonce
+        ./.local/share/kolla-ansible/init-runonce
       SHELL
     end
   end # cloud
