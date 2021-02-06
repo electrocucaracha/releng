@@ -28,7 +28,7 @@ function exit_trap {
 trap exit_trap ERR
 
 # Setup Horizontal Pod Autoscaler components
-if ! heml repo list | grep -q prometheus-community; then
+if ! helm repo list | grep -q prometheus-community; then
     helm repo add prometheus-community \
         https://prometheus-community.github.io/helm-charts
     helm repo update
