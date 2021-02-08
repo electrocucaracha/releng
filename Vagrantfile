@@ -124,8 +124,8 @@ Vagrant.configure("2") do |config|
 
     [:virtualbox, :libvirt].each do |provider|
       ci.vm.provider provider do |p|
-        p.cpus = ENV["CPUS"] || 2
-        p.memory = ENV['MEMORY'] || 6144
+        p.cpus = ENV["CPUS"] || 4
+        p.memory = ENV['MEMORY'] || 16384
       end
     end
 
@@ -189,8 +189,8 @@ Vagrant.configure("2") do |config|
 
     [:virtualbox, :libvirt].each do |provider|
       cloud.vm.provider provider do |p|
-        p.cpus = ENV["CPUS"] || 2
-        p.memory = ENV['MEMORY'] || 6144
+        p.cpus = ENV["CPUS"] || 4
+        p.memory = ENV['MEMORY'] || 32768
       end
     end
 

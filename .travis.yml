@@ -34,6 +34,9 @@ jobs:
       script:
         - sudo -E vagrant up
         - sudo -E vagrant up ci
+      env:
+        - CPUS=1
+        - MEMORY=6144
     - name: KRD - Ubuntu 18.04 LTS Vagrant validation
       install:
         - sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends qemu
@@ -43,9 +46,14 @@ jobs:
         - sudo -E vagrant up ci
       env:
         - RELENG_K8S_TYPE=krd
+        - CPUS=1
+        - MEMORY=6144
     - name: OpenStack All-in-One - Ubuntu 18.04 LTS Vagrant validation
       install:
         - sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 --no-install-recommends qemu
         - curl -fsSL http://bit.ly/initVagrant | PROVIDER=libvirt bash
       script:
         - sudo -E vagrant up cloud
+      env:
+        - CPUS=2
+        - MEMORY=6144
