@@ -9,9 +9,10 @@
 ##############################################################################
 
 set -o pipefail
-set -o xtrace
 set -o errexit
 set -o nounset
+
+echo "Configuring Concourse CI pipelines"
 
 # Install dependencies
 if ! command -v fly; then

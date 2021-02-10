@@ -25,6 +25,8 @@ function exit_trap {
     fi
 }
 
+echo "Deploying Concourse CI services"
+
 if ! helm repo list | grep -e concourse; then
     helm repo add concourse https://concourse-charts.storage.googleapis.com/
     helm repo update
@@ -45,11 +47,11 @@ if ! helm ls | grep -q concourse-ci; then
         --set secrets.localUsers="${RELENG_LOCAL_USER:-test}:${RELENG_LOCAL_PASSWORD:-test}" \
         --set image="$concourse_image" \
         --set worker.replicas="$(kubectl get nodes --no-headers | wc -l)" \
-        --set imageTag="${PKG_FLY_VERSION:-6.7.4}" -f helm/ci.yml
+        --set imageTag="${PKG_FLY_VERSION:-6.7.4}" -f ../helm/ci.yml
 fi
 
 kubectl rollout status deployment/concourse-ci-web --timeout=5m
-until curl --output /dev/null --silent --head --fail http://localhost; do
+until curl --output /dev/null --silent --head --fail "http://$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')"; do
     sleep 5
 done
 trap ERR

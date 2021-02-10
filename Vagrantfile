@@ -22,6 +22,7 @@ $cloud_public_gw=`ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192
 $fly_version="6.7.4"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
+$ci_type = ENV['RELENG_CI_TYPE'] || "concourse"
 
 def which(cmd)
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
@@ -162,6 +163,7 @@ Vagrant.configure("2") do |config|
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
         'RELENG_K8S_TYPE': $k8s_type,
+        'RELENG_CI_TYPE': $ci_type,
         'RELENG_NTP_SERVER': $mirror_ip_address,
       }
       sh.inline = <<-SHELL
@@ -172,6 +174,7 @@ Vagrant.configure("2") do |config|
         cd /vagrant/
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         ./deploy_hpa.sh | tee ~/deploy_hpa.log
+        cd ${RELENG_CI_TYPE}
         ./deploy_ci.sh | tee ~/deploy_ci.log
         ./setup.sh | tee ~/setup.log
         kubectl describe nodes
