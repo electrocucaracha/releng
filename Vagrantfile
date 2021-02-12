@@ -21,7 +21,7 @@ $cloud_public_cidr=`ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}')
 $cloud_public_gw=`ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 $fly_version="6.7.4"
 $kubectl_version="v1.18.8"
-$k8s_type = ENV['RELENG_K8S_TYPE'] || "kind"
+$k8s_type = ENV['RELENG_K8S_TYPE'] || "krd"
 $ci_type = ENV['RELENG_CI_TYPE'] || "concourse"
 
 def which(cmd)
@@ -118,6 +118,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :ci, primary: true, autostart: false do |ci|
     ci.vm.hostname = "ci"
+    ci.vm.box = "generic/ubuntu2004"
     ci.vm.network "private_network", ip: $ci_ip_address, :libvirt__network_name => "management"
     ci.vm.network :forwarded_port, guest: 80, host: 8080
     ci.vm.synced_folder './ci', '/vagrant'
