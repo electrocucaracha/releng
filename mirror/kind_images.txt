@@ -1,2 +1,4 @@
 docker.io/concourse/concourse:6.7.4
+docker.io/electrocucaracha/linter
+docker.io/electrocucaracha/vind
 docker.io/kindest/node:v1.18.8

@@ -1,5 +1,7 @@
 docker.io/concourse/concourse:6.7.4
 docker.io/coredns/coredns:1.6.7
+docker.io/electrocucaracha/linter
+docker.io/electrocucaracha/vind
 docker.io/longhornio/csi-attacher:v2.0.0
 docker.io/longhornio/csi-node-driver-registrar:v1.2.0
 docker.io/longhornio/csi-provisioner:v1.4.0

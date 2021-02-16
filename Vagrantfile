@@ -22,7 +22,7 @@ $cloud_public_gw=`ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192
 $fly_version="6.7.4"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "krd"
-$ci_type = ENV['RELENG_CI_TYPE'] || "concourse"
+$ci_type = ENV['RELENG_CI_TYPE'] || "tekton"
 
 def which(cmd)
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
@@ -174,9 +174,8 @@ Vagrant.configure("2") do |config|
         for os_var in $(printenv | grep RELENG_); do echo "export $os_var" | sudo tee --append /etc/environment ; done
         cd /vagrant/
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
-        ./deploy_hpa.sh | tee ~/deploy_hpa.log
         cd ${RELENG_CI_TYPE}
-        ./deploy_ci.sh | tee ~/deploy_ci.log
+        ./deploy.sh | tee ~/deploy.log
         ./setup.sh | tee ~/setup.log
         kubectl describe nodes
       SHELL

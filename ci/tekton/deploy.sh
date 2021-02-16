@@ -25,32 +25,32 @@ function exit_trap {
     fi
 }
 
-echo "Deploying Concourse CI services"
-
-if ! helm repo list | grep -e concourse; then
-    helm repo add concourse https://concourse-charts.storage.googleapis.com/
-    helm repo update
-fi
-
-concourse_image=""
-if [ "${RELENG_K8S_TYPE:-kind}" == "kind" ] && \
-[ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ] && \
-[ -n "$(curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")')" ]; then
-    curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")'
-    concourse_image="local-mirror:5000/"
-fi
-concourse_image+="concourse/concourse"
+echo "Deploying Tekton CI services"
 
 trap exit_trap ERR
-if ! helm ls | grep -q concourse-ci; then
-    helm upgrade --install concourse-ci concourse/concourse --wait \
-        --set secrets.localUsers="${RELENG_LOCAL_USER:-test}:${RELENG_LOCAL_PASSWORD:-test}" \
-        --set image="$concourse_image" \
-        --set worker.replicas="$(kubectl get nodes --no-headers | wc -l)" \
-        --set imageTag="${PKG_FLY_VERSION:-6.7.4}" -f ../helm/ci.yml
-fi
 
-kubectl rollout status deployment/concourse-ci-web --timeout=5m
+kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+kubectl apply -f "https://github.com/tektoncd/dashboard/releases/download/v${RELENG_TKN_DASHBOARD_VERSION:-0.14.0}/tekton-dashboard-release.yaml"
+
+for deployment in $(kubectl get deployment --namespace tekton-pipelines -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'); do
+    kubectl rollout status "deployment/$deployment" --timeout=5m --namespace tekton-pipelines
+done
+
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tekton-ingress
+  namespace: tekton-pipelines
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: tekton-dashboard
+              servicePort: 9097
+EOF
 until curl --output /dev/null --silent --head --fail "http://$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')"; do
     sleep 5
 done
