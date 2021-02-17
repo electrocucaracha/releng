@@ -23,7 +23,7 @@ fi
 fly_target="${RELENG_TARGET:-releng}"
 
 if ! fly targets | grep -e "$fly_target"; then
-    fly --target "$fly_target" login -c "http://${RELENG_CI_SERVER:-localhost}" -u "${RELENG_CI_USER:-test}" -p "${RELENG_CI_PASSWORD:-test}"
+    fly --target "$fly_target" login -c "http://${RELENG_CI_SERVER:-$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')}" -u "${RELENG_CI_USER:-test}" -p "${RELENG_CI_PASSWORD:-test}"
 fi
 
 for pipeline in pipelines/*.yml; do
