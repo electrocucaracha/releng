@@ -30,8 +30,8 @@ for task in linter vind; do
     kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$task/master/tkn.yml"
 done
 
-for pipeline in pkg-mgr_scripts; do
-    kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$pipeline/master/build/ci/tkn.yml"
+for pipeline in ./pipelines/*.yml; do
+    kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$(basename "$pipeline" | sed "s/\.yml//")/master/build/ci/tkn.yml"
 done
 
 kubectl apply -f ./pipelines
