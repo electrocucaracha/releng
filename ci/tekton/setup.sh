@@ -26,15 +26,18 @@ if [ -n "$pkgs" ]; then
 fi
 
 echo "Configuring Tekton CI tasks"
-for task in linter vind; do
+while IFS= read -r task; do
     kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$task/master/tkn.yml"
-done
+done < remote-tasks.txt
 kubectl apply -f ./tasks
 
 echo "Configuring Tekton CI pipelines"
-for pipeline in ./pipelines/*.yml; do
-    kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$(basename "$pipeline" | sed "s/\.yml//")/master/build/ci/tkn.yml"
+for pipeline in ./pipelines/*/*.yml; do
+    project="$(echo "$pipeline" | sed "s|\./pipelines/||g;s|\.yml||g")"
+    kubectl apply -f "https://raw.githubusercontent.com/$project/master/build/ci/tkn.yml"
 done
-kubectl apply -f ./pipelines
+for pipeline in ./pipelines/*; do
+    kubectl apply -f "$pipeline"
+done
 
 tkn pipeline list -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
