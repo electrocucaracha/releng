@@ -31,7 +31,7 @@ services:
     image: electrocucaracha/apt-mirror:0.0.1
     volumes:
       - ./apt-mirror/${MIRROR_FILENAME}:/etc/apt/mirror.list:ro
-      - packages:/var/spool/apt-mirror
+      - packages:/var/apt-mirror/packages
   registry:
     image: registry:2
     volumes:

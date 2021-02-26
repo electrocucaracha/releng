@@ -1,0 +1,9 @@
+set base_path /var/apt-mirror/packages
+set mirror_path $base_path/mirror
+set skel_path $base_path/skel
+set var_path $base_path/var
+set nthreads 50
+set limit_rate 10m
+set cleanscript /var/spool/apt-mirror/var/clean.sh
+set postmirror_script /var/spool/apt-mirror/var/postmirror.sh
+

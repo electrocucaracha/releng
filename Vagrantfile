@@ -23,6 +23,7 @@ $fly_version="7.0.0"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "krd"
 $ci_type = ENV['RELENG_CI_TYPE'] || "tekton"
+$mirror_file = ENV['RELENG_MIRROR_FILE'] || "mirror_releng.list"
 
 def which(cmd)
   exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
@@ -98,12 +99,14 @@ Vagrant.configure("2") do |config|
       sh.env = {
         'PKG_FLY_VERSION': $fly_version,
         'PKG_KUBECTL_VERSION': $kubectl_version,
-        'MIRROR_FILENAME': 'releng_mirror.list',
+        'MIRROR_FILENAME': $mirror_file,
         'RELENG_K8S_TYPE': $k8s_type,
       }
       sh.inline = <<-SHELL
         set -o errexit
         set -o pipefail
+
+        echo "export MIRROR_FILENAME=#{$mirror_file}" | sudo tee --append /etc/environment
 
         cd /vagrant/
         ./install.sh | tee ~/install.log
