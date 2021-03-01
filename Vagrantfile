@@ -16,7 +16,7 @@ $mirror_ip_address="192.168.123.3"
 $ci_ip_address="192.168.123.4"
 $cloud_ip_address="192.168.123.5"
 $cloud_vip_address="192.168.123.6"
-$cloud_public_nic=`ip r get 1.1.1.1 | awk 'NR==1{print $5}'`.strip! || "eth0"
+$public_nic=`ip r get 1.1.1.1 | awk 'NR==1{print $5}'`.strip! || "eth0"
 $cloud_public_cidr=`ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}') .* scope link" | awk '{print $1}'`.strip! || "192.168.0.0/24"
 $cloud_public_gw=`ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 $fly_version="7.0.0"
@@ -37,7 +37,7 @@ def which(cmd)
 end
 
 if which 'VBoxManage'
-  $vb_cloud_public_nic=`VBoxManage list bridgedifs | grep "^Name:.*#{$cloud_public_nic}" | awk -F "Name:[ ]*" '{ print $2}'`.strip!
+  $cloud_public_nic=`VBoxManage list bridgedifs | grep "^Name:.*#{$public_nic}" | awk -F "Name:[ ]*" '{ print $2}'`.strip!
 end
 
 Vagrant.configure("2") do |config|
@@ -52,10 +52,10 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provider :libvirt do |v|
-    v.random_hostname = true
     v.management_network_address = "10.0.2.0/24"
-    v.management_network_name = "administration" # Administration - Provides Internet access for all nodes and is used for administration to install software packages
-    v.management_network_mode = "nat" # NATed forwarding typically to reach networks outside of hypervisor
+    # Administration - Provides Internet access for all nodes and is
+    # used for administration to install software packages
+    v.management_network_name = "administration"
     v.cpu_mode = 'host-passthrough'
     v.disk_device = 'sda'
     v.disk_bus = 'sata'
@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
     mirror.vm.hostname = "mirror"
     mirror.vm.network "private_network", ip: $mirror_ip_address, :libvirt__network_name => "management"
     mirror.vm.synced_folder './mirror', '/vagrant'
+    mirror.vm.network :public_network, :dev => $public_nic, :bridge => $vb_public_nic
 
     [:virtualbox, :libvirt].each do |provider|
       mirror.vm.provider provider do |p|
@@ -81,9 +82,16 @@ Vagrant.configure("2") do |config|
         p.memory = 512
       end
     end
-    mirror.vm.disk :disk, name: "packages", size: "50GB"
+
+    # Mirror's volumes
+    mirror.vm.disk :disk, name: "packages", size: "250GB"
     mirror.vm.disk :disk, name: "images", size: "10GB"
     mirror.vm.disk :disk, name: "pypi", size: "10GB"
+    mirror.vm.provider :libvirt do |v|
+      v.storage :file, :bus => 'sata', :device => "sdb", :size => '350G'
+      v.storage :file, :bus => 'sata', :device => "sdc", :size => '10G'
+      v.storage :file, :bus => 'sata', :device => "sdd", :size => '10G'
+    end
     {
       "sdb"=>"/var/local/packages",
       "sdc"=>"/var/local/images",
@@ -107,6 +115,8 @@ Vagrant.configure("2") do |config|
         set -o pipefail
 
         echo "export MIRROR_FILENAME=#{$mirror_file}" | sudo tee --append /etc/environment
+        # Prefer IPv4 over IPv6 in dual-stack environment
+        sudo sed -i "s|^#precedence ::ffff:0:0/96  100$|precedence ::ffff:0:0/96  100|g" /etc/gai.conf
 
         cd /vagrant/
         ./install.sh | tee ~/install.log
@@ -137,23 +147,28 @@ Vagrant.configure("2") do |config|
     ci.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--nested-hw-virt","on"]
     end
+
+    # CI's volumes
     ci.vm.disk :disk, name: "postgresql", size: "10GB"
     ci.vm.disk :disk, name: "worker0", size: "25GB"
+    ci.vm.disk :disk, name: "containers", size: "100GB"
     ci.vm.provider :libvirt do |v|
       v.nested = true
       v.storage :file, :bus => 'sata', :device => "sdb", :size => '10G'
       v.storage :file, :bus => 'sata', :device => "sdc", :size => '25G'
+      v.storage :file, :bus => 'sata', :device => "sdd", :size => '100G'
     end
-
     {
       "sdb"=>"/mnt/disks/postgresql",
       "sdc"=>"/mnt/disks/worker0",
+      "sdd"=>"/var/lib/containers/storage",
     }.each do |device, mount_path|
       ci.vm.provision "shell" do |s|
         s.path   = "pre-install.sh"
         s.args   = [device, mount_path]
       end
     end
+
     ci.vm.provision 'shell', privileged: false do |sh|
       sh.env = {
         'RELENG_DEVPI_HOST': $mirror_ip_address,
@@ -187,11 +202,18 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :cloud, autostart: false do |cloud|
     cloud.vm.hostname = "cloud"
-    cloud.vm.network :private_network, ip: $cloud_ip_address, :libvirt__network_name => "management" # Management/API - Used for communication between the OpenStack services.
+    # Management/API - Used for communication between the OpenStack
+    # services.
+    cloud.vm.network :private_network, ip: $cloud_ip_address, :libvirt__network_name => "management"
     cloud.vm.network :forwarded_port, guest_ip: $cloud_vip_address, guest: 80, host: 9090
     cloud.vm.network :forwarded_port, guest_ip: $cloud_vip_address, guest: 6080, host: 6080
     cloud.vm.synced_folder './cloud', '/vagrant'
-    cloud.vm.network :public_network, :dev => $cloud_public_nic, :bridge => $vb_cloud_public_nic, :auto_config => false # Public - Provides external access to OpenStack services. For instances, it provides the route out to the external network and the IP addresses to enable inbound connections to the instances. This network can also provide the public API endpoints to connect to OpenStack services.
+    # Public - Provides external access to OpenStack services. For
+    # instances, it provides the route out to the external network and
+    # the IP addresses to enable inbound connections to the instances.
+    # This network can also provide the public API endpoints to
+    # connect to OpenStack services.
+    cloud.vm.network :public_network, :dev => $public_nic, :bridge => $vb_public_nic, :auto_config => false
 
     [:virtualbox, :libvirt].each do |provider|
       cloud.vm.provider provider do |p|
@@ -203,8 +225,11 @@ Vagrant.configure("2") do |config|
     cloud.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--nested-hw-virt","on"]
 
-      # Cable connected enables you to temporarily disconnect a virtual network interface, as if a network cable had been pulled from a real network card.
-      # Performance-wise the virtio network adapter is preferable over Intel PRO/1000 emulated adapters.
+      # Cable connected enables you to temporarily disconnect a
+      # virtual network interface, as if a network cable had been
+      # pulled from a real network card.
+      # Performance-wise the virtio network adapter is preferable over
+      # Intel PRO/1000 emulated adapters.
       v.customize ["modifyvm", :id, "--nictype1", "virtio", "--cableconnected1", "on"]
       v.customize ["modifyvm", :id, "--nictype2", "virtio", "--cableconnected2", "on"]
       v.customize ["modifyvm", :id, "--nictype3", "virtio", "--cableconnected3", "on"]
