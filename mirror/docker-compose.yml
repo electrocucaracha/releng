@@ -14,11 +14,8 @@ services:
   devpi-init:
     image: electrocucaracha/devpi:0.0.1
     entrypoint:
-      - /usr/local/bin/devpi-init
-      - --role
-      - standalone
-      - --serverdir
-      - /devpi/server
+      - /bin/sh
+    command: -c '[ ! -f /devpi/server/.sqlite ] && /usr/local/bin/devpi-init --role standalone --serverdir /devpi/server || true'
     volumes:
       - pypi_packages:/devpi/server
   devpi:
