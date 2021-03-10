@@ -23,6 +23,7 @@ $fly_version="7.0.0"
 $kubectl_version="v1.18.8"
 $k8s_type = ENV['RELENG_K8S_TYPE'] || "krd"
 $ci_type = ENV['RELENG_CI_TYPE'] || "tekton"
+$ci_setup_enabled = "false"
 $mirror_file = ENV['RELENG_MIRROR_FILE'] || "mirror_releng.list"
 
 def which(cmd)
@@ -195,7 +196,9 @@ Vagrant.configure("2") do |config|
         ./provision_${RELENG_K8S_TYPE:-kind}_cluster.sh | tee ~/provision_cluster.log
         cd ${RELENG_CI_TYPE}
         ./deploy.sh | tee ~/deploy.log
-        ./setup.sh | tee ~/setup.log
+        if [ "#{$ci_setup_enabled}" == "true" ]; then
+            ./setup.sh | tee ~/setup.log
+        fi
         kubectl describe nodes
       SHELL
     end
