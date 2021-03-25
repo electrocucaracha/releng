@@ -1,0 +1,636 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c)
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: super-linter-task
+spec:
+  params:
+    - name: actions-runner-debug
+      description: Flag to enable additional information about the linter, versions, and additional output.
+      default: "false"
+      type: string
+    - name: ansible-directory
+      description: Flag to set the root directory for Ansible file location(s), relative to `DEFAULT_WORKSPACE`. Set to `.` to use the top-level of the `DEFAULT_WORKSPACE`.
+      default: "/ansible"
+      type: string
+    - name: css-file-name
+      description: Filename for Stylelint configuration
+      default: ".stylelintrc.json"
+      type: string
+    - name: default-branch
+      description: The name of the repository default branch.
+      default: "master"
+      type: string
+    - name: disable-errors
+      description: Flag to have the linter complete with exit code 0 even if errors were detected.
+      default: "false"
+      type: string
+    - name: dockerfile-hadolint-file-name
+      description: Filename for hadolint configuration
+      default: ".hadolint.yaml"
+      type: string
+    - name: editorconfig-file-name
+      description: Filename for editorconfig-checker configuration
+      default: ".ecrc"
+      type: string
+    - name: error-on-missing-exec-bit
+      description: If set to `false`, the `bash-exec` linter will report a warning if a shell script is not executable. If set to `true`, the `bash-exec` linter will report an error instead.
+      default: "false"
+      type: string
+    - name: filter-regex-exclude
+      description: Regular expression defining which files will be excluded from linting
+      default: "none"
+      type: string
+    - name: filter-regex-include
+      description: Regular expression defining which files will be processed by linters
+      default: "all"
+      type: string
+    - name: github-domain
+      description: Specify a custom Github domain in case Github Enterprise is used
+      default: "github.com"
+      type: string
+    - name: github-custom-api-url
+      description: Specify a custom Github API URL in case Github Enterprise is used
+      default: "api.github.com"
+      type: string
+    - name: ignore-gitignored-files
+      description: If set to `true`, super-linter will ignore all the files that are ignored by Git.
+      default: "false"
+      type: string
+    - name: javascript-es-config-file
+      description: Filename for eslint configuration
+      default: ".eslintrc.yml"
+      type: string
+    - name: javascript-default-style
+      description: Flag to set the default style of javascript. Available options are standard and prettier
+      default: "standard"
+      type: string
+    - name: jscpd-config-file
+      description: Filename for JSCPD configuration
+      default: ".jscpd.json"
+      type: string
+    - name: linter-rules-path
+      description: Directory for all linter configuration rules.
+      default: "/"
+      type: string
+    - name: log-file
+      description: The file name for outputting logs. All output is sent to the log file regardless of `LOG_LEVEL`.
+      default: "super-linter.log"
+      type: string
+    - name: log-level
+      description: How much output the script will generate to the console. One of `ERROR`, `WARN`, `NOTICE`, `VERBOSE`, `DEBUG` or `TRACE`.
+      default: "VERBOSE"
+      type: string
+    - name: multi-status
+      description: A status API is made for each language that is linted to make visual parsing easier.
+      default: "true"
+      type: string
+    - name: markdown-config-file
+      description: Filename for Markdownlint configuration
+      default: ".markdown-lint.yml"
+      type: string
+    - name: markdown-custom-rule-globs
+      description: Comma-separated list of file globs matching custom Markdownlint rule files
+      default: ".markdown-lint/rules,rules/**"
+      type: string
+    - name: output-format
+      description: The report format to be generated, besides the stdout one. Output format of tap is currently using v13 of the specification. Supported formats tap
+      default: "none"
+      type: string
+    - name: output-folder
+      description: The location where the output reporting will be generated to. Output folder must not previously exist.
+      default: "super-linter.report"
+      type: string
+    - name: output-details
+      description: What level of details to be reported. Supported formats simpler or detailed.
+      default: "simpler"
+      type: string
+    - name: python-black-config-file
+      description: Filename for black configuration
+      default: ".python-black"
+      type: string
+    - name: python-flake8-config-file
+      description: Filename for flake8 configuration
+      default: ".flake8"
+      type: string
+    - name: python-isort-config-file
+      description: Filename for isort configuration
+      default: ".isort.cfg"
+      type: string
+    - name: python-mypy-config-file
+      description: Filename for mypy configuration
+      default: ".mypy.ini"
+      type: string
+    - name: python-pylint-config-file
+      description: Filename for pylint configuration
+      default: ".python-lint"
+      type: string
+    - name: ruby-config-file
+      description: Filename for rubocop configuration
+      default: ".ruby-lint.yml"
+      type: string
+    - name: suppress-possum
+      description: If set to `true`, will hide the ASCII possum at top of log output. Default is `false`
+      default: "false"
+      type: string
+    - name: snakemake-snakefmt-config-file
+      description: Filename for Snakemake configuration
+      default: ".snakefmt.toml"
+      type: string
+    - name: sql-config-file
+      description: Filename for SQL-Lint configuration
+      default: ".sql-config.json"
+      type: string
+    - name: typescript-es-config-file
+      description: Filename for eslint configuration
+      default: ".eslintrc.yml"
+      type: string
+    - name: validate-all-codebase
+      description: Will parse the entire repository and find all files to validate across all types. When set to `false`, only new or edited files will be parsed for validation.
+      default: "true"
+      type: string
+    - name: validate-ansible
+      description: Flag to enable or disable the linting process of the Ansible language.
+      default: "true"
+      type: string
+    - name: validate-arm
+      description: Flag to enable or disable the linting process of the ARM language.
+      default: "true"
+      type: string
+    - name: validate-bash
+      description: Flag to enable or disable the linting process of the Bash language.
+      default: "true"
+      type: string
+    - name: validate-bash-exec
+      description: Flag to enable or disable the linting process of the Bash language to validate if file is stored as executable.
+      default: "true"
+      type: string
+    - name: validate-clojure
+      description: Flag to enable or disable the linting process of the Clojure language.
+      default: "true"
+      type: string
+    - name: validate-cloudformation
+      description: Flag to enable or disable the linting process of the AWS Cloud Formation language.
+      default: "true"
+      type: string
+    - name: validate-coffee
+      description: Flag to enable or disable the linting process of the Coffeescript language.
+      default: "true"
+      type: string
+    - name: validate-csharp
+      description: Flag to enable or disable the linting process of the C# language.
+      default: "true"
+      type: string
+    - name: validate-css
+      description: Flag to enable or disable the linting process of the CSS language.
+      default: "true"
+      type: string
+    - name: validate-dart
+      description: Flag to enable or disable the linting process of the Dart language.
+      default: "true"
+      type: string
+    - name: validate-dockerfile
+      description: Flag to enable or disable the linting process of the Docker language.
+      default: "true"
+      type: string
+    - name: validate-dockerfile-hadolint
+      description: Flag to enable or disable the linting process of the Docker language.
+      default: "true"
+      type: string
+    - name: validate-editorconfig
+      description: Flag to enable or disable the linting process with the editorconfig.
+      default: "true"
+      type: string
+    - name: validate-env
+      description: Flag to enable or disable the linting process of the ENV language.
+      default: "true"
+      type: string
+    - name: validate-gherkin
+      description: Flag to enable or disable the linting process of the Gherkin language.
+      default: "true"
+      type: string
+    - name: validate-go
+      description: Flag to enable or disable the linting process of the Golang language.
+      default: "true"
+      type: string
+    - name: validate-groovy
+      description: Flag to enable or disable the linting process of the language.
+      default: "true"
+      type: string
+    - name: validate-html
+      description: Flag to enable or disable the linting process of the HTML language.
+      default: "true"
+      type: string
+    - name: validate-java
+      description: Flag to enable or disable the linting process of the language.
+      default: "true"
+      type: string
+    - name: validate-javascript-es
+      description: Flag to enable or disable the linting process of the Javascript language.
+      default: "true"
+      type: string
+    - name: validate-javascript-standard
+      description: Flag to enable or disable the linting process of the Javascript language.
+      default: "true"
+      type: string
+    - name: validate-jscpd
+      description: Flag to enable or disable the JSCPD.
+      default: "true"
+      type: string
+    - name: validate-json
+      description: Flag to enable or disable the linting process of the JSON language.
+      default: "true"
+      type: string
+    - name: validate-jsx
+      description: Flag to enable or disable the linting process for jsx files
+      default: "true"
+      type: string
+    - name: validate-kotlin
+      description: Flag to enable or disable the linting process of the Kotlin language.
+      default: "true"
+      type: string
+    - name: validate-kubernetes-kubeval
+      description: Flag to enable or disable the linting process of Kubernetes descriptors with Kubeval
+      default: "true"
+      type: string
+    - name: validate-latex
+      description: Flag to enable or disable the linting process of the LaTeX language.
+      default: "true"
+      type: string
+    - name: validate-lua
+      description: Flag to enable or disable the linting process of the language.
+      default: "true"
+      type: string
+    - name: validate-markdown
+      description: Flag to enable or disable the linting process of the Markdown language.
+      default: "true"
+      type: string
+    - name: validate-openapi
+      description: Flag to enable or disable the linting process of the OpenAPI language.
+      default: "true"
+      type: string
+    - name: validate-perl
+      description: Flag to enable or disable the linting process of the Perl language.
+      default: "true"
+      type: string
+    - name: validate-php
+      description: Flag to enable or disable the linting process of the PHP language.
+      default: "true"
+      type: string
+    - name: validate-php-builtin
+      description: Flag to enable or disable the linting process of the PHP language.
+      default: "true"
+      type: string
+    - name: validate-php-phpcs
+      description: Flag to enable or disable the linting process of the PHP language.
+      default: "true"
+      type: string
+    - name: validate-php-phpstan
+      description: Flag to enable or disable the linting process of the PHP language.
+      default: "true"
+      type: string
+    - name: validate-php-psalm
+      description: Flag to enable or disable the linting process of the PHP language.
+      default: "true"
+      type: string
+    - name: validate-protobuf
+      description: Flag to enable or disable the linting process of the Protobuf language.
+      default: "true"
+      type: string
+    - name: validate-python
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-python-black
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-python-flake8
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-python-isort
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-python-mypy
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-python-pylint
+      description: Flag to enable or disable the linting process of the Python language.
+      default: "true"
+      type: string
+    - name: validate-powershell
+      description: Flag to enable or disable the linting process of the Powershell language.
+      default: "true"
+      type: string
+    - name: validate-r
+      description: Flag to enable or disable the linting process of the R language.
+      default: "true"
+      type: string
+    - name: validate-raku
+      description: Flag to enable or disable the linting process of the Raku language.
+      default: "true"
+      type: string
+    - name: validate-ruby
+      description: Flag to enable or disable the linting process of the Ruby language.
+      default: "true"
+      type: string
+    - name: validate-rust-2015
+      description: Flag to enable or disable the linting process of the Rust language.
+      default: "true"
+      type: string
+    - name: validate-rust-2018
+      description: Flag to enable or disable the linting process of Rust language.
+      default: "true"
+      type: string
+    - name: validate-rust-clippy
+      description: Flag to enable or disable the clippy linting process of Rust language.
+      default: "true"
+      type: string
+    - name: validate-shell-shfmt
+      description: Flag to enable or disable the linting process of Shell scripts.
+      default: "true"
+      type: string
+    - name: validate-snakemake-lint
+      description: Flag to enable or disable the linting process of Snakefiles.
+      default: "true"
+      type: string
+    - name: validate-snakemake-snakefmt
+      description: Flag to enable or disable the linting process of Snakefiles.
+      default: "true"
+      type: string
+    - name: validate-states
+      description: Flag to enable or disable the linting process for AWS States Language.
+      default: "true"
+      type: string
+    - name: validate-sql
+      description: Flag to enable or disable the linting process of the SQL language.
+      default: "true"
+      type: string
+    - name: validate-tekton
+      description: Flag to enable or disable the linting process of the Tekton language.
+      default: "true"
+      type: string
+    - name: validate-terraform
+      description: Flag to enable or disable the linting process of the Terraform language.
+      default: "true"
+      type: string
+    - name: validate-terraform-terrascan
+      description: Flag to enable or disable the linting process of the Terraform language for security related issues.
+      default: "true"
+      type: string
+    - name: validate-terragrunt
+      description: Flag to enable or disable the linting process for Terragrunt files.
+      default: "true"
+      type: string
+    - name: validate-tsx
+      description: Flag to enable or disable the linting process for tsx files
+      default: "true"
+      type: string
+    - name: validate-typescript-es
+      description: Flag to enable or disable the linting process of the Typescript language.
+      default: "true"
+      type: string
+    - name: validate-typescript-standard
+      description: Flag to enable or disable the linting process of the Typescript language.
+      default: "true"
+      type: string
+    - name: validate-xml
+      description: Flag to enable or disable the linting process of the XML language.
+      default: "true"
+      type: string
+    - name: validate-yaml
+      description: Flag to enable or disable the linting process of the YAML language.
+      default: "true"
+      type: string
+    - name: yaml-config-file
+      description: Filename for Yamllint configuration
+      default: ".yaml-lint.yml"
+      type: string
+  resources:
+    inputs:
+      - name: repo
+        type: git
+        targetPath: src
+  steps:
+    - name: linter
+      image: github/super-linter:v3
+      workingDir: /workspace/src
+      env:
+        - name: DEFAULT_WORKSPACE
+          value: /workspace/src
+        - name: RUN_LOCAL
+          value: "true"
+        - name: ACTIONS_RUNNER_DEBUG
+          value: "$(params.actions-runner-debug)"
+        - name: ANSIBLE_DIRECTORY
+          value: "$(params.ansible-directory)"
+        - name: CSS_FILE_NAME
+          value: "$(params.css-file-name)"
+        - name: DEFAULT_BRANCH
+          value: "$(params.default-branch)"
+        - name: DISABLE_ERRORS
+          value: "$(params.disable-errors)"
+        - name: DOCKERFILE_HADOLINT_FILE_NAME
+          value: "$(params.dockerfile-hadolint-file-name)"
+        - name: EDITORCONFIG_FILE_NAME
+          value: "$(params.editorconfig-file-name)"
+        - name: ERROR_ON_MISSING_EXEC_BIT
+          value: "$(params.error-on-missing-exec-bit)"
+        - name: FILTER_REGEX_EXCLUDE
+          value: "$(params.filter-regex-exclude)"
+        - name: FILTER_REGEX_INCLUDE
+          value: "$(params.filter-regex-include)"
+        - name: GITHUB_DOMAIN
+          value: "$(params.github-domain)"
+        - name: GITHUB_CUSTOM_API_URL
+          value: "$(params.github-custom-api-url)"
+        - name: IGNORE_GITIGNORED_FILES
+          value: "$(params.ignore-gitignored-files)"
+        - name: JAVASCRIPT_ES_CONFIG_FILE
+          value: "$(params.javascript-es-config-file)"
+        - name: JAVASCRIPT_DEFAULT_STYLE
+          value: "$(params.javascript-default-style)"
+        - name: JSCPD_CONFIG_FILE
+          value: "$(params.jscpd-config-file)"
+        - name: LINTER_RULES_PATH
+          value: "$(params.linter-rules-path)"
+        - name: LOG_FILE
+          value: "$(params.log-file)"
+        - name: LOG_LEVEL
+          value: "$(params.log-level)"
+        - name: MULTI_STATUS
+          value: "$(params.multi-status)"
+        - name: MARKDOWN_CONFIG_FILE
+          value: "$(params.markdown-config-file)"
+        - name: MARKDOWN_CUSTOM_RULE_GLOBS
+          value: "$(params.markdown-custom-rule-globs)"
+        - name: OUTPUT_FORMAT
+          value: "$(params.output-format)"
+        - name: OUTPUT_FOLDER
+          value: "$(params.output-folder)"
+        - name: OUTPUT_DETAILS
+          value: "$(params.output-details)"
+        - name: PYTHON_BLACK_CONFIG_FILE
+          value: "$(params.python-black-config-file)"
+        - name: PYTHON_FLAKE8_CONFIG_FILE
+          value: "$(params.python-flake8-config-file)"
+        - name: PYTHON_ISORT_CONFIG_FILE
+          value: "$(params.python-isort-config-file)"
+        - name: PYTHON_MYPY_CONFIG_FILE
+          value: "$(params.python-mypy-config-file)"
+        - name: PYTHON_PYLINT_CONFIG_FILE
+          value: "$(params.python-pylint-config-file)"
+        - name: RUBY_CONFIG_FILE
+          value: "$(params.ruby-config-file)"
+        - name: SUPPRESS_POSSUM
+          value: "$(params.suppress-possum)"
+        - name: SNAKEMAKE_SNAKEFMT_CONFIG_FILE
+          value: "$(params.snakemake-snakefmt-config-file)"
+        - name: SQL_CONFIG_FILE
+          value: "$(params.sql-config-file)"
+        - name: TYPESCRIPT_ES_CONFIG_FILE
+          value: "$(params.typescript-es-config-file)"
+        - name: VALIDATE_ALL_CODEBASE
+          value: "$(params.validate-all-codebase)"
+        - name: VALIDATE_ANSIBLE
+          value: "$(params.validate-ansible)"
+        - name: VALIDATE_ARM
+          value: "$(params.validate-arm)"
+        - name: VALIDATE_BASH
+          value: "$(params.validate-bash)"
+        - name: VALIDATE_BASH_EXEC
+          value: "$(params.validate-bash-exec)"
+        - name: VALIDATE_CLOJURE
+          value: "$(params.validate-clojure)"
+        - name: VALIDATE_CLOUDFORMATION
+          value: "$(params.validate-cloudformation)"
+        - name: VALIDATE_COFFEE
+          value: "$(params.validate-coffee)"
+        - name: VALIDATE_CSHARP
+          value: "$(params.validate-csharp)"
+        - name: VALIDATE_CSS
+          value: "$(params.validate-css)"
+        - name: VALIDATE_DART
+          value: "$(params.validate-dart)"
+        - name: VALIDATE_DOCKERFILE
+          value: "$(params.validate-dockerfile)"
+        - name: VALIDATE_DOCKERFILE_HADOLINT
+          value: "$(params.validate-dockerfile-hadolint)"
+        - name: VALIDATE_EDITORCONFIG
+          value: "$(params.validate-editorconfig)"
+        - name: VALIDATE_ENV
+          value: "$(params.validate-env)"
+        - name: VALIDATE_GHERKIN
+          value: "$(params.validate-gherkin)"
+        - name: VALIDATE_GO
+          value: "$(params.validate-go)"
+        - name: VALIDATE_GROOVY
+          value: "$(params.validate-groovy)"
+        - name: VALIDATE_HTML
+          value: "$(params.validate-html)"
+        - name: VALIDATE_JAVA
+          value: "$(params.validate-java)"
+        - name: VALIDATE_JAVASCRIPT_ES
+          value: "$(params.validate-javascript-es)"
+        - name: VALIDATE_JAVASCRIPT_STANDARD
+          value: "$(params.validate-javascript-standard)"
+        - name: VALIDATE_JSCPD
+          value: "$(params.validate-jscpd)"
+        - name: VALIDATE_JSON
+          value: "$(params.validate-json)"
+        - name: VALIDATE_JSX
+          value: "$(params.validate-jsx)"
+        - name: VALIDATE_KOTLIN
+          value: "$(params.validate-kotlin)"
+        - name: VALIDATE_KUBERNETES_KUBEVAL
+          value: "$(params.validate-kubernetes-kubeval)"
+        - name: VALIDATE_LATEX
+          value: "$(params.validate-latex)"
+        - name: VALIDATE_LUA
+          value: "$(params.validate-lua)"
+        - name: VALIDATE_MARKDOWN
+          value: "$(params.validate-markdown)"
+        - name: VALIDATE_OPENAPI
+          value: "$(params.validate-openapi)"
+        - name: VALIDATE_PERL
+          value: "$(params.validate-perl)"
+        - name: VALIDATE_PHP
+          value: "$(params.validate-php)"
+        - name: VALIDATE_PHP_BUILTIN
+          value: "$(params.validate-php-builtin)"
+        - name: VALIDATE_PHP_PHPCS
+          value: "$(params.validate-php-phpcs)"
+        - name: VALIDATE_PHP_PHPSTAN
+          value: "$(params.validate-php-phpstan)"
+        - name: VALIDATE_PHP_PSALM
+          value: "$(params.validate-php-psalm)"
+        - name: VALIDATE_PROTOBUF
+          value: "$(params.validate-protobuf)"
+        - name: VALIDATE_PYTHON
+          value: "$(params.validate-python)"
+        - name: VALIDATE_PYTHON_BLACK
+          value: "$(params.validate-python-black)"
+        - name: VALIDATE_PYTHON_FLAKE8
+          value: "$(params.validate-python-flake8)"
+        - name: VALIDATE_PYTHON_ISORT
+          value: "$(params.validate-python-isort)"
+        - name: VALIDATE_PYTHON_MYPY
+          value: "$(params.validate-python-mypy)"
+        - name: VALIDATE_PYTHON_PYLINT
+          value: "$(params.validate-python-pylint)"
+        - name: VALIDATE_POWERSHELL
+          value: "$(params.validate-powershell)"
+        - name: VALIDATE_R
+          value: "$(params.validate-r)"
+        - name: VALIDATE_RAKU
+          value: "$(params.validate-raku)"
+        - name: VALIDATE_RUBY
+          value: "$(params.validate-ruby)"
+        - name: VALIDATE_RUST_2015
+          value: "$(params.validate-rust-2015)"
+        - name: VALIDATE_RUST_2018
+          value: "$(params.validate-rust-2018)"
+        - name: VALIDATE_RUST_CLIPPY
+          value: "$(params.validate-rust-clippy)"
+        - name: VALIDATE_SHELL_SHFMT
+          value: "$(params.validate-shell-shfmt)"
+        - name: VALIDATE_SNAKEMAKE_LINT
+          value: "$(params.validate-snakemake-lint)"
+        - name: VALIDATE_SNAKEMAKE_SNAKEFMT
+          value: "$(params.validate-snakemake-snakefmt)"
+        - name: VALIDATE_STATES
+          value: "$(params.validate-states)"
+        - name: VALIDATE_SQL
+          value: "$(params.validate-sql)"
+        - name: VALIDATE_TEKTON
+          value: "$(params.validate-tekton)"
+        - name: VALIDATE_TERRAFORM
+          value: "$(params.validate-terraform)"
+        - name: VALIDATE_TERRAFORM_TERRASCAN
+          value: "$(params.validate-terraform-terrascan)"
+        - name: VALIDATE_TERRAGRUNT
+          value: "$(params.validate-terragrunt)"
+        - name: VALIDATE_TSX
+          value: "$(params.validate-tsx)"
+        - name: VALIDATE_TYPESCRIPT_ES
+          value: "$(params.validate-typescript-es)"
+        - name: VALIDATE_TYPESCRIPT_STANDARD
+          value: "$(params.validate-typescript-standard)"
+        - name: VALIDATE_XML
+          value: "$(params.validate-xml)"
+        - name: VALIDATE_YAML
+          value: "$(params.validate-yaml)"
+        - name: YAML_CONFIG_FILE
+          value: "$(params.yaml-config-file)"
