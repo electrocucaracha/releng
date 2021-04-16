@@ -24,11 +24,14 @@ if [ -n "$pkgs" ]; then
     # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
     curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
-pip install -r requirements.txt
 
-# Configure custom values
-sudo mkdir -p /etc/kolla
-sudo cp ./kolla/kolla-build.ini /etc/kolla/kolla-build.ini
-sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-victoria}/g" /etc/kolla/kolla-build.ini
-sudo sed -i "s/^profile = .*$/profile = ${OS_KOLLA_PROFILE:-custom}/g" /etc/kolla/kolla-build.ini
-sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-victoria}\"/g" /etc/kolla/kolla-build.ini
+if [ "${RELENG_KOLLA_BUID:-false}" == "true" ]; then
+    pip install -r requirements.txt
+
+    # Configure custom values
+    sudo mkdir -p /etc/kolla
+    sudo cp ./kolla/kolla-build.ini /etc/kolla/kolla-build.ini
+    sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-victoria}/g" /etc/kolla/kolla-build.ini
+    sudo sed -i "s/^profile = .*$/profile = ${OS_KOLLA_PROFILE:-custom}/g" /etc/kolla/kolla-build.ini
+    sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-victoria}\"/g" /etc/kolla/kolla-build.ini
+fi
