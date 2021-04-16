@@ -3,3 +3,4 @@
 *.swp
 *.vdi
 mirror/apt-mirror/sources.list
+*.log

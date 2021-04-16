@@ -1,5 +1,7 @@
 # Release Engineering
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![GitHub Super-Linter](https://github.com/electrocucaracha/releng/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=electrocucaracha.releng)
 
 ## Summary
 
@@ -15,13 +17,17 @@ dependencies and plugins required for this project. That script
 supports two Virtualization providers (Libvirt and VirtualBox) which
 are determine by the **PROVIDER** environment variable.
 
-    $ curl -fsSL http://bit.ly/initVagrant | PROVIDER=libvirt bash
+```bash
+curl -fsSL http://bit.ly/initVagrant | PROVIDER=libvirt bash
+```
 
 Once Vagrant is installed, it's possible to provision a Virtual
 Machine using the following instructions:
 
-    $ VAGRANT_EXPERIMENTAL=disks vagrant up
-    $ vagrant up ci
+```bash
+VAGRANT_EXPERIMENTAL=disks vagrant up
+vagrant up ci
+```
 
 The provisioning process will take some time to install all
 dependencies required by this project and perform a Kubernetes
