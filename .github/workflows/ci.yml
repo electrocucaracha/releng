@@ -8,7 +8,7 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
-name: Check Bare-Metal installations
+name: Check CI Bare-Metal deployments
 # yamllint disable-line rule:truthy
 on:
   push:
@@ -16,25 +16,6 @@ on:
       - 'master'
 
 jobs:
-  check-mirror:
-    runs-on: ubuntu-18.04
-    env:
-      RELENG_MIRROR_FILE: mirror_releng.list
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup the VM folders
-        run: |
-          ./pre-install.sh "sdc" "/var/local/packages"
-          ./pre-install.sh "sdd" "/var/local/images"
-          ./pre-install.sh "sdf" "/var/local/pypi_packages"
-      - name: Install dependencies
-        run: cd mirror; ./install.sh
-      - name: Deploy docker compose services
-        run: cd mirror; ./deploy.sh
-      - name: Pull KinD docker images
-        run: cd mirror; ./setup_k8s.sh
-      - name: Retrieve images hosted in private registry
-        run: curl -s -X GET http://localhost:5000/v2/_catalog
   check-ci:
     strategy:
       matrix:
