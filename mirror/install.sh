@@ -31,7 +31,7 @@ if [ "${RELENG_KOLLA_BUID:-false}" == "true" ]; then
     # Configure custom values
     sudo mkdir -p /etc/kolla
     sudo cp ./kolla/kolla-build.ini /etc/kolla/kolla-build.ini
-    sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-victoria}/g" /etc/kolla/kolla-build.ini
+    sudo sed -i "s/^tag = .*$/tag = ${OPENSTACK_TAG:-wallaby}/g" /etc/kolla/kolla-build.ini
     sudo sed -i "s/^profile = .*$/profile = ${OS_KOLLA_PROFILE:-custom}/g" /etc/kolla/kolla-build.ini
-    sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-victoria}\"/g" /etc/kolla/kolla-build.ini
+    sudo sed -i "s/^#openstack_release = .*$/openstack_release = \"${OPENSTACK_RELEASE:-wallaby}\"/g" /etc/kolla/kolla-build.ini
 fi

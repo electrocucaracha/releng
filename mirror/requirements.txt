@@ -1,2 +1,2 @@
-kolla
+git+https://github.com/openstack/kolla.git@stable/wallaby
 docker-squash
