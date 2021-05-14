@@ -131,16 +131,16 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :ci, primary: true, autostart: false do |ci|
     ci.vm.hostname = "ci"
-    ci.vm.box = "generic/ubuntu2004"
     ci.vm.network "private_network", ip: ci_ip_address, libvirt__network_name: "management"
     ci.vm.network :forwarded_port, guest: 80, host: 8080
     ci.vm.synced_folder "./ci", "/vagrant"
     ci.vm.synced_folder "./", "/opt/releng"
+    ci.vm.synced_folder "./apt/", "/etc/apt/" if File.exist?("#{File.dirname(__FILE__)}./apt/sources.list")
 
     %i[virtualbox libvirt].each do |provider|
       ci.vm.provider provider do |p|
-        p.cpus = ENV["CPUS"] || 7
-        p.memory = ENV["MEMORY"] || 36_864
+        p.cpus = ENV["CPUS"] || 4
+        p.memory = ENV["MEMORY"] || 16_384
       end
     end
 
