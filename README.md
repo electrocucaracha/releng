@@ -5,8 +5,15 @@
 
 ## Summary
 
-This project provisions a Continuous Integration server used for
-validate personal projects.
+This project provisions the following servers used for validation and test of
+personal projects.
+
+* *Mirror Server*: Provides services to reduce external network traffic. Those
+are [Ubuntu mirror][3], [Docker registry][4] and [PyPI server][5].
+* *CI Server*: Provides a Continuous Integration server on top of a Kubernetes
+Cluster. [Concourse CI][6] and [Tekton][7] are the options supported.
+* *Cloud Server*: Provides an [OpenStack][8] server as Infrastructure as a
+Service solution.
 
 ## Virtual Machines
 
@@ -33,8 +40,11 @@ The provisioning process will take some time to install all
 dependencies required by this project and perform a Kubernetes
 deployment on it.
 
-The Concourse CI Dashboard is accesible through
-[this URL.](http://192.168.123.4/)
-
 [1]: https://www.vagrantup.com/
 [2]: https://github.com/electrocucaracha/bootstrap-vagrant
+[3]: http://apt-mirror.github.io/
+[4]: https://docs.docker.com/registry/
+[5]: https://www.devpi.net/
+[6]: https://concourse-ci.org/
+[7]: https://tekton.dev/
+[8]: https://www.openstack.org/
