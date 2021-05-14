@@ -16,7 +16,6 @@ spec:
   pipelineRef:
     name: linter
   podTemplate:
-    runtimeClassName: crun
   serviceAccountName: 'default'
   resources:
     - name: src

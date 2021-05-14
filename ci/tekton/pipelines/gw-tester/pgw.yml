@@ -16,7 +16,6 @@ spec:
   pipelineRef:
     name: pgw
   podTemplate:
-    runtimeClassName: crun
   serviceAccountName: 'default'
   resources:
     - name: src

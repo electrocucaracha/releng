@@ -16,7 +16,6 @@ spec:
   pipelineRef:
     name: pkg-mgr-scripts
   podTemplate:
-    runtimeClassName: crun
   serviceAccountName: 'default'
   resources:
     - name: src
