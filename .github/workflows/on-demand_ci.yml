@@ -52,7 +52,6 @@ jobs:
   check-e2e:
     runs-on: macos-10.15
     env:
-      VAGRANT_NAME: ${{ matrix.name }}
       VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
       VAGRANT_EXPERIMENTAL: disks
       CPUS: 2
