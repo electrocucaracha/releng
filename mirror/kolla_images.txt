@@ -19,7 +19,6 @@ docker.io/kolla/ubuntu-binary-keystone:wallaby
 docker.io/kolla/ubuntu-binary-kolla-toolbox:wallaby
 docker.io/kolla/ubuntu-binary-mariadb-clustercheck:wallaby
 docker.io/kolla/ubuntu-binary-mariadb-server:wallaby
-docker.io/kolla/ubuntu-binary-mariadb:wallaby
 docker.io/kolla/ubuntu-binary-memcached:wallaby
 docker.io/kolla/ubuntu-binary-neutron-dhcp-agent:wallaby
 docker.io/kolla/ubuntu-binary-neutron-l3-agent:wallaby
