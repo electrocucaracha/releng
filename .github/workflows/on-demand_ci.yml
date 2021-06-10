@@ -31,7 +31,7 @@ jobs:
       - name: Get nodes information
         run: kubectl describe nodes
   check-mirror-baremetal:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       RELENG_MIRROR_FILE: mirror_releng.list
     steps:
