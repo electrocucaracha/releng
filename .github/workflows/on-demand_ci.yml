@@ -69,7 +69,9 @@ jobs:
       - name: Install GNU tools
         run: brew install proctools iproute2mac
       - name: Replace shorten links
-        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
+        run: |
+          find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
+          find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/KRDaio|https://raw.githubusercontent.com/electrocucaracha/krd/master/aio.sh|g' {} \;
       - name: Run mirror
         run: vagrant up
       - name: Create CI instance
