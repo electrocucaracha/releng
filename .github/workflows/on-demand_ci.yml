@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Provision a Kubernetes cluster
-        run: cd ci; ./provision_kind_cluster.sh
+        run: cd ci; ./provision_krd_cluster.sh
       - name: Deploy CI services
         run: cd ci/${RELENG_CI_TYPE}; ./deploy.sh
       - name: Get nodes information
@@ -56,6 +56,7 @@ jobs:
       VAGRANT_EXPERIMENTAL: disks
       CPUS: 2
       MEMORY: 12288
+      RELENG_K8S_TYPE: kind
     steps:
       - uses: actions/checkout@v2
       - name: Cache Vagrant boxes
@@ -68,9 +69,7 @@ jobs:
       - name: Install GNU tools
         run: brew install proctools iproute2mac
       - name: Replace shorten links
-        run: |
-          find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
-          find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/KRDaio|https://raw.githubusercontent.com/electrocucaracha/krd/master/aio.sh|g' {} \;
+        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
       - name: Run mirror
         run: vagrant up
       - name: Create CI instance
