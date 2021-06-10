@@ -41,7 +41,7 @@ networking:
     kubeProxyMode: "ipvs"
 nodes:
     - role: control-plane
-      image: kindest/node:${PKG_KUBECTL_VERSION:-v1.18.8}
+      image: kindest/node:${PKG_KUBECTL_VERSION:-v1.20.7}
       kubeadmConfigPatches:
           - |
               kind: InitConfiguration

@@ -20,7 +20,7 @@ jobs:
       matrix:
         ci: [concourse, tekton]
     env:
-      PKG_KUBECTL_VERSION: v1.18.8
+      PKG_KUBECTL_VERSION: v1.20.7
       RELENG_CI_TYPE: ${{ matrix.ci }}
     steps:
       - uses: actions/checkout@v2
