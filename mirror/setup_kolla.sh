@@ -17,7 +17,7 @@ fi
 
 while IFS= read -r image; do
     image_name="${image#*/}"
-    if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
+    if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ] || [ "$(curl "http://localhost:5000/v2/${image_name%:*}/manifests/${image_name#*:}" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
         if [ "${RELENG_KOLLA_BUID:-false}" == "true" ]; then
             image_tag="${image#*binary-}"
             SNAP=$HOME/.local/ kolla-build "${image_tag%:*}" --base ubuntu --base-arch "$(uname -m)" \
