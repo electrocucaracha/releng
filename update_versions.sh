@@ -17,3 +17,6 @@ fi
 eval "$(curl -fsSL https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/pinned_versions.env)"
 
 sed -i "s/PKG_FLY_VERSION\".*/PKG_FLY_VERSION\"] || \"$PKG_FLY_VERSION\"/g" Vagrantfile
+sed -i "s/PKG_FLY_VERSION:-.*/PKG_FLY_VERSION:-$PKG_FLY_VERSION}\" -f helm\/ci\.yml/g" ci/concourse/deploy.sh
+sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/kind_images.txt
+sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/krd_images.txt
