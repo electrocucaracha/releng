@@ -15,9 +15,11 @@ set -o nounset
 
 # Install dependencies
 pkgs=""
-if ! command -v pip; then
-    pkgs+=" pip"
-fi
+for pkg in pip jq; do
+    if ! command -v "$pkg"; then
+        pkgs+=" $pkg"
+    fi
+done
 if ! systemctl list-unit-files | grep -q "openntpd.*enabled"; then
     pkgs+=" openntpd"
 fi
