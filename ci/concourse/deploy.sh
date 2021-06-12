@@ -22,6 +22,7 @@ function exit_trap {
     if command -v kubectl; then
         kubectl get all -A -o wide
         kubectl describe nodes
+        kubectl describe pods
     fi
 }
 
