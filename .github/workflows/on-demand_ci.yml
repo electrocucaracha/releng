@@ -18,14 +18,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci: [concourse, tekton]
+        include:
+          - ci: concourse
+            k8s: kind
+          - ci: tekton
+            k8s: krd
     env:
       PKG_KUBECTL_VERSION: v1.20.7
       RELENG_CI_TYPE: ${{ matrix.ci }}
+      RELENG_K8S_TYPE: ${{ matrix.k8s }}
     steps:
       - uses: actions/checkout@v2
       - name: Provision a Kubernetes cluster
-        run: cd ci; ./provision_krd_cluster.sh
+        run: cd ci; ./provision_${RELENG_K8S_TYPE}_cluster.sh
       - name: Deploy CI services
         run: cd ci/${RELENG_CI_TYPE}; ./deploy.sh
       - name: Get nodes information
