@@ -27,6 +27,7 @@ k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
 ci_type = ENV["RELENG_CI_TYPE"] || "tekton"
 ci_setup_enabled = "false"
 mirror_file = ENV["RELENG_MIRROR_FILE"] || "mirror_releng.list"
+releng_folder = "/opt/releng/"
 
 def which(cmd)
   exts = ENV["PATHEXT"] ? ENV["PATHEXT"].split(";") : [""]
@@ -85,6 +86,7 @@ Vagrant.configure("2") do |config|
     config.proxy.enabled = { docker: false }
   end
 
+  config.vm.synced_folder "./common", "#{releng_folder}common"
   config.vm.define :mirror do |mirror|
     mirror.vm.hostname = "mirror"
     mirror.vm.network :private_network, ip: mirror_ip_address, libvirt__network_name: "management"
@@ -123,7 +125,8 @@ Vagrant.configure("2") do |config|
         PKG_FLY_VERSION: fly_version,
         PKG_KUBECTL_VERSION: kubectl_version,
         MIRROR_FILENAME: mirror_file,
-        RELENG_K8S_TYPE: k8s_type
+        RELENG_K8S_TYPE: k8s_type,
+        RELENG_FOLDER: releng_folder
       }
       sh.inline = <<-SHELL
         set -o errexit
@@ -138,6 +141,7 @@ Vagrant.configure("2") do |config|
         ./deploy.sh | tee ~/deploy.log
         ./setup_k8s.sh | tee ~/setup_k8s.log
         ./setup_kolla.sh | tee ~/setup_kolla.log
+        ./setup_devpi.sh | tee ~/setup_devpi.log
         ./post-install.sh | tee ~/post-install.log
 
         curl -s -X GET http://localhost:5000/v2/_catalog
@@ -283,6 +287,7 @@ Vagrant.configure("2") do |config|
         RELENG_NEUTRON_EXTERNAL_INTERFACE: "eth2",
         RELENG_NTP_SERVER: mirror_ip_address,
         RELENG_DEVPI_HOST: mirror_ip_address,
+        RELENG_FOLDER: releng_folder,
         EXT_NET_RANGE: "start=#{cloud_public_cidr.sub('0/24', '50')},end=#{cloud_public_cidr.sub('0/24', '100')}",
         EXT_NET_CIDR: cloud_public_cidr.to_s,
         EXT_NET_GATEWAY: cloud_public_gw.to_s

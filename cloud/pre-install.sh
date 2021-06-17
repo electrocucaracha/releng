@@ -19,7 +19,6 @@ function exit_trap {
     sudo fdisk -l
 }
 
-
 trap exit_trap ERR
 
 if [ -n "${RELENG_CINDER_VOLUME:-}" ]; then

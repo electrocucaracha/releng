@@ -14,7 +14,7 @@ set -o errexit
 set -o nounset
 
 # Install dependencies
-pip install -r requeriments.txt
+pip install -r "${RELENG_FOLDER:-}./common/requeriments.txt"
 
 # Configure kolla-ansible
 sudo mkdir -p /etc/{kolla/config,ansible}
