@@ -18,7 +18,7 @@ docker==5.0.0
     #   kolla
 gitdb==4.0.7
     # via gitpython
-gitpython==3.1.14
+gitpython==3.1.18
     # via kolla
 idna==2.10
     # via requests
