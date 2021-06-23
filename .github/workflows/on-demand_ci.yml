@@ -80,7 +80,7 @@ jobs:
       - name: Replace shorten links
         run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
       - name: Run mirror
-        run: vagrant up
+        run: vagrant up mirror
       - name: Create CI instance
         run: vagrant up ci
       - name: Destroy CI instance
@@ -91,3 +91,9 @@ jobs:
       - name: Destroy Cloud instance
         if: ${{ always() }}
         run: vagrant destroy -f cloud
+      - name: Check HW resources
+        if: failure()
+        run: |
+          vm_stat
+          top -l 1 -n 0
+          VBoxManage list runningvms --long
