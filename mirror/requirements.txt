@@ -6,7 +6,7 @@
 #
 certifi==2021.5.30
     # via requests
-chardet==4.0.0
+charset-normalizer==2.0.1
     # via requests
 debtcollector==2.2.0
     # via oslo.config
@@ -20,7 +20,7 @@ gitdb==4.0.7
     # via gitpython
 gitpython==3.1.18
     # via kolla
-idna==2.10
+idna==3.2
     # via requests
 jinja2==3.0.1
     # via kolla
@@ -42,7 +42,7 @@ pbr==5.6.0
     #   stevedore
 pyyaml==5.4.1
     # via oslo.config
-requests==2.25.1
+requests==2.26.0
     # via
     #   docker
     #   oslo.config
