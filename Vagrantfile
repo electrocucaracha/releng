@@ -25,6 +25,7 @@ fly_version = ENV["PKG_FLY_VERSION"] || "7.3.2"
 kubectl_version = "v1.20.7"
 k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
 ci_type = ENV["RELENG_CI_TYPE"] || "tekton"
+debug = ENV["RELENG_DEBUG"] || "false"
 ci_setup_enabled = "false"
 mirror_file = ENV["RELENG_MIRROR_FILE"] || "mirror_releng.list"
 releng_folder = "/opt/releng/"
@@ -203,6 +204,7 @@ Vagrant.configure("2") do |config|
         PKG_KUBECTL_VERSION: kubectl_version,
         RELENG_K8S_TYPE: k8s_type,
         RELENG_CI_TYPE: ci_type,
+        RELENG_DEBUG: debug,
         RELENG_NTP_SERVER: mirror_ip_address
       }
       sh.inline = <<-SHELL

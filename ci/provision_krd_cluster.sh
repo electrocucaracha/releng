@@ -9,9 +9,12 @@
 ##############################################################################
 
 set -o pipefail
-set -o xtrace
 set -o errexit
 set -o nounset
+if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+    set -o xtrace
+    export KRD_DEBUG=true
+fi
 
 # Configure KRD variables
 if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
