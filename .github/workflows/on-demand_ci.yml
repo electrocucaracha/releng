@@ -10,7 +10,22 @@
 
 name: Check CI
 # yamllint disable-line rule:truthy
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.sh'
+      - '**.yml'
+      - '**.conf'
+      - '**.txt'
+  pull_request:
+    paths:
+      - '**.sh'
+      - '**.yml'
+      - '**.conf'
+      - '**.txt'
+  pull_request_review:
+    types:
+      - submitted
 
 jobs:
   check-ci-baremetal:
