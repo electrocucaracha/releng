@@ -80,7 +80,7 @@ if ! helm ls | grep -q concourse-ci; then
         --set secrets.localUsers="${RELENG_LOCAL_USER:-test}:${RELENG_LOCAL_PASSWORD:-test}" \
         --set image="$concourse_image" \
         --set worker.replicas="$(kubectl get nodes --no-headers | wc -l)" \
-        --set imageTag="${PKG_FLY_VERSION:-6.7.7}" -f helm/ci.yml
+        --set imageTag="${PKG_FLY_VERSION:-7.4.0}" -f helm/ci.yml
 fi
 
 kubectl rollout status deployment/concourse-ci-web --timeout=5m
