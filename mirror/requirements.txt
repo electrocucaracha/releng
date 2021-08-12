@@ -59,7 +59,7 @@ stevedore==3.3.0
     # via oslo.config
 urllib3==1.26.6
     # via requests
-websocket-client==1.1.1
+websocket-client==1.2.0
     # via docker
 wrapt==1.12.1
     # via debtcollector
