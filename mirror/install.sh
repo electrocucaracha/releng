@@ -25,7 +25,7 @@ if [ -n "$pkgs" ]; then
     curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
 
-if [ "${RELENG_KOLLA_BUID:-false}" == "true" ]; then
+if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
     pip install -r requirements.txt
 
     # Configure custom values

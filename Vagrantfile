@@ -23,6 +23,7 @@ cloud_public_cidr = `ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}'
 cloud_public_gw = `ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 fly_version = ENV["PKG_FLY_VERSION"] || "7.4.0"
 kubectl_version = "v1.20.7"
+kolla_build = ENV["RELENG_KOLLA_BUILD"]
 k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
 ci_type = ENV["RELENG_CI_TYPE"] || "tekton"
 debug = ENV["RELENG_DEBUG"] || "false"
@@ -127,7 +128,8 @@ Vagrant.configure("2") do |config|
         PKG_KUBECTL_VERSION: kubectl_version,
         MIRROR_FILENAME: mirror_file,
         RELENG_K8S_TYPE: k8s_type,
-        RELENG_FOLDER: releng_folder
+        RELENG_FOLDER: releng_folder,
+        RELENG_KOLLA_BUILD: kolla_build
       }
       sh.inline = <<-SHELL
         set -o errexit

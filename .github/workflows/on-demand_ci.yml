@@ -78,6 +78,7 @@ jobs:
     env:
       VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
       VAGRANT_EXPERIMENTAL: disks
+      RELENG_K8S_TYPE: kind
     steps:
       - uses: actions/checkout@v2
       - name: Cache Vagrant boxes
@@ -93,12 +94,13 @@ jobs:
         run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
       - name: Run mirror
         run: vagrant up mirror
+        env:
+          RELENG_KOLLA_BUILD: "true"
       - name: Create CI instance
         run: vagrant up ci
         env:
           CPUS: 1
           MEMORY: 4096
-          RELENG_K8S_TYPE: kind
       - name: Destroy CI instance
         if: ${{ always() }}
         run: vagrant destroy -f ci
