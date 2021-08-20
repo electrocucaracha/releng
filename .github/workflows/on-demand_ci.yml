@@ -78,9 +78,6 @@ jobs:
     env:
       VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
       VAGRANT_EXPERIMENTAL: disks
-      CPUS: 2
-      MEMORY: 12288
-      RELENG_K8S_TYPE: kind
     steps:
       - uses: actions/checkout@v2
       - name: Cache Vagrant boxes
@@ -98,11 +95,18 @@ jobs:
         run: vagrant up mirror
       - name: Create CI instance
         run: vagrant up ci
+        env:
+          CPUS: 1
+          MEMORY: 4096
+          RELENG_K8S_TYPE: kind
       - name: Destroy CI instance
         if: ${{ always() }}
         run: vagrant destroy -f ci
       - name: Create cloud instance
         run: vagrant up cloud
+        env:
+          CPUS: 1
+          MEMORY: 8192
       - name: Destroy Cloud instance
         if: ${{ always() }}
         run: vagrant destroy -f cloud
