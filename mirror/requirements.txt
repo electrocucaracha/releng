@@ -55,7 +55,7 @@ six==1.16.0
     #   oslo.i18n
 smmap==4.0.0
     # via gitdb
-stevedore==3.3.0
+stevedore==3.4.0
     # via oslo.config
 urllib3==1.26.6
     # via requests
