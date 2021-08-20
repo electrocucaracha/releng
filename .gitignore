@@ -5,3 +5,4 @@
 mirror/apt-mirror/sources.list
 *.log
 apt/sources.list
+dictionary.dic
