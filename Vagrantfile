@@ -97,8 +97,8 @@ Vagrant.configure("2") do |config|
 
     %i[virtualbox libvirt].each do |provider|
       mirror.vm.provider provider do |p|
-        p.cpus = 1
-        p.memory = 512
+        p.cpus = ENV["CPUS"] || 1
+        p.memory = ENV["MEMORY"] || 512
       end
     end
 
