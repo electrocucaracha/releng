@@ -12,6 +12,8 @@ version: '3.8'
 
 services:
   devpi-init:
+    build:
+      context: ./devpi
     image: electrocucaracha/devpi:0.0.1
     entrypoint:
       - /bin/sh
@@ -19,12 +21,16 @@ services:
     volumes:
       - pypi_packages:/devpi/server
   devpi:
+    build:
+      context: ./devpi
     image: electrocucaracha/devpi:0.0.1
     depends_on:
       - devpi-init
     volumes:
       - pypi_packages:/devpi/server
   mirror:
+    build:
+      context: ./apt-mirror
     image: electrocucaracha/apt-mirror:0.0.1
     volumes:
       - ./apt-mirror/${MIRROR_FILENAME}:/etc/apt/mirror.list:ro
@@ -34,6 +40,8 @@ services:
     volumes:
       - images:/var/lib/registry
   ntp:
+    build:
+      context: ./ntpd
     image: electrocucaracha/ntpd:0.0.1
     privileged: true
     volumes:
