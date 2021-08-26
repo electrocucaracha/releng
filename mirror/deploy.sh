@@ -13,4 +13,4 @@ set -o xtrace
 set -o errexit
 set -o nounset
 
-sudo "$(command -v docker-compose)" up -d
+sudo "$(command -v docker-compose)" up --detach --build

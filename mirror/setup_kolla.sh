@@ -16,14 +16,14 @@ if [[ "${DEBUG:-false}" == "true" ]]; then
 fi
 
 if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
-    image_name="$(cat kolla_images.txt | head -n 1 | awk -F '/' '{ print $NF}')"
+    image_name="$(head -n 1 < kolla_images.txt | awk -F '/' '{ print $NF}')"
     newgrp docker <<EONG
     # PEP 370 -- Per user site-packages directory
     [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
     SNAP=$HOME/.local/ kolla-build --base "${image_name%-binary*}" \
     --base-arch "$(uname -m)" --push --registry localhost:5000 \
     --tag "${image_name#*:}" --squash --quiet --skip-existing --noskip-parents \
-    | jq "." | tee "$HOME/output.json"
+    --profile default | jq "." | tee "$HOME/output.json"
 EONG
     if [[ $(jq  '.failed | length ' "$HOME/output.json") != 0 ]]; then
         jq  '.failed[].name' "$HOME/output.json"
