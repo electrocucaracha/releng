@@ -15,31 +15,32 @@ if [[ "${DEBUG:-false}" == "true" ]]; then
     set -o xtrace
 fi
 
+if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
+    image_name="$(cat kolla_images.txt | head -n 1 | awk -F '/' '{ print $NF}')"
+    newgrp docker <<EONG
+    # PEP 370 -- Per user site-packages directory
+    [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
+    SNAP=$HOME/.local/ kolla-build --base "${image_name%-binary*}" \
+    --base-arch "$(uname -m)" --push --registry localhost:5000 \
+    --tag "${image_name#*:}" --squash --quiet --skip-existing --noskip-parents \
+    | jq "." | tee "$HOME/output.json"
+EONG
+    if [[ $(jq  '.failed | length ' "$HOME/output.json") != 0 ]]; then
+        jq  '.failed[].name' "$HOME/output.json"
+    else
+        exit
+    fi
+fi
+
 while IFS= read -r image; do
     image_name="${image##*/}"
-    if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
-        image_tag="${image#*binary-}"
-        newgrp docker <<EONG
-        # PEP 370 -- Per user site-packages directory
-        [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
-        SNAP=$HOME/.local/ kolla-build "${image_tag%:*}" \
-        --base "${image_name%-binary*}" --base-arch "$(uname -m)" --push \
-        --registry localhost:5000 --tag "${image_name#*:}" --squash \
-        --skip-existing --noskip-parents | jq "." | tee "$HOME/output.json"
-EONG
-        if [[ $(jq  '.failed | length ' "$HOME/output.json") != 0 ]]; then
-            jq  '.failed[].name' "$HOME/output.json"
-            exit 1
-        fi
-    else
-        if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ] || [ "$(curl "http://localhost:5000/v2/${image_name%:*}/manifests/${image_name#*:}" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
-            if command -v skopeo; then
-                skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/$image_name"
-            else
-                docker pull "$image"
-                docker tag "$image" "localhost:5000/$image_name"
-                docker push "localhost:5000/$image_name"
-            fi
+    if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ] || [ "$(curl "http://localhost:5000/v2/${image_name%:*}/manifests/${image_name#*:}" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
+        if command -v skopeo; then
+            skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/$image_name"
+        else
+            docker pull "$image"
+            docker tag "$image" "localhost:5000/$image_name"
+            docker push "localhost:5000/$image_name"
         fi
     fi
 done < kolla_images.txt
