@@ -106,7 +106,8 @@ Vagrant.configure("2") do |config|
     mirror.vm.disk :disk, name: "packages", size: "250GB"
     mirror.vm.disk :disk, name: "images", size: "10GB"
     mirror.vm.disk :disk, name: "pypi", size: "10GB"
-    mirror.vm.provider :libvirt do |v|
+    mirror.vm.provider :libvirt do |v, override|
+      override.vm.synced_folder "./mirror", "/vagrant", type: "nfs"
       v.storage :file, bus: "sata", device: "sdb", size: "350G"
       v.storage :file, bus: "sata", device: "sdc", size: "10G"
       v.storage :file, bus: "sata", device: "sdd", size: "10G"
@@ -175,7 +176,8 @@ Vagrant.configure("2") do |config|
     ci.vm.disk :disk, name: "postgresql", size: "10GB"
     ci.vm.disk :disk, name: "worker0", size: "25GB"
     ci.vm.disk :disk, name: "containers", size: "100GB"
-    ci.vm.provider :libvirt do |v|
+    ci.vm.provider :libvirt do |v, override|
+      override.vm.synced_folder "./ci", "/vagrant", type: "nfs"
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "10G"
       v.storage :file, bus: "sata", device: "sdc", size: "25G"
@@ -263,7 +265,8 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--nic3", "natnetwork", "--nat-network3", "public", "--nicpromisc3", "allow-all"]
     end
     cloud.vm.disk :disk, name: "cinder", size: "50GB"
-    cloud.vm.provider :libvirt do |v|
+    cloud.vm.provider :libvirt do |v, override|
+      override.vm.synced_folder "./cloud", "/vagrant", type: "nfs"
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "50G"
     end
