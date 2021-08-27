@@ -9,9 +9,11 @@
 ##############################################################################
 
 set -o pipefail
-set -o xtrace
 set -o errexit
 set -o nounset
+if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+    set -o xtrace
+fi
 
 # mount_dev() - Formats and mounts storage devices
 function mount_dev {

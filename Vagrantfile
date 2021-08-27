@@ -128,6 +128,7 @@ Vagrant.configure("2") do |config|
         PKG_FLY_VERSION: fly_version,
         PKG_KUBECTL_VERSION: kubectl_version,
         MIRROR_FILENAME: mirror_file,
+        RELENG_DEBUG: debug,
         RELENG_K8S_TYPE: k8s_type,
         RELENG_FOLDER: releng_folder,
         RELENG_KOLLA_BUILD: kolla_build
@@ -287,6 +288,7 @@ Vagrant.configure("2") do |config|
     cloud.vm.provision "shell", privileged: false do |sh|
       sh.env = {
         PKG_DOCKER_REGISTRY_MIRRORS: "\"http://#{mirror_ip_address}:5000\"",
+        RELENG_DEBUG: debug,
         RELENG_CINDER_VOLUME: "/dev/sdb",
         RELENG_ENABLE_CINDER: "yes",
         RELENG_INTERNAL_VIP_ADDRESS: cloud_vip_address,

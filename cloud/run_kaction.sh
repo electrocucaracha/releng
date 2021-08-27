@@ -8,10 +8,12 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
+set -o pipefail
 set -o errexit
 set -o nounset
-set -o pipefail
-set -o xtrace
+if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+    set -o xtrace
+fi
 
 SNAP=$HOME/.local/ kolla-ansible \
     -e "ansible_user=root" \

@@ -9,9 +9,11 @@
 ##############################################################################
 
 set -o pipefail
-set -o xtrace
 set -o errexit
 set -o nounset
+if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+    set -o xtrace
+fi
 
 # PEP 370 -- Per user site-packages directory
 [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
