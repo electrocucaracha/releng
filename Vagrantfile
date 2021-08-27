@@ -144,9 +144,9 @@ Vagrant.configure("2") do |config|
         cd /vagrant/
         ./install.sh | tee ~/install.log
         ./deploy.sh | tee ~/deploy.log
+        ./setup_devpi.sh | tee ~/setup_devpi.log
         ./setup_k8s.sh | tee ~/setup_k8s.log
         ./setup_kolla.sh | tee ~/setup_kolla.log
-        ./setup_devpi.sh | tee ~/setup_devpi.log
         ./post-install.sh | tee ~/post-install.log
 
         curl -s -X GET http://localhost:5000/v2/_catalog
