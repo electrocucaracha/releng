@@ -17,12 +17,14 @@ on:
       - '**.yml'
       - '**.conf'
       - '**.txt'
+      - '!.github/*'
   pull_request:
     paths:
       - '**.sh'
       - '**.yml'
       - '**.conf'
       - '**.txt'
+      - '!.github/*'
   pull_request_review:
     types:
       - submitted
