@@ -13,24 +13,18 @@ name: Check CI
 on:
   push:
     paths:
-      - '**.sh'
-      - '**.yml'
-      - '**.conf'
-      - '**.txt'
-      - '!.github/*'
+      - '*install.sh'
+      - 'ci/*'
   pull_request:
     paths:
-      - '**.sh'
-      - '**.yml'
-      - '**.conf'
-      - '**.txt'
-      - '!.github/*'
+      - '*install.sh'
+      - 'ci/*'
   pull_request_review:
     types:
       - submitted
 
 jobs:
-  check-ci-baremetal:
+  check-baremetal:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -41,83 +35,20 @@ jobs:
           - ci: tekton
             k8s: krd
     env:
-      PKG_KUBECTL_VERSION: v1.20.7
-      RELENG_CI_TYPE: ${{ matrix.ci }}
-      RELENG_K8S_TYPE: ${{ matrix.k8s }}
+      RELENG_DEBUG: "true"
     steps:
       - uses: actions/checkout@v2
       - name: Provision a Kubernetes cluster
+        env:
+          RELENG_K8S_TYPE: ${{ matrix.k8s }}
         run: cd ci; "./provision_${RELENG_K8S_TYPE}_cluster.sh"
       - name: Deploy CI services
+        env:
+          RELENG_CI_TYPE: ${{ matrix.ci }}
         run: cd "ci/${RELENG_CI_TYPE}"; ./deploy.sh
       - name: Get nodes information
-        run: kubectl describe nodes
-  check-mirror-baremetal:
-    runs-on: ubuntu-20.04
-    env:
-      MIRROR_FILENAME: mirror_releng.list
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup the VM folders
+        if: ${{ failure() }}
         run: |
-          ./pre-install.sh "sdc" "/var/local/packages"
-          ./pre-install.sh "sdd" "/var/local/images"
-          ./pre-install.sh "sdf" "/var/local/pypi_packages"
-      - name: Install dependencies
-        run: cd mirror; ./install.sh
-      - name: Deploy docker compose services
-        run: cd mirror; ./deploy.sh
-      - name: Pull KinD docker images
-        run: cd mirror; ./setup_k8s.sh
-      - name: Pull DevPi packages
-        env:
-          RELENG_FOLDER: "../"
-        run: cd mirror; ./setup_devpi.sh
-      - name: Retrieve images hosted in private registry
-        run: curl -s -X GET http://localhost:5000/v2/_catalog
-      - name: Check logs
-        if: failure()
-        run: docker-compose -f mirror/docker-compose.yml logs
-  check-e2e:
-    runs-on: macos-10.15
-    env:
-      VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
-      VAGRANT_EXPERIMENTAL: disks
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cache Vagrant boxes
-        uses: actions/cache@v2
-        with:
-          path: ~/.vagrant.d/boxes
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
-          restore-keys: |
-            ${{ runner.os }}-vagrant-
-      - name: Install GNU tools
-        run: brew install proctools iproute2mac
-      - name: Install Vagrant Reload plugin
-        run: vagrant plugin install vagrant-reload
-      - name: Replace shorten links
-        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
-      - name: Run mirror
-        env:
-          RELENG_KOLLA_BUILD: "true"
-          RELENG_K8S_TYPE: kind
-          CPUS: 3
-          MEMORY: 12288
-        run: |
-          vagrant up mirror
-          CPUS=1 MEMORY=2048 vagrant reload mirror
-      - name: Create cloud instance
-        run: vagrant up cloud
-        env:
-          CPUS: 2
-          MEMORY: 12288
-      - name: Destroy instances
-        if: ${{ always() }}
-        run: vagrant destroy -f
-      - name: Check HW resources
-        if: failure()
-        run: |
-          vm_stat
-          top -l 1 -n 0
-          VBoxManage list runningvms --long
+          kubectl get events -A --sort-by=".metadata.managedFields[0].time"
+          kubectl get all -A -o wide
+          kubectl describe nodes

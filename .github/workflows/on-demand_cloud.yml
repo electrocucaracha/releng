@@ -1,0 +1,73 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c) 2021
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+name: Check Cloud
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '*install.sh'
+      - 'cloud/*'
+  pull_request:
+    paths:
+      - '*install.sh'
+      - 'cloud/*'
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  check-e2e:
+    runs-on: macos-10.15
+    env:
+      VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
+      VAGRANT_EXPERIMENTAL: disks
+      RELENG_DEBUG: "true"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+      - name: Install GNU tools
+        run: brew install proctools iproute2mac
+      - name: Replace shorten links
+        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
+      - name: Provision mirror
+        env:
+          RELENG_KOLLA_BUILD: "true"
+          RELENG_K8S_TYPE: kind
+          CPUS: 3
+          MEMORY: 12288
+        run: vagrant up mirror
+      - name: Install Vagrant Reload plugin
+        run: vagrant plugin install vagrant-reload
+      - name: Run mirror
+        env:
+          CPUS: 1
+          MEMORY: 2048
+        run: vagrant reload mirror
+      - name: Provision cloud instance
+        run: vagrant up cloud
+        env:
+          CPUS: 2
+          MEMORY: 12288
+      - name: Destroy instances
+        if: ${{ always() }}
+        run: vagrant destroy -f
+      - name: Check HW resources
+        if: ${{ failure() }}
+        run: |
+          vm_stat
+          top -l 1 -n 0
+          VBoxManage list runningvms --long
