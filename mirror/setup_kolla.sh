@@ -8,8 +8,6 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
 
-set -o pipefail
-set -o errexit
 set -o nounset
 if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
     set -o xtrace
