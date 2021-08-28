@@ -16,7 +16,7 @@ if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
 fi
 
 # Install dependencies
-pip install -r "${RELENG_FOLDER:-}./common/requeriments.txt"
+pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"
 
 # Configure kolla-ansible
 sudo mkdir -p /etc/{kolla/config,ansible}

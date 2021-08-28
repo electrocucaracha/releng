@@ -22,5 +22,5 @@ fi
 virtualenv /tmp/devpi
 # shellcheck disable=SC1091
 source /tmp/devpi/bin/activate
-PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/ pip install -r "${RELENG_FOLDER:-}./common/requeriments.txt"
+PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/ pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"
 deactivate
