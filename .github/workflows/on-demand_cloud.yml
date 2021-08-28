@@ -45,8 +45,7 @@ jobs:
         run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
       - name: Provision mirror
         env:
-          RELENG_KOLLA_BUILD: "true"
-          RELENG_K8S_TYPE: kind
+          RELENG_MIRROR_SERVICE_LIST: "devpi,kolla"
           CPUS: 3
           MEMORY: 12288
         run: vagrant up mirror
