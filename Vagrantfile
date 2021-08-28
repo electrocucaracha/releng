@@ -28,6 +28,7 @@ k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
 ci_type = ENV["RELENG_CI_TYPE"] || "tekton"
 debug = ENV["RELENG_DEBUG"] || "false"
 ci_setup_enabled = "false"
+mirror_svc_list = ENV["RELENG_MIRROR_SERVICE_LIST"] || "k8s,devpi,kolla"
 mirror_file = ENV["RELENG_MIRROR_FILE"] || "mirror_releng.list"
 releng_folder = "/opt/releng/"
 
@@ -128,6 +129,7 @@ Vagrant.configure("2") do |config|
         PKG_FLY_VERSION: fly_version,
         PKG_KUBECTL_VERSION: kubectl_version,
         MIRROR_FILENAME: mirror_file,
+        SVC_LIST: mirror_svc_list,
         RELENG_DEBUG: debug,
         RELENG_K8S_TYPE: k8s_type,
         RELENG_FOLDER: releng_folder,
@@ -144,9 +146,9 @@ Vagrant.configure("2") do |config|
         cd /vagrant/
         ./install.sh | tee ~/install.log
         ./deploy.sh | tee ~/deploy.log
-        ./setup_devpi.sh | tee ~/setup_devpi.log
-        ./setup_k8s.sh | tee ~/setup_k8s.log
-        ./setup_kolla.sh | tee ~/setup_kolla.log
+        for svc in ${SVC_LIST//,/ }; do
+            ./setup_$svc.sh | tee "$HOME/setup_${svc}.log"
+        done
         ./post-install.sh | tee ~/post-install.log
 
         curl -s -X GET http://localhost:5000/v2/_catalog
