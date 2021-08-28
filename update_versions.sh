@@ -35,6 +35,10 @@ function _get_pip_version {
     echo "${version#*v}"
 }
 
+if ! command -v pip-compile > /dev/null; then
+    pip install pip-tools
+fi
+
 eval "$(curl -fsSL https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/ci/pinned_versions.env)"
 
 sed -i "s/PKG_FLY_VERSION\".*/PKG_FLY_VERSION\"] || \"$PKG_FLY_VERSION\"/g" Vagrantfile
@@ -42,3 +46,8 @@ sed -i "s/PKG_FLY_VERSION:-.*/PKG_FLY_VERSION:-$PKG_FLY_VERSION}\" -f helm\/ci\.
 sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/kind_images.txt
 sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/krd_images.txt
 sed -i "s/devpi-server==.*/devpi-server==$(_get_pip_version devpi-server)/g" mirror/devpi/Dockerfile
+
+for req_dir in mirror common; do
+    pip-compile "$req_dir/requirements.in" \
+    --output-file "$req_dir/requirements.txt" --upgrade
+done
