@@ -15,9 +15,13 @@ if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
     set -o xtrace
 fi
 
+if ! command -v bindep > /dev/null; then
+    curl -fsSL http://bit.ly/install_bin | bash
+fi
+
 # Install dependencies
 pkgs=""
-for pkg in docker skopeo docker-compose jq; do
+for pkg in docker skopeo docker-compose; do
     if ! command -v "$pkg"; then
         pkgs+=" $pkg"
     fi

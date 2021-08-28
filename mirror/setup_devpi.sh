@@ -15,11 +15,19 @@ if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
     set -o xtrace
 fi
 
-if ! command -v virtualenv; then
-    sudo -H pip install virtualenv
-fi
+attempt_counter=0
+max_attempts=5
 
-virtualenv /tmp/devpi
+python -m venv /tmp/devpi
+until sudo "$(command -v docker-compose)" logs devpi | grep -q "Serving on "; do
+    if [ ${attempt_counter} -eq ${max_attempts} ];then
+        echo "Max attempts reached"
+        exit 1
+    fi
+    attempt_counter=$((attempt_counter+1))
+    sleep $((attempt_counter*30))
+done
+
 # shellcheck disable=SC1091
 source /tmp/devpi/bin/activate
 PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/ pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"
