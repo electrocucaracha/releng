@@ -10,7 +10,7 @@ charset-normalizer==2.0.4
     # via requests
 debtcollector==2.2.0
     # via oslo.config
-docker==5.0.0
+docker==5.0.1
     # via
     #   docker-squash
     #   kolla
