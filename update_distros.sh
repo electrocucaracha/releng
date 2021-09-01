@@ -58,7 +58,7 @@ function _vagrant_pull {
         return
     fi
 
-    if sed --version > /dev/null; then
+    if sed --version > /dev/null 2>&1; then
         sed -i "s|config.vm.box = \".*|config.vm.box = \"$name\"|g" Vagrantfile
         sed -i "s|config.vm.box_version = \".*|config.vm.box_version = \"$version\"|g" Vagrantfile
     else
