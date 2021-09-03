@@ -159,7 +159,7 @@ python-cinderclient==8.0.0
     # via python-openstackclient
 python-keystoneclient==4.2.0
     # via python-openstackclient
-python-novaclient==17.5.0
+python-novaclient==17.6.0
     # via python-openstackclient
 python-openstackclient==5.6.0
     # via -r common/requirements.in
