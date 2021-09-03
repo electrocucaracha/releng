@@ -40,7 +40,7 @@ decorator==5.0.9
     # via
     #   dogpile.cache
     #   openstacksdk
-dogpile.cache==1.1.3
+dogpile.cache==1.1.4
     # via openstacksdk
 idna==3.2
     # via requests
@@ -70,7 +70,7 @@ keystoneauth1==4.3.1
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
-kolla-ansible==12.1.0
+kolla-ansible==12.2.0
     # via -r common/requirements.in
 markupsafe==2.0.1
     # via jinja2
