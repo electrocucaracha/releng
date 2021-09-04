@@ -155,7 +155,7 @@ pyparsing==2.4.7
     #   packaging
 pyperclip==1.8.2
     # via cmd2
-python-cinderclient==8.0.0
+python-cinderclient==8.1.0
     # via python-openstackclient
 python-keystoneclient==4.2.0
     # via python-openstackclient
