@@ -31,7 +31,7 @@ cryptography==3.4.8
     #   ansible
     #   kolla-ansible
     #   openstacksdk
-debtcollector==2.2.0
+debtcollector==2.3.0
     # via
     #   oslo.config
     #   oslo.utils
@@ -100,7 +100,7 @@ oslo.config==8.7.1
     # via
     #   kolla-ansible
     #   python-keystoneclient
-oslo.i18n==5.0.1
+oslo.i18n==5.1.0
     # via
     #   osc-lib
     #   oslo.config
@@ -193,7 +193,6 @@ six==1.16.0
     #   debtcollector
     #   keystoneauth1
     #   munch
-    #   oslo.i18n
     #   python-keystoneclient
 stevedore==3.4.0
     # via
