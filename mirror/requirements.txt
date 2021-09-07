@@ -8,9 +8,9 @@ certifi==2021.5.30
     # via requests
 charset-normalizer==2.0.4
     # via requests
-debtcollector==2.2.0
+debtcollector==2.3.0
     # via oslo.config
-docker==5.0.1
+docker==5.0.2
     # via
     #   docker-squash
     #   kolla
@@ -32,7 +32,7 @@ netaddr==0.8.0
     # via oslo.config
 oslo.config==8.7.1
     # via kolla
-oslo.i18n==5.0.1
+oslo.i18n==5.1.0
     # via oslo.config
 pbr==5.6.0
     # via
@@ -52,7 +52,6 @@ six==1.16.0
     # via
     #   debtcollector
     #   docker-squash
-    #   oslo.i18n
 smmap==4.0.0
     # via gitdb
 stevedore==3.4.0
