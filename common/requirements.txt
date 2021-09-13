@@ -36,7 +36,7 @@ debtcollector==2.3.0
     #   oslo.config
     #   oslo.utils
     #   python-keystoneclient
-decorator==5.0.9
+decorator==5.1.0
     # via
     #   dogpile.cache
     #   openstacksdk
