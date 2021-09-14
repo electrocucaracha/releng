@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=common/requirements.txt common/requirements.in
 #
-ansible==2.9.25
+ansible==2.9.26
     # via -r common/requirements.in
 appdirs==1.4.4
     # via openstacksdk
