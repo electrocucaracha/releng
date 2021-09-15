@@ -16,13 +16,13 @@ certifi==2021.5.30
     # via requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.4
+charset-normalizer==2.0.5
     # via requests
 cliff==3.9.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.1.2
+cmd2==2.2.0
     # via cliff
 colorama==0.4.4
     # via cmd2
