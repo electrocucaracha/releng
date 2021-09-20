@@ -16,7 +16,7 @@ certifi==2021.5.30
     # via requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.5
+charset-normalizer==2.0.6
     # via requests
 cliff==3.9.0
     # via
@@ -63,7 +63,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.1
     # via jsonpatch
-keystoneauth1==4.3.1
+keystoneauth1==4.4.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -157,7 +157,7 @@ pyperclip==1.8.2
     # via cmd2
 python-cinderclient==8.1.0
     # via python-openstackclient
-python-keystoneclient==4.2.0
+python-keystoneclient==4.3.0
     # via python-openstackclient
 python-novaclient==17.6.0
     # via python-openstackclient
