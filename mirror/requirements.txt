@@ -58,7 +58,7 @@ stevedore==3.4.0
     # via oslo.config
 typing-extensions==3.10.0.2
     # via gitpython
-urllib3==1.26.6
+urllib3==1.26.7
     # via requests
 websocket-client==1.2.1
     # via docker
