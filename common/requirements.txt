@@ -141,7 +141,7 @@ pbr==5.6.0
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==2.2.0
+prettytable==2.2.1
     # via
     #   cliff
     #   python-cinderclient
