@@ -26,7 +26,7 @@ cmd2==2.2.0
     # via cliff
 colorama==0.4.4
     # via cmd2
-cryptography==3.4.8
+cryptography==35.0.0
     # via
     #   ansible
     #   kolla-ansible
