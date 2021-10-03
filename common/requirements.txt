@@ -163,7 +163,7 @@ python-novaclient==17.6.0
     # via python-openstackclient
 python-openstackclient==5.6.0
     # via -r common/requirements.in
-pytz==2021.1
+pytz==2021.3
     # via
     #   oslo.serialization
     #   oslo.utils
