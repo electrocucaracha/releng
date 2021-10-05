@@ -15,16 +15,22 @@ on:
     paths:
       - 'pre-install.sh'
       - 'mirror/*'
-  pull_request:
-    paths:
-      - 'pre-install.sh'
-      - 'mirror/*'
   pull_request_review:
     types:
       - submitted
+    paths:
+      - 'pre-install.sh'
+      - 'mirror/*'
 
 jobs:
-  check-baremetal:
+  check-mirror-baremetal:
+    name: Check Mirror deployment on Ubuntu Bionic Virtual Environment
+    if: >-
+      (
+        github.event_name == 'pull_request_review' &&
+        github.event.review.state == 'approved'
+      ) ||
+      github.event_name != 'pull_request_review'
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false

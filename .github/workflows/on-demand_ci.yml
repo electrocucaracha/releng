@@ -15,16 +15,22 @@ on:
     paths:
       - '*install.sh'
       - 'ci/*'
-  pull_request:
-    paths:
-      - '*install.sh'
-      - 'ci/*'
   pull_request_review:
     types:
       - submitted
+    paths:
+      - '*install.sh'
+      - 'ci/*'
 
 jobs:
-  check-baremetal:
+  check-ci-baremetal:
+    name: Check CI deployment on Ubuntu Bionic Virtual Environment
+    if: >-
+      (
+        github.event_name == 'pull_request_review' &&
+        github.event.review.state == 'approved'
+      ) ||
+      github.event_name != 'pull_request_review'
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false

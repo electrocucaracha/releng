@@ -15,17 +15,23 @@ on:
     paths:
       - '*install.sh'
       - 'cloud/*'
-  pull_request:
-    paths:
-      - '*install.sh'
-      - 'cloud/*'
   pull_request_review:
     types:
       - submitted
+    paths:
+      - '*install.sh'
+      - 'cloud/*'
 
 jobs:
   check-e2e:
     runs-on: macos-10.15
+    name: Check End-to-End deployment on Ubuntu Bionic Virtual Machine
+    if: >-
+      (
+        github.event_name == 'pull_request_review' &&
+        github.event.review.state == 'approved'
+      ) ||
+      github.event_name != 'pull_request_review'
     env:
       VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
       VAGRANT_EXPERIMENTAL: disks
