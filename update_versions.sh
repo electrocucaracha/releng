@@ -35,6 +35,26 @@ function _get_pip_version {
     echo "${version#*v}"
 }
 
+function get_github_latest_release {
+    version=""
+    attempt_counter=0
+    max_attempts=5
+
+    until [ "$version" ]; do
+        url_effective=$(curl -sL -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+        if [ "$url_effective" ]; then
+            version="${url_effective##*/}"
+            break
+        elif [ ${attempt_counter} -eq ${max_attempts} ];then
+            echo "Max attempts reached"
+            exit 1
+        fi
+        attempt_counter=$((attempt_counter+1))
+        sleep $((attempt_counter*2))
+    done
+    echo "${version#v}"
+}
+
 if ! command -v pip-compile > /dev/null; then
     pip install pip-tools
 fi
@@ -46,6 +66,7 @@ sed -i "s/PKG_FLY_VERSION:-.*/PKG_FLY_VERSION:-$PKG_FLY_VERSION}\" -f helm\/ci\.
 sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/kind_images.txt
 sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FLY_VERSION|g" mirror/krd_images.txt
 sed -i "s/devpi-server==.*/devpi-server==$(_get_pip_version devpi-server)/g" mirror/devpi/Dockerfile
+sed -i "s/RELENG_TKN_DASHBOARD_VERSION:.*/RELENG_TKN_DASHBOARD_VERSION:-$(get_github_latest_release tektoncd/dashboard)}\/tekton-dashboard-release.yaml\"/g" ci/tekton/deploy.sh
 
 for req_dir in mirror common; do
     pip-compile "$req_dir/requirements.in" \
