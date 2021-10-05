@@ -57,7 +57,14 @@ spec:
                 port:
                   number: 9097
 EOF
+
+attempt_counter=0
+max_attempts=5
 until curl --output /dev/null --silent --head --fail "http://$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')"; do
-    sleep 5
+    if [ ${attempt_counter} -eq ${max_attempts} ];then
+        echo "Max attempts reached"
+        exit 1
+    fi
+    attempt_counter=$((attempt_counter+1))
+    sleep $((attempt_counter*2))
 done
-trap ERR
