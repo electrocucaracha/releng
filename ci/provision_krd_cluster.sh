@@ -29,6 +29,7 @@ if [ -n "${RELENG_DNS_SERVER:-}" ]; then
     export KRD_MANUAL_DNS_SERVER=${RELENG_DNS_SERVER}
 fi
 export KRD_CERT_MANAGER_ENABLED=false
+export KRD_INGRESS_NGINX_ENABLED=true
 export KRD_HUGEPAGES_ENABLED=false
 export KRD_ACTIONS_LIST=install_k8s,install_helm
 export KRD_HELM_VERSION=3
