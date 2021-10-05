@@ -44,13 +44,15 @@ kind: Ingress
 metadata:
   name: tekton-ingress
   namespace: tekton-pipelines
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: tekton-dashboard

@@ -22,7 +22,7 @@ gitpython==3.1.24
     # via kolla
 idna==3.2
     # via requests
-jinja2==3.0.1
+jinja2==3.0.2
     # via kolla
 kolla @ git+https://github.com/openstack/kolla.git@stable/wallaby
     # via -r mirror/requirements.in
@@ -62,5 +62,5 @@ urllib3==1.26.7
     # via requests
 websocket-client==1.2.1
     # via docker
-wrapt==1.12.1
+wrapt==1.13.1
     # via debtcollector

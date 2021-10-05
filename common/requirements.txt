@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=common/requirements.txt common/requirements.in
 #
-ansible==2.9.26
+ansible==2.9.20
     # via -r common/requirements.in
 appdirs==1.4.4
     # via openstacksdk
@@ -12,6 +12,8 @@ attrs==21.2.0
     # via cmd2
 autopage==0.4.0
     # via cliff
+bindep==2.9.0
+    # via -r common/requirements.in
 certifi==2021.5.30
     # via requests
 cffi==1.14.6
@@ -26,7 +28,7 @@ cmd2==2.2.0
     # via cliff
 colorama==0.4.4
     # via cmd2
-cryptography==3.4.8
+cryptography==35.0.0
     # via
     #   ansible
     #   kolla-ansible
@@ -40,6 +42,8 @@ decorator==5.1.0
     # via
     #   dogpile.cache
     #   openstacksdk
+distro==1.6.0
+    # via bindep
 dogpile.cache==1.1.4
     # via openstacksdk
 idna==3.2
@@ -51,7 +55,7 @@ iso8601==0.1.16
     #   oslo.utils
     #   python-novaclient
     #   python-openstackclient
-jinja2==3.0.1
+jinja2==3.0.2
     # via
     #   ansible
     #   kolla-ansible
@@ -124,8 +128,11 @@ oslo.utils==4.10.0
     #   python-openstackclient
 packaging==21.0
     # via oslo.utils
+parsley==1.3
+    # via bindep
 pbr==5.6.0
     # via
+    #   bindep
     #   cliff
     #   debtcollector
     #   keystoneauth1
@@ -163,7 +170,7 @@ python-novaclient==17.6.0
     # via python-openstackclient
 python-openstackclient==5.6.0
     # via -r common/requirements.in
-pytz==2021.1
+pytz==2021.3
     # via
     #   oslo.serialization
     #   oslo.utils
@@ -211,5 +218,5 @@ wcwidth==0.2.5
     # via
     #   cmd2
     #   prettytable
-wrapt==1.12.1
+wrapt==1.13.1
     # via debtcollector
