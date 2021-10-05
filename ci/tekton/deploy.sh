@@ -39,19 +39,23 @@ for deployment in $(kubectl get deployment --namespace tekton-pipelines -o jsonp
 done
 
 cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tekton-ingress
   namespace: tekton-pipelines
 spec:
+  ingressClassName: nginx
   rules:
     - http:
         paths:
           - path: /
+            pathType: ImplementationSpecific
             backend:
-              serviceName: tekton-dashboard
-              servicePort: 9097
+              service:
+                name: tekton-dashboard
+                port:
+                  number: 9097
 EOF
 until curl --output /dev/null --silent --head --fail "http://$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')"; do
     sleep 5
