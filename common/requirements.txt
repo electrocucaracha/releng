@@ -46,7 +46,7 @@ distro==1.6.0
     # via bindep
 dogpile.cache==1.1.4
     # via openstacksdk
-idna==3.2
+idna==3.3
     # via requests
 iso8601==0.1.16
     # via
