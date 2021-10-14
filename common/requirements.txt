@@ -16,7 +16,7 @@ bindep==2.9.0
     # via -r common/requirements.in
 certifi==2021.10.8
     # via requests
-cffi==1.14.6
+cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.7
     # via requests
@@ -174,7 +174,7 @@ pytz==2021.3
     # via
     #   oslo.serialization
     #   oslo.utils
-pyyaml==5.4.1
+pyyaml==6.0
     # via
     #   ansible
     #   cliff
@@ -218,5 +218,5 @@ wcwidth==0.2.5
     # via
     #   cmd2
     #   prettytable
-wrapt==1.13.1
+wrapt==1.13.2
     # via debtcollector
