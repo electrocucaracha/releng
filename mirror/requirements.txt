@@ -54,7 +54,7 @@ six==1.16.0
     #   docker-squash
 smmap==4.0.0
     # via gitdb
-stevedore==3.4.0
+stevedore==3.5.0
     # via oslo.config
 typing-extensions==3.10.0.2
     # via gitpython
