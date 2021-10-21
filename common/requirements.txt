@@ -12,7 +12,7 @@ attrs==21.2.0
     # via cmd2
 autopage==0.4.0
     # via cliff
-bindep==2.10.0
+bindep==2.10.1
     # via -r common/requirements.in
 certifi==2021.10.8
     # via requests
