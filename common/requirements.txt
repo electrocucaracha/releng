@@ -157,7 +157,7 @@ prettytable==2.2.1
     #   python-novaclient
 pycparser==2.20
     # via cffi
-pyparsing==2.4.7
+pyparsing==3.0.0
     # via
     #   cliff
     #   oslo.utils
