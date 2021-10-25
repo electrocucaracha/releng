@@ -117,7 +117,7 @@ oslo.serialization==4.2.0
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo.utils==4.10.0
+oslo.utils==4.11.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -157,7 +157,7 @@ prettytable==2.2.1
     #   python-novaclient
 pycparser==2.20
     # via cffi
-pyparsing==2.4.7
+pyparsing==3.0.1
     # via
     #   cliff
     #   oslo.utils
