@@ -126,7 +126,7 @@ oslo.utils==4.11.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==21.0
+packaging==21.2
     # via
     #   bindep
     #   oslo.utils
@@ -157,7 +157,7 @@ prettytable==2.2.1
     #   python-novaclient
 pycparser==2.20
     # via cffi
-pyparsing==3.0.3
+pyparsing==2.4.7
     # via
     #   cliff
     #   oslo.utils
@@ -220,5 +220,5 @@ wcwidth==0.2.5
     # via
     #   cmd2
     #   prettytable
-wrapt==1.13.2
+wrapt==1.13.3
     # via debtcollector
