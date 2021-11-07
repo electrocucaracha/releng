@@ -155,7 +155,7 @@ prettytable==2.4.0
     #   cliff
     #   python-cinderclient
     #   python-novaclient
-pycparser==2.20
+pycparser==2.21
     # via cffi
 pyparsing==2.4.7
     # via
