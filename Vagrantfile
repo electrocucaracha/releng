@@ -92,7 +92,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./common", "#{releng_folder}common"
   config.vm.define :mirror do |mirror|
     mirror.vm.hostname = "mirror"
-    mirror.vm.network :private_network, ip: mirror_ip_address, libvirt__network_name: "management"
+    mirror.vm.network :private_network, ip: mirror_ip_address, libvirt__network_name: "management", virtualbox__intnet: true
     mirror.vm.synced_folder "./mirror", "/vagrant"
     mirror.vm.network :public_network, dev: public_nic, bridge: vb_public_nic
 
@@ -158,7 +158,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :ci, primary: true, autostart: false do |ci|
     ci.vm.hostname = "ci"
-    ci.vm.network :private_network, ip: ci_ip_address, libvirt__network_name: "management"
+    ci.vm.network :private_network, ip: ci_ip_address, libvirt__network_name: "management", virtualbox__intnet: true
     ci.vm.network :forwarded_port, guest: 80, host: 8080
     ci.vm.synced_folder "./ci", "/vagrant"
     ci.vm.synced_folder "./", "/opt/releng"
@@ -235,7 +235,7 @@ Vagrant.configure("2") do |config|
     cloud.vm.hostname = "cloud"
     # Management/API - Used for communication between the OpenStack
     # services.
-    cloud.vm.network :private_network, ip: cloud_ip_address, libvirt__network_name: "management"
+    cloud.vm.network :private_network, ip: cloud_ip_address, libvirt__network_name: "management", virtualbox__intnet: true
     cloud.vm.network :forwarded_port, guest_ip: cloud_vip_address, guest: 80, host: 9090
     cloud.vm.network :forwarded_port, guest_ip: cloud_vip_address, guest: 6080, host: 6080
     cloud.vm.synced_folder "./cloud", "/vagrant"
