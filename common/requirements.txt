@@ -24,10 +24,8 @@ cliff==3.9.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.2.0
+cmd2==2.3.0
     # via cliff
-colorama==0.4.4
-    # via cmd2
 cryptography==35.0.0
     # via
     #   ansible
@@ -48,14 +46,14 @@ dogpile.cache==1.1.4
     # via openstacksdk
 idna==3.3
     # via requests
-iso8601==0.1.16
+iso8601==1.0.0
     # via
     #   keystoneauth1
     #   openstacksdk
     #   oslo.utils
     #   python-novaclient
     #   python-openstackclient
-jinja2==3.0.2
+jinja2==3.0.3
     # via
     #   ansible
     #   kolla-ansible
@@ -65,7 +63,7 @@ jmespath==0.10.0
     #   openstacksdk
 jsonpatch==1.32
     # via openstacksdk
-jsonpointer==2.1
+jsonpointer==2.2
     # via jsonpatch
 keystoneauth1==4.4.0
     # via
@@ -126,13 +124,13 @@ oslo.utils==4.11.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==21.0
+packaging==21.2
     # via
     #   bindep
     #   oslo.utils
 parsley==1.3
     # via bindep
-pbr==5.6.0
+pbr==5.7.0
     # via
     #   bindep
     #   cliff
@@ -150,14 +148,14 @@ pbr==5.6.0
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==2.2.1
+prettytable==2.4.0
     # via
     #   cliff
     #   python-cinderclient
     #   python-novaclient
-pycparser==2.20
+pycparser==2.21
     # via cffi
-pyparsing==3.0.1
+pyparsing==2.4.7
     # via
     #   cliff
     #   oslo.utils
@@ -220,5 +218,5 @@ wcwidth==0.2.5
     # via
     #   cmd2
     #   prettytable
-wrapt==1.13.2
+wrapt==1.13.3
     # via debtcollector
