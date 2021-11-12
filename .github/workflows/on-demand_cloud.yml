@@ -45,18 +45,23 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
+      # TODO: Remove this once https://www.virtualbox.org/ticket/20636 is released
+      - name: Apply workaround for VBoxHeadless in macOS
+        run: |
+          find . -type f -iname "Vagrantfile" -exec sed -i '.bak' 's|v.gui = .*|v.gui = true|g' {} \;
+          find . -type f -name "*.bak" -delete
       - name: Install GNU tools
         run: brew install proctools iproute2mac
       - name: Replace shorten links
         run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
+      - name: Install Vagrant Reload plugin
+        run: vagrant plugin install vagrant-reload
       - name: Provision mirror
         env:
           RELENG_MIRROR_SERVICE_LIST: "devpi,kolla"
           CPUS: 3
           MEMORY: 12288
         run: vagrant up mirror
-      - name: Install Vagrant Reload plugin
-        run: vagrant plugin install vagrant-reload
       - name: Run mirror
         env:
           CPUS: 1
@@ -67,11 +72,7 @@ jobs:
         env:
           CPUS: 2
           MEMORY: 12288
-      - name: Destroy instances
-        if: ${{ always() }}
-        run: vagrant destroy -f
       - name: Check HW resources
-        if: ${{ failure() }}
         run: |
           vm_stat
           top -l 1 -n 0
