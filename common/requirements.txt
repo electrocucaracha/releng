@@ -191,7 +191,7 @@ requestsexceptions==1.4.0
     # via openstacksdk
 rfc3986==1.5.0
     # via oslo.config
-simplejson==3.17.5
+simplejson==3.17.6
     # via
     #   osc-lib
     #   python-cinderclient
