@@ -168,7 +168,7 @@ python-keystoneclient==4.3.0
     # via python-openstackclient
 python-novaclient==17.6.0
     # via python-openstackclient
-python-openstackclient==5.6.0
+python-openstackclient==5.7.0
     # via -r common/requirements.in
 pytz==2021.3
     # via
@@ -191,7 +191,7 @@ requestsexceptions==1.4.0
     # via openstacksdk
 rfc3986==1.5.0
     # via oslo.config
-simplejson==3.17.5
+simplejson==3.17.6
     # via
     #   osc-lib
     #   python-cinderclient
