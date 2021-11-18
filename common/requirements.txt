@@ -124,7 +124,7 @@ oslo.utils==4.11.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==21.2
+packaging==21.3
     # via
     #   bindep
     #   oslo.utils
@@ -155,7 +155,7 @@ prettytable==2.4.0
     #   python-novaclient
 pycparser==2.21
     # via cffi
-pyparsing==2.4.7
+pyparsing==3.0.6
     # via
     #   cliff
     #   oslo.utils
