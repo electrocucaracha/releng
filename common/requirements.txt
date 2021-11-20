@@ -24,7 +24,7 @@ cliff==3.9.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.3.0
+cmd2==2.3.1
     # via cliff
 cryptography==35.0.0
     # via
