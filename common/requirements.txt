@@ -24,7 +24,7 @@ cliff==3.9.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.3.1
+cmd2==2.3.2
     # via cliff
 cryptography==36.0.0
     # via
@@ -46,7 +46,7 @@ dogpile.cache==1.1.4
     # via openstacksdk
 idna==3.3
     # via requests
-iso8601==1.0.0
+iso8601==1.0.1
     # via
     #   keystoneauth1
     #   openstacksdk
