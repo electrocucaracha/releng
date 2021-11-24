@@ -44,9 +44,11 @@ distro==1.6.0
     # via bindep
 dogpile.cache==1.1.4
     # via openstacksdk
+hvac==0.11.2
+    # via kolla-ansible
 idna==3.3
     # via requests
-iso8601==1.0.1
+iso8601==1.0.2
     # via
     #   keystoneauth1
     #   openstacksdk
@@ -72,7 +74,7 @@ keystoneauth1==4.4.0
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
-kolla-ansible==12.2.0
+kolla-ansible==13.0.0
     # via -r common/requirements.in
 markupsafe==2.0.1
     # via jinja2
@@ -183,6 +185,7 @@ pyyaml==6.0
     #   oslo.config
 requests==2.26.0
     # via
+    #   hvac
     #   keystoneauth1
     #   oslo.config
     #   python-cinderclient
@@ -198,6 +201,7 @@ simplejson==3.17.6
 six==1.16.0
     # via
     #   debtcollector
+    #   hvac
     #   keystoneauth1
     #   munch
     #   python-keystoneclient
