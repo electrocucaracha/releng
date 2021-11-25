@@ -18,7 +18,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.7
+charset-normalizer==2.0.8
     # via requests
 cliff==3.9.0
     # via
@@ -78,7 +78,7 @@ kolla-ansible==13.0.0
     # via -r common/requirements.in
 markupsafe==2.0.1
     # via jinja2
-msgpack==1.0.2
+msgpack==1.0.3
     # via oslo.serialization
 munch==2.5.0
     # via openstacksdk
