@@ -20,7 +20,7 @@ cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.8
     # via requests
-cliff==3.9.0
+cliff==3.10.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo.utils
-openstacksdk==0.59.0
+openstacksdk==0.60.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -164,7 +164,7 @@ pyparsing==3.0.6
     #   packaging
 pyperclip==1.8.2
     # via cmd2
-python-cinderclient==8.1.0
+python-cinderclient==8.2.0
     # via python-openstackclient
 python-keystoneclient==4.3.0
     # via python-openstackclient
