@@ -18,9 +18,9 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.7
+charset-normalizer==2.0.8
     # via requests
-cliff==3.9.0
+cliff==3.10.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -44,9 +44,11 @@ distro==1.6.0
     # via bindep
 dogpile.cache==1.1.4
     # via openstacksdk
+hvac==0.11.2
+    # via kolla-ansible
 idna==3.3
     # via requests
-iso8601==1.0.1
+iso8601==1.0.2
     # via
     #   keystoneauth1
     #   openstacksdk
@@ -72,11 +74,11 @@ keystoneauth1==4.4.0
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
-kolla-ansible==12.2.0
+kolla-ansible==13.0.0
     # via -r common/requirements.in
 markupsafe==2.0.1
     # via jinja2
-msgpack==1.0.2
+msgpack==1.0.3
     # via oslo.serialization
 munch==2.5.0
     # via openstacksdk
@@ -88,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo.utils
-openstacksdk==0.59.0
+openstacksdk==0.60.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -162,7 +164,7 @@ pyparsing==3.0.6
     #   packaging
 pyperclip==1.8.2
     # via cmd2
-python-cinderclient==8.1.0
+python-cinderclient==8.2.0
     # via python-openstackclient
 python-keystoneclient==4.3.0
     # via python-openstackclient
@@ -183,6 +185,7 @@ pyyaml==6.0
     #   oslo.config
 requests==2.26.0
     # via
+    #   hvac
     #   keystoneauth1
     #   oslo.config
     #   python-cinderclient
@@ -198,6 +201,7 @@ simplejson==3.17.6
 six==1.16.0
     # via
     #   debtcollector
+    #   hvac
     #   keystoneauth1
     #   munch
     #   python-keystoneclient
