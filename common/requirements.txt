@@ -18,15 +18,15 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.8
+charset-normalizer==2.0.9
     # via requests
 cliff==3.10.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.3.2
+cmd2==2.3.3
     # via cliff
-cryptography==36.0.0
+cryptography==36.0.1
     # via
     #   ansible
     #   kolla-ansible
@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo.utils
-openstacksdk==0.60.0
+openstacksdk==0.61.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -150,7 +150,7 @@ pbr==5.8.0
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==2.4.0
+prettytable==2.5.0
     # via
     #   cliff
     #   python-cinderclient
