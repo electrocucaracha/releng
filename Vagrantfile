@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/ubuntu2004"
   config.vm.box_check_update = false
-  config.vm.box_version = "3.5.4"
+  config.vm.box_version = "3.6.4"
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false
