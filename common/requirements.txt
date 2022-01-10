@@ -192,7 +192,7 @@ requests==2.27.1
     #   python-keystoneclient
 requestsexceptions==1.4.0
     # via openstacksdk
-rfc3986==1.5.0
+rfc3986==2.0.0
     # via oslo.config
 simplejson==3.17.6
     # via

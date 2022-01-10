@@ -46,7 +46,7 @@ requests==2.27.1
     # via
     #   docker
     #   oslo.config
-rfc3986==1.5.0
+rfc3986==2.0.0
     # via oslo.config
 six==1.16.0
     # via
