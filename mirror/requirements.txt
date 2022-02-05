@@ -6,7 +6,7 @@
 #
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.0.10
+charset-normalizer==2.0.11
     # via requests
 debtcollector==2.4.0
     # via oslo.config
@@ -30,9 +30,9 @@ markupsafe==2.0.1
     # via jinja2
 netaddr==0.8.0
     # via oslo.config
-oslo.config==8.7.1
+oslo-config==8.7.1
     # via kolla
-oslo.i18n==5.1.0
+oslo-i18n==5.1.0
     # via oslo.config
 pbr==5.8.0
     # via
