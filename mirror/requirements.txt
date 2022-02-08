@@ -34,7 +34,7 @@ oslo-config==8.7.1
     # via kolla
 oslo-i18n==5.1.0
     # via oslo.config
-pbr==5.8.0
+pbr==5.8.1
     # via
     #   debtcollector
     #   kolla
