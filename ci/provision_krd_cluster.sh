@@ -22,14 +22,12 @@ if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
     KRD_INSECURE_REGISTRIES_LIST=${KRD_REGISTRY_MIRRORS_LIST##*/}
     export KRD_REGISTRY_MIRRORS_LIST KRD_INSECURE_REGISTRIES_LIST
 fi
-export KRD_KUBE_VERSION=${PKG_KUBECTL_VERSION:-v1.20.7}
 if [ -n "${RELENG_DNS_SERVER:-}" ]; then
     export KRD_MANUAL_DNS_SERVER=${RELENG_DNS_SERVER}
 fi
+export PKG_KREW_PLUGINS_LIST=" "
 export KRD_CERT_MANAGER_ENABLED=false
 export KRD_INGRESS_NGINX_ENABLED=true
-# TODO: Investigate the Tekton Dashboard ingress issues using Kubespray +v2.16
-export KRD_KUBESPRAY_VERSION=v2.16.0
 export KRD_HUGEPAGES_ENABLED=false
 export KRD_ACTIONS_LIST=install_k8s,install_helm
 export KRD_HELM_VERSION=3

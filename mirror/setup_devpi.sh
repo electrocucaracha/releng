@@ -19,7 +19,7 @@ attempt_counter=0
 max_attempts=5
 
 python -m venv /tmp/devpi
-until sudo "$(command -v docker-compose)" logs devpi | grep -q "Serving on "; do
+until sudo "$(command -v docker-compose)" logs devpi | grep "Serving on "; do
     if [ ${attempt_counter} -eq ${max_attempts} ];then
         echo "Max attempts reached"
         exit 1
@@ -30,5 +30,12 @@ done
 
 # shellcheck disable=SC1091
 source /tmp/devpi/bin/activate
-PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/ pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"
+attempt_counter=0
+until PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/ pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"; do
+    if [ ${attempt_counter} -eq ${max_attempts} ];then
+        echo "Max attempts reached"
+        exit 1
+    fi
+    attempt_counter=$((attempt_counter+1))
+done
 deactivate

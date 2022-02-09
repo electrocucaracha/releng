@@ -1,4 +1,6 @@
-ansible==2.9.20 # LGPLv3+
+# Ansible v2.10.x is experimentally supported by Kubespray project
+ansible<2.10 # LGPLv3+
 kolla-ansible # Apache-2.0
 python-openstackclient # Apache-2.0
 bindep # Apache-2.0
+wheel # MIT
