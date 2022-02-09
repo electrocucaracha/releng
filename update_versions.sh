@@ -68,7 +68,7 @@ sed -i "s|docker.io/concourse/concourse:.*|docker.io/concourse/concourse:$PKG_FL
 sed -i "s/devpi-server==.*/devpi-server==$(_get_pip_version devpi-server)/g" mirror/devpi/Dockerfile
 sed -i "s/RELENG_TKN_DASHBOARD_VERSION:.*/RELENG_TKN_DASHBOARD_VERSION:-$(get_github_latest_release tektoncd/dashboard)}\/tekton-dashboard-release.yaml\"/g" ci/tekton/deploy.sh
 
-for req_dir in mirror common; do
+for req_dir in "mirror" "common" "mirror/devpi"; do
     pip-compile "$req_dir/requirements.in" \
     --output-file "$req_dir/requirements.txt" --upgrade
 done
