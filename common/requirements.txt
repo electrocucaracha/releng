@@ -40,7 +40,7 @@ decorator==5.1.1
     # via
     #   dogpile-cache
     #   openstacksdk
-distro==1.6.0
+distro==1.7.0
     # via bindep
 dogpile-cache==1.1.5
     # via openstacksdk
@@ -100,7 +100,7 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==2.4.2
     # via python-openstackclient
-oslo-config==8.7.1
+oslo-config==8.8.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
