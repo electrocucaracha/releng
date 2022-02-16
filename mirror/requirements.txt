@@ -6,10 +6,10 @@
 #
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.0.9
+charset-normalizer==2.0.12
     # via requests
-debtcollector==2.3.0
-    # via oslo.config
+debtcollector==2.4.0
+    # via oslo-config
 docker==5.0.3
     # via
     #   docker-squash
@@ -18,7 +18,7 @@ docker-squash==1.0.9
     # via -r mirror/requirements.in
 gitdb==4.0.9
     # via gitpython
-gitpython==3.1.24
+gitpython==3.1.26
     # via kolla
 idna==3.3
     # via requests
@@ -29,36 +29,32 @@ kolla @ git+https://github.com/openstack/kolla.git@stable/wallaby
 markupsafe==2.0.1
     # via jinja2
 netaddr==0.8.0
-    # via oslo.config
-oslo.config==8.7.1
+    # via oslo-config
+oslo-config==8.7.1
     # via kolla
-oslo.i18n==5.1.0
-    # via oslo.config
-pbr==5.8.0
+oslo-i18n==5.1.0
+    # via oslo-config
+pbr==5.8.1
     # via
     #   debtcollector
     #   kolla
-    #   oslo.i18n
+    #   oslo-i18n
     #   stevedore
 pyyaml==6.0
-    # via oslo.config
-requests==2.26.0
+    # via oslo-config
+requests==2.27.1
     # via
     #   docker
-    #   oslo.config
-rfc3986==1.5.0
-    # via oslo.config
+    #   oslo-config
+rfc3986==2.0.0
+    # via oslo-config
 six==1.16.0
-    # via
-    #   debtcollector
-    #   docker-squash
+    # via docker-squash
 smmap==5.0.0
     # via gitdb
 stevedore==3.5.0
-    # via oslo.config
-typing-extensions==4.0.1
-    # via gitpython
-urllib3==1.26.7
+    # via oslo-config
+urllib3==1.26.8
     # via requests
 websocket-client==1.2.3
     # via docker
