@@ -70,7 +70,7 @@ idna==3.3
     # via
     #   requests
     #   yarl
-itsdangerous==2.0.1
+itsdangerous==2.1.0
     # via devpi-server
 lazy==1.4
     # via
