@@ -38,7 +38,7 @@ charset-normalizer==2.0.12
     # via
     #   aiohttp
     #   requests
-cmarkgfm==0.6.0
+cmarkgfm==0.8.0
     # via readme-renderer
 defusedxml==0.7.1
     # via
@@ -115,7 +115,7 @@ pyramid-chameleon==0.3
     # via devpi-web
 python-dateutil==2.8.2
     # via strictyaml
-readme-renderer[md]==32.0
+readme-renderer[md]==33.0
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
@@ -139,7 +139,7 @@ urllib3==1.26.8
     # via requests
 venusian==3.0.0
     # via pyramid
-waitress==2.0.0
+waitress==2.1.0
     # via devpi-server
 webencodings==0.5.1
     # via bleach
