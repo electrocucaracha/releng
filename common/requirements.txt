@@ -170,7 +170,7 @@ python-keystoneclient==4.4.0
     # via python-openstackclient
 python-novaclient==17.7.0
     # via python-openstackclient
-python-openstackclient==5.7.0
+python-openstackclient==5.8.0
     # via -r common/requirements.in
 pytz==2021.3
     # via
