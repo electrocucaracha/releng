@@ -26,7 +26,7 @@ cliff==3.10.1
     #   python-openstackclient
 cmd2==2.4.0
     # via cliff
-cryptography==36.0.1
+cryptography==36.0.2
     # via
     #   ansible
     #   kolla-ansible
@@ -59,7 +59,7 @@ jinja2==3.0.3
     # via
     #   ansible
     #   kolla-ansible
-jmespath==0.10.0
+jmespath==1.0.0
     # via
     #   kolla-ansible
     #   openstacksdk
@@ -76,7 +76,7 @@ keystoneauth1==4.5.0
     #   python-novaclient
 kolla-ansible==13.0.1
     # via -r common/requirements.in
-markupsafe==2.1.0
+markupsafe==2.1.1
     # via jinja2
 msgpack==1.0.3
     # via oslo-serialization
