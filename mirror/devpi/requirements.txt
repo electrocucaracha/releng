@@ -135,11 +135,11 @@ strictyaml==1.6.1
     # via devpi-server
 translationstring==1.4
     # via pyramid
-urllib3==1.26.8
+urllib3==1.26.9
     # via requests
 venusian==3.0.0
     # via pyramid
-waitress==2.1.0
+waitress==2.1.1
     # via devpi-server
 webencodings==0.5.1
     # via bleach
