@@ -43,7 +43,7 @@ jobs:
     env:
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Provision a Kubernetes cluster
         env:
           RELENG_K8S_TYPE: ${{ matrix.k8s }}
