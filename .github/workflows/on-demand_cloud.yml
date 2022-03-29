@@ -37,7 +37,7 @@ jobs:
       VAGRANT_EXPERIMENTAL: disks
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Cache Vagrant boxes
         uses: actions/cache@v3
         with:
