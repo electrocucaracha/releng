@@ -30,7 +30,7 @@ cffi==1.15.0
     # via
     #   argon2-cffi-bindings
     #   cmarkgfm
-chameleon==3.9.1
+chameleon==3.10.0
     # via pyramid-chameleon
 charset-normalizer==2.0.12
     # via
@@ -127,7 +127,7 @@ six==1.16.0
     # via
     #   bleach
     #   python-dateutil
-soupsieve==2.3.1
+soupsieve==2.3.2
     # via beautifulsoup4
 strictyaml==1.6.1
     # via devpi-server
