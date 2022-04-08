@@ -26,12 +26,12 @@ cliff==3.10.1
     #   python-openstackclient
 cmd2==2.4.0
     # via cliff
-cryptography==36.0.1
+cryptography==36.0.2
     # via
     #   ansible
     #   kolla-ansible
     #   openstacksdk
-debtcollector==2.4.0
+debtcollector==2.5.0
     # via
     #   oslo-config
     #   oslo-utils
@@ -55,11 +55,11 @@ iso8601==1.0.2
     #   oslo-utils
     #   python-novaclient
     #   python-openstackclient
-jinja2==3.0.3
+jinja2==3.1.1
     # via
     #   ansible
     #   kolla-ansible
-jmespath==0.10.0
+jmespath==1.0.0
     # via
     #   kolla-ansible
     #   openstacksdk
@@ -67,7 +67,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.2
     # via jsonpatch
-keystoneauth1==4.4.0
+keystoneauth1==4.5.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -76,7 +76,7 @@ keystoneauth1==4.4.0
     #   python-novaclient
 kolla-ansible==13.0.1
     # via -r common/requirements.in
-markupsafe==2.1.0
+markupsafe==2.1.1
     # via jinja2
 msgpack==1.0.3
     # via oslo-serialization
@@ -136,7 +136,6 @@ pbr==5.8.1
     # via
     #   bindep
     #   cliff
-    #   debtcollector
     #   keystoneauth1
     #   kolla-ansible
     #   openstacksdk
@@ -150,7 +149,7 @@ pbr==5.8.1
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==3.1.1
+prettytable==3.2.0
     # via
     #   cliff
     #   python-cinderclient
@@ -170,9 +169,9 @@ python-keystoneclient==4.4.0
     # via python-openstackclient
 python-novaclient==17.7.0
     # via python-openstackclient
-python-openstackclient==5.7.0
+python-openstackclient==5.8.0
     # via -r common/requirements.in
-pytz==2021.3
+pytz==2022.1
     # via
     #   oslo-serialization
     #   oslo-utils
@@ -215,7 +214,7 @@ stevedore==3.5.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-urllib3==1.26.8
+urllib3==1.26.9
     # via requests
 wcwidth==0.2.5
     # via
@@ -223,5 +222,5 @@ wcwidth==0.2.5
     #   prettytable
 wheel==0.37.1
     # via -r common/requirements.in
-wrapt==1.13.3
+wrapt==1.14.0
     # via debtcollector
