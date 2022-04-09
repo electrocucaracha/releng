@@ -20,7 +20,7 @@ attrs==21.4.0
     # via
     #   aiohttp
     #   devpi-server
-beautifulsoup4==4.11.0
+beautifulsoup4==4.11.1
     # via devpi-web
 bleach==5.0.0
     # via readme-renderer
