@@ -22,7 +22,7 @@ gitpython==3.1.27
     # via kolla
 idna==3.3
     # via requests
-jinja2==3.1.1
+jinja2==3.1.2
     # via kolla
 kolla @ git+https://github.com/openstack/kolla.git@stable/wallaby
     # via -r mirror/requirements.in
