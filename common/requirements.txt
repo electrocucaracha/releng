@@ -222,5 +222,5 @@ wcwidth==0.2.5
     #   prettytable
 wheel==0.37.1
     # via -r common/requirements.in
-wrapt==1.14.0
+wrapt==1.14.1
     # via debtcollector
