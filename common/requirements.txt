@@ -67,7 +67,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.3
     # via jsonpatch
-keystoneauth1==4.5.0
+keystoneauth1==4.6.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==0.61.0
+openstacksdk==0.99.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -98,7 +98,7 @@ os-service-types==1.7.0
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==2.5.0
+osc-lib==2.6.0
     # via python-openstackclient
 oslo-config==8.8.0
     # via
@@ -130,6 +130,7 @@ packaging==21.3
     # via
     #   bindep
     #   oslo-utils
+    #   python-keystoneclient
 parsley==1.3
     # via bindep
 pbr==5.9.0
@@ -165,9 +166,9 @@ pyperclip==1.8.2
     # via cmd2
 python-cinderclient==8.3.0
     # via python-openstackclient
-python-keystoneclient==4.4.0
+python-keystoneclient==4.5.0
     # via python-openstackclient
-python-novaclient==17.7.0
+python-novaclient==18.0.0
     # via python-openstackclient
 python-openstackclient==5.8.0
     # via -r common/requirements.in
