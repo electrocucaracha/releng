@@ -14,7 +14,7 @@ autopage==0.5.1
     # via cliff
 bindep==2.11.0
     # via -r common/requirements.in
-certifi==2022.5.18.1
+certifi==2022.6.15
     # via requests
 cffi==1.15.0
     # via cryptography
