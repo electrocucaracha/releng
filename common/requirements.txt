@@ -117,7 +117,7 @@ oslo-serialization==4.3.0
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo-utils==5.0.0
+oslo-utils==6.0.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -144,7 +144,6 @@ pbr==5.9.0
     #   osc-lib
     #   oslo-i18n
     #   oslo-serialization
-    #   oslo-utils
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
