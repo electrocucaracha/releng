@@ -42,7 +42,7 @@ decorator==5.1.1
     #   openstacksdk
 distro==1.7.0
     # via bindep
-dogpile-cache==1.1.7
+dogpile-cache==1.1.8
     # via openstacksdk
 hvac==0.11.2
     # via kolla-ansible
