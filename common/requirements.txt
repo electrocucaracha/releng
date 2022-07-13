@@ -100,7 +100,7 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==2.6.0
     # via python-openstackclient
-oslo-config==8.8.0
+oslo-config==9.0.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
@@ -113,7 +113,7 @@ oslo-i18n==5.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-oslo-serialization==4.3.0
+oslo-serialization==5.0.0
     # via
     #   python-keystoneclient
     #   python-novaclient
@@ -203,7 +203,7 @@ six==1.16.0
     #   keystoneauth1
     #   munch
     #   python-keystoneclient
-stevedore==3.5.0
+stevedore==4.0.0
     # via
     #   cliff
     #   dogpile-cache
