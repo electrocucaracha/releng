@@ -1,4 +1,4 @@
-docker.io/concourse/concourse:7.8.1
+docker.io/concourse/concourse:7.8.2
 docker.io/coredns/coredns:1.6.7
 docker.io/electrocucaracha/linter
 docker.io/electrocucaracha/vind
