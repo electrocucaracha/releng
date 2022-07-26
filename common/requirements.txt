@@ -214,7 +214,7 @@ stevedore==4.0.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-urllib3==1.26.10
+urllib3==1.26.11
     # via requests
 wcwidth==0.2.5
     # via
