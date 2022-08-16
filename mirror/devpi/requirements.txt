@@ -96,7 +96,7 @@ py==1.11.0
     #   devpi-server
 pycparser==2.21
     # via cffi
-pygments==2.12.0
+pygments==2.13.0
     # via
     #   devpi-web
     #   readme-renderer
