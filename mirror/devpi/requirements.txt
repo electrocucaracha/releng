@@ -42,15 +42,15 @@ defusedxml==0.7.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-common==3.6.0
+devpi-common==3.7.0
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.5.1
+devpi-server==6.6.0
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==4.0.8
+devpi-web==4.1.0
     # via -r mirror/devpi/requirements.in
 docutils==0.19
     # via
@@ -76,6 +76,8 @@ multidict==6.0.2
     # via
     #   aiohttp
     #   yarl
+packaging==21.3
+    # via devpi-common
 passlib[argon2]==1.7.4
     # via devpi-server
 pastedeploy==2.1.1
@@ -100,6 +102,8 @@ pygments==2.13.0
     # via
     #   devpi-web
     #   readme-renderer
+pyparsing==3.0.9
+    # via packaging
 pyramid==2.0
     # via
     #   devpi-server
