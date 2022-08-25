@@ -92,7 +92,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==0.100.0
+openstacksdk==0.101.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -100,7 +100,7 @@ os-service-types==1.7.0
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==2.6.1
+osc-lib==2.6.2
     # via python-openstackclient
 oslo-config==9.0.0
     # via
@@ -119,7 +119,7 @@ oslo-serialization==5.0.0
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo-utils==6.0.0
+oslo-utils==6.0.1
     # via
     #   kolla-ansible
     #   osc-lib
