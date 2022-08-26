@@ -18,9 +18,6 @@ on:
   pull_request_review:
     types:
       - submitted
-    paths:
-      - '*install.sh'
-      - 'cloud/*'
 
 jobs:
   check-e2e:
