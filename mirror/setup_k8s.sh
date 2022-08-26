@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -26,4 +26,4 @@ while IFS= read -r image; do
             docker push "localhost:5000/$image_name"
         fi
     fi
-done < "${RELENG_K8S_TYPE:-kind}_images.txt"
+done <"${RELENG_K8S_TYPE:-kind}_images.txt"

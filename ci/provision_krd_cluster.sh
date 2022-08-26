@@ -11,18 +11,18 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
     export KRD_DEBUG=true
 fi
 
 # Configure KRD variables
-if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
-    KRD_REGISTRY_MIRRORS_LIST=${PKG_DOCKER_REGISTRY_MIRRORS//\"}
+if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
+    KRD_REGISTRY_MIRRORS_LIST=${PKG_DOCKER_REGISTRY_MIRRORS//\"/}
     KRD_INSECURE_REGISTRIES_LIST=${KRD_REGISTRY_MIRRORS_LIST##*/}
     export KRD_REGISTRY_MIRRORS_LIST KRD_INSECURE_REGISTRIES_LIST
 fi
-if [ -n "${RELENG_DNS_SERVER:-}" ]; then
+if [ -n "${RELENG_DNS_SERVER-}" ]; then
     export KRD_MANUAL_DNS_SERVER=${RELENG_DNS_SERVER}
 fi
 export PKG_KREW_PLUGINS_LIST=" "

@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -29,13 +29,13 @@ fi
 
 if ! sudo kind get clusters | grep -q kind; then
     containerd_patch=""
-    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
+    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
         containerd_patch+="containerdConfigPatches:
     - |
         [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors.\"local-mirror:5000\"]
             endpoint = [$PKG_DOCKER_REGISTRY_MIRRORS]"
     fi
-    cat << EOF | sudo kind create cluster --wait=300s --config=-
+    cat <<EOF | sudo kind create cluster --wait=300s --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 $containerd_patch
@@ -63,7 +63,7 @@ EOF
     sudo chown -R "$USER" "$HOME/.kube/"
     chmod 600 "$HOME/.kube/config"
 
-    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
+    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
         cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap

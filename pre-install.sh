@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -23,8 +23,8 @@ function mount_dev {
     sudo mkdir -p "$mount_dir"
 
     # Format registry volume
-    if lsblk --list | grep -q "^${dev_name##*/} .*disk" &&  ! mount | grep -q "${dev_name}1 on $mount_dir"; then
-    sudo sfdisk "$dev_name" --no-reread << EOF
+    if lsblk --list | grep -q "^${dev_name##*/} .*disk" && ! mount | grep -q "${dev_name}1 on $mount_dir"; then
+        sudo sfdisk "$dev_name" --no-reread <<EOF
 ;
 EOF
         sudo mkfs -t ext4 "${dev_name}1"

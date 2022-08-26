@@ -1,0 +1,192 @@
+---
+# SPDX-license-identifier: Apache-2.0
+##############################################################################
+# Copyright (c) 2021
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Apache License, Version 2.0
+# which accompanies this distribution, and is available at
+# http://www.apache.org/licenses/LICENSE-2.0
+##############################################################################
+
+name: Integration tests
+# yamllint disable-line rule:truthy
+on:
+  push:
+    paths:
+      - '*.sh'
+      - 'ci/*'
+      - 'cloud/*'
+      - 'mirror/*'
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    if: >-
+      (
+        github.event_name == 'pull_request_review' &&
+        github.event.review.state == 'approved'
+      ) ||
+      github.event_name != 'pull_request_review'
+    outputs:
+      scripts: ${{ steps.filter.outputs.scripts }}
+      ci: ${{ steps.filter.outputs.ci }}
+      cloud: ${{ steps.filter.outputs.cloud }}
+      mirror: ${{ steps.filter.outputs.mirror }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        if: ${{ !env.ACT }}
+        id: filter
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filters: |
+            scripts:
+              - '**.sh'
+            ci:
+              - 'pre-install.sh'
+              - 'install.sh'
+              - 'ci/*'
+            cloud:
+              - 'install.sh'
+              - 'cloud/*'
+            mirror:
+              - 'pre-install.sh'
+              - 'mirror/*'
+  check-format:
+    name: Check scripts format
+    if: needs.changes.outputs.scripts == 'true'
+    needs: changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run the sh-checker
+        uses: luizm/action-sh-checker@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHFMT_OPTS: -i 4 -s
+        with:
+          sh_checker_shellcheck_disable: true
+  check-ci-baremetal:
+    name: Check CI deployment on Ubuntu Bionic Virtual Environment
+    if: needs.changes.outputs.ci == 'true'
+    needs: changes
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ci: concourse
+            k8s: kind
+          - ci: tekton
+            k8s: krd
+    env:
+      RELENG_DEBUG: "true"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Provision a Kubernetes cluster
+        env:
+          RELENG_K8S_TYPE: ${{ matrix.k8s }}
+        run: cd ci; "./provision_${RELENG_K8S_TYPE}_cluster.sh"
+      - name: Deploy CI services
+        env:
+          RELENG_CI_TYPE: ${{ matrix.ci }}
+        run: cd "ci/${RELENG_CI_TYPE}"; ./deploy.sh
+      - name: Get nodes information
+        if: ${{ failure() }}
+        run: |
+          kubectl get events -A --sort-by=".metadata.managedFields[0].time"
+          kubectl get all -A -o wide
+          kubectl describe nodes
+  check-e2e:
+    runs-on: macos-12
+    if: needs.changes.outputs.mirror == 'true' && needs.changes.outputs.cloud == 'true'
+    needs: changes
+    name: Check End-to-End deployment on Ubuntu Bionic Virtual Machine
+    env:
+      VAGRANT_DISABLE_VBOXSYMLINKCREATE: 1
+      VAGRANT_EXPERIMENTAL: disks
+      RELENG_DEBUG: "true"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v3
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+      - name: Apply workaround for VBoxHeadless issue on macOS (https://www.virtualbox.org/ticket/20636)
+        shell: bash
+        run: |
+          if [[ "$(VBoxManage --version)" == "6.1.28r147628" ]]; then
+              find . -type f -iname "Vagrantfile" -exec sed -i '.bak' 's|v.gui = .*|v.gui = true|g' {} \;
+              find . -type f -name "*.bak" -delete
+          fi
+      - name: Install GNU tools
+        run: brew install proctools iproute2mac
+      - name: Install vagrant tool
+        run: brew install vagrant
+      - name: Replace shorten links
+        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
+      - name: Install Vagrant Reload plugin
+        run: vagrant plugin install vagrant-reload
+      - name: Provision mirror
+        env:
+          RELENG_MIRROR_SERVICE_LIST: "devpi,kolla"
+          CPUS: 3
+          MEMORY: 12288
+        run: vagrant up mirror
+      - name: Run mirror
+        env:
+          CPUS: 1
+          MEMORY: 2048
+        run: vagrant reload mirror
+      - name: Provision cloud instance
+        run: vagrant up cloud
+        env:
+          CPUS: 2
+          MEMORY: 12288
+      - name: Check HW resources
+        run: |
+          vm_stat
+          top -l 1 -n 0
+          VBoxManage list runningvms --long
+  check-mirror-baremetal:
+    name: check mirror deployment on ubuntu bionic virtual environment
+    if: needs.changes.outputs.mirror == 'true'
+    needs: changes
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [k8s, devpi, kolla]
+    env:
+      releng_kolla_build: "true"
+      releng_debug: "true"
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup the vm folders
+        run: |
+          ./pre-install.sh "sdc" "/var/local/packages"
+          ./pre-install.sh "sdd" "/var/local/images"
+          ./pre-install.sh "sdf" "/var/local/pypi_packages"
+      - name: install dependencies
+        run: cd mirror; ./install.sh
+      - name: deploy docker compose services
+        env:
+          mirror_filename: mirror_releng.list
+        run: cd mirror; ./deploy.sh
+      - name: deploy service
+        env:
+          service: ${{ matrix.service }}
+          releng_folder: "../"
+          releng_kolla_build: "true"
+        run: cd mirror; "./setup_$service.sh"
+      - name: retrieve images hosted in private registry
+        run: curl -s -x get http://localhost:5000/v2/_catalog
+      - name: check logs
+        if: ${{ failure() }}
+        run: docker-compose -f mirror/docker-compose.yml logs

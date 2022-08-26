@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -63,10 +63,10 @@ EOF
 attempt_counter=0
 max_attempts=5
 until curl --output /dev/null --silent --head --fail "http://$(ip route get 8.8.8.8 | grep "^8." | awk '{ print $7 }')"; do
-    if [ ${attempt_counter} -eq ${max_attempts} ];then
+    if [ ${attempt_counter} -eq ${max_attempts} ]; then
         echo "Max attempts reached"
         exit 1
     fi
-    attempt_counter=$((attempt_counter+1))
-    sleep $((attempt_counter*2))
+    attempt_counter=$((attempt_counter + 1))
+    sleep $((attempt_counter * 2))
 done

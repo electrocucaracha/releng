@@ -11,11 +11,11 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
-sudo tee <<EOF /etc/systemd/system/docker-compose-mirror.service >/dev/null
+sudo tee /etc/systemd/system/docker-compose-mirror.service <<EOF >/dev/null
 [Unit]
 Description=Docker Compose Mirror Services
 Requires=docker.service

@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -46,7 +46,7 @@ if ! helm ls | grep -q metric-apiserver; then
         prometheus-community/prometheus-adapter --wait \
         -f helm/adapter.yml
 fi
-cat << EOF | kubectl apply -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -69,10 +69,8 @@ if ! helm repo list | grep -e concourse; then
 fi
 
 concourse_image=""
-if [ "${RELENG_K8S_TYPE:-kind}" == "kind" ] && \
-[ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ] && \
-[ -n "$(curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")')" ]; then
-    curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")'
+if [ "${RELENG_K8S_TYPE:-kind}" == "kind" ] && [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ] && [ -n "$(curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"/}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")')" ]; then
+    curl -s -X GET "${PKG_DOCKER_REGISTRY_MIRRORS//\"/}/v2/_catalog" | jq '.repositories[] | select(.=="concourse/concourse")'
     concourse_image="local-mirror:5000/"
 fi
 concourse_image+="concourse/concourse"

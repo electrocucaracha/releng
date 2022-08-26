@@ -10,7 +10,7 @@
 
 set -o errexit
 set -o pipefail
-if [[ "${DEBUG:-false}" == "true" ]]; then
+if [[ ${DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -24,12 +24,12 @@ function _get_pip_version {
         if [ "$metadata" ]; then
             version="$(echo "$metadata" | python -c 'import json,sys;print(json.load(sys.stdin)["info"]["version"])')"
             break
-        elif [ ${attempt_counter} -eq ${max_attempts} ];then
+        elif [ ${attempt_counter} -eq ${max_attempts} ]; then
             echo "Max attempts reached"
             exit 1
         fi
-        attempt_counter=$((attempt_counter+1))
-        sleep $((attempt_counter*2))
+        attempt_counter=$((attempt_counter + 1))
+        sleep $((attempt_counter * 2))
     done
 
     echo "${version#*v}"
@@ -45,17 +45,17 @@ function get_github_latest_release {
         if [ "$url_effective" ]; then
             version="${url_effective##*/}"
             break
-        elif [ ${attempt_counter} -eq ${max_attempts} ];then
+        elif [ ${attempt_counter} -eq ${max_attempts} ]; then
             echo "Max attempts reached"
             exit 1
         fi
-        attempt_counter=$((attempt_counter+1))
-        sleep $((attempt_counter*2))
+        attempt_counter=$((attempt_counter + 1))
+        sleep $((attempt_counter * 2))
     done
     echo "${version#v}"
 }
 
-if ! command -v pip-compile > /dev/null; then
+if ! command -v pip-compile >/dev/null; then
     pip install pip-tools
 fi
 
@@ -70,5 +70,5 @@ sed -i "s/RELENG_TKN_DASHBOARD_VERSION:.*/RELENG_TKN_DASHBOARD_VERSION:-$(get_gi
 
 for req_dir in "mirror" "common" "mirror/devpi"; do
     pip-compile "$req_dir/requirements.in" \
-    --output-file "$req_dir/requirements.txt" --upgrade
+        --output-file "$req_dir/requirements.txt" --upgrade
 done

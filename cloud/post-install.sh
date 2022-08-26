@@ -11,19 +11,19 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
 # Install dependencies
-pip install -r "${RELENG_FOLDER:-}./common/requirements.txt"
+pip install -r "${RELENG_FOLDER-}./common/requirements.txt"
 
 # Configure kolla-ansible
 sudo mkdir -p /etc/{kolla/config,ansible}
 sudo cp -R kolla-ansible/* /etc/kolla/
 sudo chown "$USER" /etc/kolla/passwords.yml
 
-if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS:-}" ]; then
+if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
     sudo sed -i "s|^#docker_registry:.*$|docker_registry: ${PKG_DOCKER_REGISTRY_MIRRORS/'http://'/}|g" /etc/kolla/globals.yml
 fi
 sudo sed -i "s/^enable_cinder: .*/enable_cinder: \"${RELENG_ENABLE_CINDER:-no}\"/g" /etc/kolla/globals.yml
@@ -31,7 +31,7 @@ sudo sed -i "s/^#network_interface: .*/network_interface: \"${RELENG_NETWORK_INT
 sudo sed -i "s/^#neutron_external_interface: .*/neutron_external_interface: \"${RELENG_NEUTRON_EXTERNAL_INTERFACE}\"/g" /etc/kolla/globals.yml
 sudo sed -i "s/^kolla_internal_vip_address: .*/kolla_internal_vip_address: \"${RELENG_INTERNAL_VIP_ADDRESS}\"/g" /etc/kolla/globals.yml
 
-sudo tee /etc/ansible/ansible.cfg << EOL
+sudo tee /etc/ansible/ansible.cfg <<EOL
 [defaults]
 host_key_checking=False
 pipelinig=True

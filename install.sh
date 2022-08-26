@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
     export PKG_DEBUG=true
 fi
@@ -36,7 +36,7 @@ sudo systemctl enable openntpd
 
 # Configure pip mirror
 mkdir -p "$HOME/.pip/"
-cat <<EOL > "$HOME/.pip/pip.conf"
+cat <<EOL >"$HOME/.pip/pip.conf"
 [global]
 trusted-host = $RELENG_DEVPI_HOST
 index-url = http://$RELENG_DEVPI_HOST:3141/root/pypi/+simple/

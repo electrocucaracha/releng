@@ -11,18 +11,18 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
 # PEP 370 -- Per user site-packages directory
-[[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
+[[ $PATH != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
 kolla-genpwd
 
 for action in bootstrap-servers prechecks pull deploy check post-deploy; do
     ./run_kaction.sh "$action" | tee "$HOME/$action.log"
 done
 
-sudo sed -i  '/OS_*/d' /etc/environment
+sudo sed -i '/OS_*/d' /etc/environment
 # shellcheck disable=SC2002
 sudo cat /etc/kolla/admin-openrc.sh | sudo tee --append /etc/environment

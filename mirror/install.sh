@@ -11,11 +11,11 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
-if ! command -v bindep > /dev/null; then
+if ! command -v bindep >/dev/null; then
     curl -fsSL http://bit.ly/install_bin | bash
 fi
 

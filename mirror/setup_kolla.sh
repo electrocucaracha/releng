@@ -9,12 +9,12 @@
 ##############################################################################
 
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
 if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
-    image_name="$(head -n 1 < kolla_images.txt | awk -F '/' '{ print $NF}')"
+    image_name="$(head -n 1 <kolla_images.txt | awk -F '/' '{ print $NF}')"
     newgrp docker <<EONG
     # PEP 370 -- Per user site-packages directory
     [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
@@ -23,8 +23,8 @@ if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
     --tag "${image_name#*:}" --squash --quiet --skip-existing --noskip-parents \
     --profile default | jq "." | tee "$HOME/output.json"
 EONG
-    if [[ $(jq  '.failed | length ' "$HOME/output.json") != 0 ]]; then
-        jq  '.failed[].name' "$HOME/output.json"
+    if [[ $(jq '.failed | length ' "$HOME/output.json") != 0 ]]; then
+        jq '.failed[].name' "$HOME/output.json"
     fi
 fi
 
@@ -39,4 +39,4 @@ while IFS= read -r image; do
             docker push "localhost:5000/$image_name"
         fi
     fi
-done < kolla_images.txt
+done <kolla_images.txt

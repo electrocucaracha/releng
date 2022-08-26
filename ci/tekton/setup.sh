@@ -28,7 +28,7 @@ fi
 echo "Configuring Tekton CI tasks"
 while IFS= read -r task; do
     kubectl apply -f "https://raw.githubusercontent.com/electrocucaracha/$task/master/tkn.yml"
-done < remote-tasks.txt
+done <remote-tasks.txt
 kubectl apply -f ./tasks
 
 echo "Configuring Tekton CI pipelines"

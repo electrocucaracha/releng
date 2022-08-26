@@ -25,3 +25,8 @@ build:
 		sudo -E $(DOCKER_CMD) buildx build --platform linux/amd64,linux/arm64 -t electrocucaracha/$$image:0.0.1 --push --file mirror/$$image/Dockerfile mirror/$$image ; \
 	done
 	sudo -E $(DOCKER_CMD) image prune --force
+
+.PHONY: fmt
+fmt:
+	sudo -E $(DOCKER_CMD) run --rm -u "$$(id -u):$$(id -g)" \
+	-v "$$(pwd):/mnt" -w /mnt mvdan/shfmt -l -w -i 4 -s .

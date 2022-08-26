@@ -11,7 +11,7 @@
 set -o pipefail
 set -o errexit
 set -o nounset
-if [[ "${RELENG_DEBUG:-false}" == "true" ]]; then
+if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
@@ -22,7 +22,7 @@ function exit_trap {
 
 trap exit_trap ERR
 
-if [ -n "${RELENG_CINDER_VOLUME:-}" ]; then
+if [ -n "${RELENG_CINDER_VOLUME-}" ]; then
     if ! command -v vgs; then
         # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
         curl -fsSL http://bit.ly/install_pkg | PKG="lvm2" bash
