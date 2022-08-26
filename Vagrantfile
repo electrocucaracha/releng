@@ -23,7 +23,7 @@ cloud_public_cidr = `ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}'
 cloud_public_gw = `ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 fly_version = ENV["PKG_FLY_VERSION"] || "7.7.1"
 kubectl_version = "v1.20.7"
-kolla_build = ENV["RELENG_KOLLA_BUILD"]
+kolla_build = ENV.fetch("RELENG_KOLLA_BUILD", nil)
 k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
 ci_type = ENV["RELENG_CI_TYPE"] || "tekton"
 debug = ENV["RELENG_DEBUG"] || "false"
@@ -108,7 +108,7 @@ Vagrant.configure("2") do |config|
     mirror.vm.disk :disk, name: "images", size: "10GB"
     mirror.vm.disk :disk, name: "pypi", size: "10GB"
     mirror.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./mirror", "/vagrant", type: "nfs"
+      override.vm.synced_folder "./mirror", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
       v.storage :file, bus: "sata", device: "sdb", size: "350G"
       v.storage :file, bus: "sata", device: "sdc", size: "10G"
       v.storage :file, bus: "sata", device: "sdd", size: "10G"
@@ -180,7 +180,7 @@ Vagrant.configure("2") do |config|
     ci.vm.disk :disk, name: "worker0", size: "25GB"
     ci.vm.disk :disk, name: "containers", size: "100GB"
     ci.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./ci", "/vagrant", type: "nfs"
+      override.vm.synced_folder "./ci", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "10G"
       v.storage :file, bus: "sata", device: "sdc", size: "25G"
@@ -269,7 +269,7 @@ Vagrant.configure("2") do |config|
     end
     cloud.vm.disk :disk, name: "cinder", size: "50GB"
     cloud.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./cloud", "/vagrant", type: "nfs"
+      override.vm.synced_folder "./cloud", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "50G"
     end
