@@ -150,7 +150,7 @@ pbr==5.10.0
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==3.4.0
+prettytable==3.4.1
     # via
     #   cliff
     #   python-cinderclient
@@ -165,7 +165,7 @@ pyperclip==1.8.2
     # via cmd2
 python-cinderclient==9.1.0
     # via python-openstackclient
-python-keystoneclient==5.0.0
+python-keystoneclient==5.0.1
     # via python-openstackclient
 python-novaclient==18.1.0
     # via python-openstackclient
