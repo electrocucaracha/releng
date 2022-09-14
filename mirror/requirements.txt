@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/requirements.txt mirror/requirements.in
 #
-certifi==2022.6.15.1
+certifi==2022.6.15.2
     # via requests
 charset-normalizer==2.1.1
     # via requests
@@ -20,7 +20,7 @@ gitdb==4.0.9
     # via gitpython
 gitpython==3.1.27
     # via kolla
-idna==3.3
+idna==3.4
     # via requests
 jinja2==3.1.2
     # via kolla

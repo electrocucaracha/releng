@@ -14,7 +14,7 @@ autopage==0.5.1
     # via cliff
 bindep==2.11.0
     # via -r common/requirements.in
-certifi==2022.6.15.1
+certifi==2022.6.15.2
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -46,7 +46,7 @@ dogpile-cache==1.1.8
     # via openstacksdk
 hvac==0.11.2
     # via kolla-ansible
-idna==3.3
+idna==3.4
     # via requests
 importlib-metadata==4.12.0
     # via cliff
