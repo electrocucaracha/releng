@@ -68,7 +68,7 @@ idna==3.4
     #   yarl
 itsdangerous==2.1.2
     # via devpi-server
-lazy==1.4
+lazy==1.5
     # via
     #   devpi-common
     #   devpi-server
