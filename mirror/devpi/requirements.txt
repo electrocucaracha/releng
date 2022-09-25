@@ -24,7 +24,7 @@ beautifulsoup4==4.11.1
     # via devpi-web
 bleach==5.0.1
     # via readme-renderer
-certifi==2022.9.14
+certifi==2022.9.24
     # via requests
 cffi==1.15.1
     # via
@@ -113,7 +113,7 @@ pyramid-chameleon==0.3
     # via devpi-web
 python-dateutil==2.8.2
     # via strictyaml
-readme-renderer[md]==37.1
+readme-renderer[md]==37.2
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
