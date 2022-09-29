@@ -50,7 +50,7 @@ idna==3.4
     # via requests
 importlib-metadata==4.12.0
     # via cliff
-iso8601==1.0.2
+iso8601==1.1.0
     # via
     #   keystoneauth1
     #   openstacksdk
