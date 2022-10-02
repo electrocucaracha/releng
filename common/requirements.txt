@@ -48,7 +48,7 @@ hvac==1.0.2
     # via kolla-ansible
 idna==3.4
     # via requests
-importlib-metadata==4.12.0
+importlib-metadata==5.0.0
     # via cliff
 iso8601==1.1.0
     # via
