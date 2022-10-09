@@ -129,7 +129,7 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.3.2.post1
     # via beautifulsoup4
-strictyaml==1.6.1
+strictyaml==1.6.2
     # via devpi-server
 translationstring==1.4
     # via pyramid
