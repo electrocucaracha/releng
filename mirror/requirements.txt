@@ -55,7 +55,7 @@ six==1.16.0
     # via docker-squash
 smmap==5.0.0
     # via gitdb
-stevedore==4.0.0
+stevedore==4.0.1
     # via oslo-config
 urllib3==1.26.12
     # via
