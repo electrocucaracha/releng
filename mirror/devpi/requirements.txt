@@ -36,7 +36,7 @@ charset-normalizer==2.1.1
     # via
     #   aiohttp
     #   requests
-cmarkgfm==0.8.0
+cmarkgfm==2022.10.27
     # via readme-renderer
 defusedxml==0.7.1
     # via
