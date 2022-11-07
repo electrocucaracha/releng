@@ -86,9 +86,9 @@ plaster==1.0
     # via
     #   plaster-pastedeploy
     #   pyramid
-plaster-pastedeploy==0.7
+plaster-pastedeploy==1.0.1
     # via pyramid
-platformdirs==2.5.2
+platformdirs==2.5.3
     # via devpi-server
 pluggy==1.0.0
     # via devpi-server
