@@ -82,7 +82,7 @@ passlib[argon2]==1.7.4
     # via devpi-server
 pastedeploy==3.0.1
     # via plaster-pastedeploy
-plaster==1.0
+plaster==1.1
     # via
     #   plaster-pastedeploy
     #   pyramid
