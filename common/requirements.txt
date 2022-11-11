@@ -204,7 +204,7 @@ six==1.16.0
     #   keystoneauth1
     #   munch
     #   python-keystoneclient
-stevedore==4.1.0
+stevedore==4.1.1
     # via
     #   cliff
     #   dogpile-cache
