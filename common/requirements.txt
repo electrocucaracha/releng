@@ -119,7 +119,7 @@ oslo-serialization==5.0.0
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo-utils==6.0.1
+oslo-utils==6.1.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -169,7 +169,7 @@ python-cinderclient==9.1.0
     # via python-openstackclient
 python-keystoneclient==5.0.1
     # via python-openstackclient
-python-novaclient==18.1.0
+python-novaclient==18.2.0
     # via python-openstackclient
 python-openstackclient==6.0.0
     # via -r common/requirements.in
