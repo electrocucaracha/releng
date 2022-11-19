@@ -20,7 +20,7 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==2.1.1
     # via requests
-cliff==4.0.0
+cliff==4.1.0
     # via
     #   osc-lib
     #   python-openstackclient
