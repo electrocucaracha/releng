@@ -48,7 +48,7 @@ hvac==1.0.2
     # via kolla-ansible
 idna==3.4
     # via requests
-importlib-metadata==5.0.0
+importlib-metadata==5.1.0
     # via cliff
 iso8601==1.1.0
     # via
@@ -69,7 +69,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.3
     # via jsonpatch
-keystoneauth1==5.0.0
+keystoneauth1==5.1.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -92,7 +92,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==0.102.0
+openstacksdk==0.103.0
     # via
     #   osc-lib
     #   python-openstackclient

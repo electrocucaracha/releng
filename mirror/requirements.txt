@@ -16,7 +16,7 @@ docker==6.0.1
     #   kolla
 docker-squash==1.0.10
     # via -r mirror/requirements.in
-gitdb==4.0.9
+gitdb==4.0.10
     # via gitpython
 gitpython==3.1.29
     # via kolla
