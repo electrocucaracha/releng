@@ -14,7 +14,7 @@ autopage==0.5.1
     # via cliff
 bindep==2.11.0
     # via -r common/requirements.in
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -128,7 +128,7 @@ oslo-utils==6.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==21.3
+packaging==22.0
     # via
     #   bindep
     #   oslo-utils
@@ -160,9 +160,7 @@ pycparser==2.21
 pyhcl==0.4.4
     # via hvac
 pyparsing==3.0.9
-    # via
-    #   oslo-utils
-    #   packaging
+    # via oslo-utils
 pyperclip==1.8.2
     # via cmd2
 python-cinderclient==9.1.0

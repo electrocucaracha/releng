@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/requirements.txt mirror/requirements.in
 #
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
 charset-normalizer==2.1.1
     # via requests
@@ -34,15 +34,13 @@ oslo-config==9.0.0
     # via kolla
 oslo-i18n==5.1.0
     # via oslo-config
-packaging==21.3
+packaging==22.0
     # via docker
 pbr==5.11.0
     # via
     #   kolla
     #   oslo-i18n
     #   stevedore
-pyparsing==3.0.9
-    # via packaging
 pyyaml==6.0
     # via oslo-config
 requests==2.28.1
