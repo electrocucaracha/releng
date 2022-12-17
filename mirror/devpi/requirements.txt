@@ -30,7 +30,7 @@ cffi==1.15.1
     # via
     #   argon2-cffi-bindings
     #   cmarkgfm
-chameleon==3.10.1
+chameleon==3.10.2
     # via pyramid-chameleon
 charset-normalizer==2.1.1
     # via
@@ -42,7 +42,7 @@ defusedxml==0.7.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-common==3.7.0
+devpi-common==3.7.1
     # via
     #   devpi-server
     #   devpi-web
@@ -76,7 +76,7 @@ multidict==6.0.3
     # via
     #   aiohttp
     #   yarl
-packaging==22.0
+packaging==21.3
     # via devpi-common
 passlib[argon2]==1.7.4
     # via devpi-server
@@ -102,6 +102,8 @@ pygments==2.13.0
     # via
     #   devpi-web
     #   readme-renderer
+pyparsing==3.0.9
+    # via packaging
 pyramid==2.0
     # via
     #   devpi-server
