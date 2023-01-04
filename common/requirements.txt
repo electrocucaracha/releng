@@ -69,7 +69,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.3
     # via jsonpatch
-keystoneauth1==5.1.0
+keystoneauth1==5.1.1
     # via
     #   openstacksdk
     #   osc-lib
@@ -193,7 +193,7 @@ requestsexceptions==1.4.0
     # via openstacksdk
 rfc3986==2.0.0
     # via oslo-config
-simplejson==3.18.0
+simplejson==3.18.1
     # via
     #   osc-lib
     #   python-cinderclient
