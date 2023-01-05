@@ -21,7 +21,7 @@ cloud_vip_address = "192.168.123.6"
 public_nic = `ip r get 1.1.1.1 | awk 'NR==1{print $5}'`.strip! || "eth0"
 cloud_public_cidr = `ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}') .* scope link" | awk '{print $1}'`.strip! || "192.168.0.0/24"
 cloud_public_gw = `ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
-fly_version = ENV["PKG_FLY_VERSION"] || "7.8.3"
+fly_version = ENV["PKG_FLY_VERSION"] || "7.9.0"
 kubectl_version = "v1.20.7"
 kolla_build = ENV["RELENG_KOLLA_BUILD"]
 k8s_type = ENV["RELENG_K8S_TYPE"] || "krd"
