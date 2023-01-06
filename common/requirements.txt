@@ -102,7 +102,7 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==2.6.2
     # via python-openstackclient
-oslo-config==9.0.0
+oslo-config==9.1.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
