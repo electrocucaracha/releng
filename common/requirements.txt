@@ -128,7 +128,7 @@ oslo-utils==6.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==22.0
+packaging==23.0
     # via
     #   bindep
     #   oslo-utils
@@ -150,7 +150,7 @@ pbr==5.11.0
     #   python-novaclient
     #   python-openstackclient
     #   stevedore
-prettytable==3.5.0
+prettytable==3.6.0
     # via
     #   cliff
     #   python-cinderclient
