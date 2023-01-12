@@ -36,7 +36,7 @@ oslo-i18n==5.1.0
     # via oslo-config
 packaging==23.0
     # via docker
-pbr==5.11.0
+pbr==5.11.1
     # via
     #   kolla
     #   oslo-i18n
@@ -55,7 +55,7 @@ smmap==5.0.0
     # via gitdb
 stevedore==4.1.1
     # via oslo-config
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   docker
     #   requests
