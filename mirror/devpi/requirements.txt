@@ -117,7 +117,7 @@ readme-renderer[md]==37.3
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
-requests==2.28.1
+requests==2.28.2
     # via devpi-common
 ruamel-yaml==0.17.21
     # via devpi-server
