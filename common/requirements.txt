@@ -215,7 +215,7 @@ stevedore==4.1.1
     #   python-openstackclient
 urllib3==1.26.14
     # via requests
-wcwidth==0.2.5
+wcwidth==0.2.6
     # via
     #   cmd2
     #   prettytable
