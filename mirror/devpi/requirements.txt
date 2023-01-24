@@ -22,7 +22,7 @@ attrs==22.2.0
     #   devpi-server
 beautifulsoup4==4.11.1
     # via devpi-web
-bleach==5.0.1
+bleach==6.0.0
     # via readme-renderer
 certifi==2022.12.7
     # via requests
