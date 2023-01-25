@@ -42,7 +42,7 @@ defusedxml==0.7.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-common==3.7.1
+devpi-common==3.7.2
     # via
     #   devpi-server
     #   devpi-web
