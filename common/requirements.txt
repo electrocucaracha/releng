@@ -24,7 +24,7 @@ cliff==4.1.0
     # via
     #   osc-lib
     #   python-openstackclient
-cmd2==2.4.2
+cmd2==2.4.3
     # via cliff
 cryptography==39.0.0
     # via
@@ -223,5 +223,5 @@ wheel==0.38.4
     # via -r common/requirements.in
 wrapt==1.14.1
     # via debtcollector
-zipp==3.11.0
+zipp==3.12.0
     # via importlib-metadata
