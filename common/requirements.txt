@@ -82,8 +82,6 @@ markupsafe==2.1.2
     # via jinja2
 msgpack==1.0.4
     # via oslo-serialization
-munch==2.5.0
-    # via openstacksdk
 netaddr==0.8.0
     # via
     #   oslo-config
@@ -92,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==0.103.0
+openstacksdk==1.0.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -200,7 +198,6 @@ simplejson==3.18.1
 six==1.16.0
     # via
     #   keystoneauth1
-    #   munch
     #   python-keystoneclient
 stevedore==4.1.1
     # via
