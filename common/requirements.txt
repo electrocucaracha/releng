@@ -191,7 +191,7 @@ requestsexceptions==1.4.0
     # via openstacksdk
 rfc3986==2.0.0
     # via oslo-config
-simplejson==3.18.2
+simplejson==3.18.3
     # via
     #   osc-lib
     #   python-cinderclient
@@ -220,5 +220,5 @@ wheel==0.38.4
     # via -r common/requirements.in
 wrapt==1.14.1
     # via debtcollector
-zipp==3.12.0
+zipp==3.12.1
     # via importlib-metadata
