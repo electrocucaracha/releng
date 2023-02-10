@@ -220,5 +220,5 @@ wheel==0.38.4
     # via -r common/requirements.in
 wrapt==1.14.1
     # via debtcollector
-zipp==3.12.1
+zipp==3.13.0
     # via importlib-metadata
