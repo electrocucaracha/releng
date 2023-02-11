@@ -104,7 +104,7 @@ oslo-config==9.1.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
-oslo-i18n==5.1.0
+oslo-i18n==6.0.0
     # via
     #   osc-lib
     #   oslo-config
@@ -113,7 +113,7 @@ oslo-i18n==5.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-oslo-serialization==5.0.0
+oslo-serialization==5.1.0
     # via
     #   python-keystoneclient
     #   python-novaclient
@@ -199,7 +199,7 @@ six==1.16.0
     # via
     #   keystoneauth1
     #   python-keystoneclient
-stevedore==4.1.1
+stevedore==5.0.0
     # via
     #   cliff
     #   dogpile-cache
