@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/devpi/requirements.txt mirror/devpi/requirements.in
 #
-aiohttp==3.8.3
+aiohttp==3.8.4
     # via devpi-server
 aiosignal==1.3.1
     # via aiohttp
@@ -32,7 +32,7 @@ cffi==1.15.1
     #   cmarkgfm
 chameleon==3.10.2
     # via pyramid-chameleon
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via
     #   aiohttp
     #   requests
