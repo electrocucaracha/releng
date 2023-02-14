@@ -20,7 +20,7 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==3.0.1
     # via requests
-cliff==4.1.0
+cliff==4.2.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -69,7 +69,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.3
     # via jsonpatch
-keystoneauth1==5.1.1
+keystoneauth1==5.1.2
     # via
     #   openstacksdk
     #   osc-lib
@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==1.0.0
+openstacksdk==1.0.1
     # via
     #   osc-lib
     #   python-openstackclient
@@ -98,7 +98,7 @@ os-service-types==1.7.0
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==2.6.2
+osc-lib==2.7.0
     # via python-openstackclient
 oslo-config==9.1.0
     # via
