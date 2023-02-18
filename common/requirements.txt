@@ -161,11 +161,11 @@ pyparsing==3.0.9
     # via oslo-utils
 pyperclip==1.8.2
     # via cmd2
-python-cinderclient==9.2.0
+python-cinderclient==9.3.0
     # via python-openstackclient
 python-keystoneclient==5.0.1
     # via python-openstackclient
-python-novaclient==18.2.0
+python-novaclient==18.3.0
     # via python-openstackclient
 python-openstackclient==6.0.0
     # via -r common/requirements.in
@@ -192,9 +192,7 @@ requestsexceptions==1.4.0
 rfc3986==2.0.0
     # via oslo-config
 simplejson==3.18.3
-    # via
-    #   osc-lib
-    #   python-cinderclient
+    # via osc-lib
 six==1.16.0
     # via
     #   keystoneauth1
@@ -220,5 +218,5 @@ wheel==0.38.4
     # via -r common/requirements.in
 wrapt==1.14.1
     # via debtcollector
-zipp==3.13.0
+zipp==3.14.0
     # via importlib-metadata
