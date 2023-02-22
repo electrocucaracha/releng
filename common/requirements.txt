@@ -76,7 +76,7 @@ keystoneauth1==5.1.2
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
-kolla-ansible==15.0.0
+kolla-ansible==15.1.0
     # via -r common/requirements.in
 markupsafe==2.1.2
     # via jinja2
@@ -100,7 +100,7 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==2.7.0
     # via python-openstackclient
-oslo-config==9.1.0
+oslo-config==9.1.1
     # via
     #   kolla-ansible
     #   python-keystoneclient
@@ -113,7 +113,7 @@ oslo-i18n==6.0.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-oslo-serialization==5.1.0
+oslo-serialization==5.1.1
     # via
     #   python-keystoneclient
     #   python-novaclient
@@ -167,7 +167,7 @@ python-keystoneclient==5.0.1
     # via python-openstackclient
 python-novaclient==18.3.0
     # via python-openstackclient
-python-openstackclient==6.0.0
+python-openstackclient==6.1.0
     # via -r common/requirements.in
 pytz==2022.7.1
     # via
