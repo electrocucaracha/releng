@@ -61,5 +61,5 @@ urllib3==1.26.14
     #   requests
 websocket-client==1.5.1
     # via docker
-wrapt==1.14.1
+wrapt==1.15.0
     # via debtcollector
