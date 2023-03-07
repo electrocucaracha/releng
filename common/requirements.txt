@@ -18,7 +18,7 @@ certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
-charset-normalizer==3.0.1
+charset-normalizer==3.1.0
     # via requests
 cliff==4.2.0
     # via
@@ -44,7 +44,7 @@ distro==1.8.0
     # via bindep
 dogpile-cache==1.1.8
     # via openstacksdk
-hvac==1.0.2
+hvac==1.1.0
     # via kolla-ansible
 idna==3.4
     # via requests
