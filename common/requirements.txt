@@ -80,7 +80,7 @@ kolla-ansible==15.1.0
     # via -r common/requirements.in
 markupsafe==2.1.2
     # via jinja2
-msgpack==1.0.4
+msgpack==1.0.5
     # via oslo-serialization
 netaddr==0.8.0
     # via
