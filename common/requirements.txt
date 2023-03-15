@@ -191,7 +191,7 @@ requestsexceptions==1.4.0
     # via openstacksdk
 rfc3986==2.0.0
     # via oslo-config
-simplejson==3.18.3
+simplejson==3.18.4
     # via osc-lib
 six==1.16.0
     # via
@@ -214,7 +214,7 @@ wcwidth==0.2.6
     # via
     #   cmd2
     #   prettytable
-wheel==0.38.4
+wheel==0.40.0
     # via -r common/requirements.in
 wrapt==1.15.0
     # via debtcollector
