@@ -149,7 +149,7 @@ yarl==1.8.2
     # via aiohttp
 zope-deprecation==4.4.0
     # via pyramid
-zope-interface==5.5.2
+zope-interface==6.0
     # via pyramid
 
 # The following packages are considered to be unsafe in a requirements file:
