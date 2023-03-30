@@ -147,7 +147,7 @@ whoosh==2.7.4
     # via devpi-web
 yarl==1.8.2
     # via aiohttp
-zope-deprecation==4.4.0
+zope-deprecation==5.0
     # via pyramid
 zope-interface==6.0
     # via pyramid
