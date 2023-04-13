@@ -34,7 +34,7 @@ oslo-config==9.1.1
     # via kolla
 oslo-i18n==6.0.0
     # via oslo-config
-packaging==23.0
+packaging==23.1
     # via docker
 pbr==5.11.1
     # via

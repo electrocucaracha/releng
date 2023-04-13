@@ -126,7 +126,7 @@ oslo-utils==6.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-packaging==23.0
+packaging==23.1
     # via
     #   bindep
     #   oslo-utils
