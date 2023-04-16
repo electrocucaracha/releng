@@ -16,6 +16,7 @@ lint:
 	-e LINTER_RULES_PATH=/ \
 	-e VALIDATE_TEKTON=false \
 	-e VALIDATE_KUBERNETES_KUBEVAL=false \
+	-e KUBERNETES_KUBECONFORM_OPTIONS='-ignore-missing-schemas' \
 	github/super-linter
 	tox -e lint
 
