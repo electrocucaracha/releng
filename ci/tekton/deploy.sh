@@ -32,7 +32,7 @@ echo "Deploying Tekton CI services"
 trap exit_trap ERR
 
 kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
-kubectl apply -f "https://github.com/tektoncd/dashboard/releases/download/v${RELENG_TKN_DASHBOARD_VERSION:-0.34.0}/tekton-dashboard-release.yaml"
+kubectl apply -f "https://github.com/tektoncd/dashboard/releases/download/v${RELENG_TKN_DASHBOARD_VERSION:-0.35.0}/tekton-dashboard-release.yaml"
 
 for deployment in $(kubectl get deployment --namespace tekton-pipelines -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'); do
     kubectl rollout status "deployment/$deployment" --timeout=5m --namespace tekton-pipelines
