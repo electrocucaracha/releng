@@ -42,7 +42,7 @@ decorator==5.1.1
     #   openstacksdk
 distro==1.8.0
     # via bindep
-dogpile-cache==1.1.8
+dogpile-cache==1.2.0
     # via openstacksdk
 hvac==1.1.0
     # via kolla-ansible
@@ -180,7 +180,7 @@ pyyaml==6.0
     #   kolla-ansible
     #   openstacksdk
     #   oslo-config
-requests==2.28.2
+requests==2.29.0
     # via
     #   hvac
     #   keystoneauth1
