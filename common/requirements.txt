@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==1.0.1
+openstacksdk==1.1.0
     # via
     #   osc-lib
     #   python-openstackclient
