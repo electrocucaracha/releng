@@ -180,7 +180,7 @@ pyyaml==6.0
     #   kolla-ansible
     #   openstacksdk
     #   oslo-config
-requests==2.29.0
+requests==2.30.0
     # via
     #   hvac
     #   keystoneauth1
@@ -208,7 +208,7 @@ stevedore==5.0.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-urllib3==1.26.15
+urllib3==2.0.2
     # via requests
 wcwidth==0.2.6
     # via
