@@ -20,7 +20,7 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==3.1.0
     # via requests
-cliff==4.2.0
+cliff==4.3.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -98,7 +98,7 @@ os-service-types==1.7.0
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==2.7.0
+osc-lib==2.8.0
     # via python-openstackclient
 oslo-config==9.1.1
     # via
