@@ -14,7 +14,7 @@ docker==6.1.1
     # via
     #   docker-squash
     #   kolla
-docker-squash==1.0.10
+docker-squash==1.1.0
     # via -r mirror/requirements.in
 gitdb==4.0.10
     # via gitpython
@@ -49,8 +49,6 @@ requests==2.30.0
     #   oslo-config
 rfc3986==2.0.0
     # via oslo-config
-six==1.16.0
-    # via docker-squash
 smmap==5.0.0
     # via gitdb
 stevedore==5.0.0
