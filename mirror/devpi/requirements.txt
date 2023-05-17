@@ -52,7 +52,7 @@ devpi-server==6.8.0
     #   devpi-web
 devpi-web==4.2.0
     # via -r mirror/devpi/requirements.in
-docutils==0.20
+docutils==0.20.1
     # via
     #   devpi-web
     #   readme-renderer
