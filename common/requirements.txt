@@ -69,7 +69,7 @@ jsonpatch==1.32
     # via openstacksdk
 jsonpointer==2.3
     # via jsonpatch
-keystoneauth1==5.1.2
+keystoneauth1==5.2.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -194,9 +194,7 @@ rfc3986==2.0.0
 simplejson==3.19.1
     # via osc-lib
 six==1.16.0
-    # via
-    #   keystoneauth1
-    #   python-keystoneclient
+    # via python-keystoneclient
 stevedore==5.1.0
     # via
     #   cliff
