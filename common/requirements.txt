@@ -76,9 +76,9 @@ keystoneauth1==5.2.0
     #   python-cinderclient
     #   python-keystoneclient
     #   python-novaclient
-kolla-ansible==15.1.0
+kolla-ansible==16.0.0
     # via -r common/requirements.in
-markupsafe==2.1.2
+markupsafe==2.1.3
     # via jinja2
 msgpack==1.0.5
     # via oslo-serialization
