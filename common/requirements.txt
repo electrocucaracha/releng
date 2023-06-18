@@ -44,7 +44,7 @@ distro==1.8.0
     # via bindep
 dogpile-cache==1.2.1
     # via openstacksdk
-hvac==1.1.0
+hvac==1.1.1
     # via kolla-ansible
 idna==3.4
     # via requests
