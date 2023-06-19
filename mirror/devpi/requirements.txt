@@ -88,7 +88,7 @@ plaster==1.1.2
     #   pyramid
 plaster-pastedeploy==1.0.1
     # via pyramid
-platformdirs==3.5.3
+platformdirs==3.6.0
     # via devpi-server
 pluggy==1.0.0
     # via devpi-server
@@ -102,7 +102,7 @@ pygments==2.15.1
     # via
     #   devpi-web
     #   readme-renderer
-pyparsing==3.0.9
+pyparsing==3.1.0
     # via packaging
 pyramid==2.0.1
     # via
