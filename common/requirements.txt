@@ -69,7 +69,7 @@ jsonpatch==1.33
     # via openstacksdk
 jsonpointer==2.4
     # via jsonpatch
-keystoneauth1==5.2.0
+keystoneauth1==5.2.1
     # via
     #   openstacksdk
     #   osc-lib
