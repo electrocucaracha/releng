@@ -46,11 +46,11 @@ devpi-common==3.7.2
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.9.0
+devpi-server==6.9.1
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==4.2.0
+devpi-web==4.2.1
     # via -r mirror/devpi/requirements.in
 docutils==0.20.1
     # via
