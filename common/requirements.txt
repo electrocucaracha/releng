@@ -117,7 +117,7 @@ oslo-serialization==5.1.1
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo-utils==6.1.0
+oslo-utils==6.2.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -206,6 +206,8 @@ stevedore==5.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
+tzdata==2023.3
+    # via oslo-utils
 urllib3==2.0.3
     # via requests
 wcwidth==0.2.6
