@@ -42,7 +42,7 @@ decorator==5.1.1
     #   openstacksdk
 distro==1.8.0
     # via bindep
-dogpile-cache==1.2.1
+dogpile-cache==1.2.2
     # via openstacksdk
 hvac==1.1.1
     # via kolla-ansible
@@ -206,6 +206,8 @@ stevedore==5.1.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
+typing-extensions==4.7.1
+    # via dogpile-cache
 tzdata==2023.3
     # via oslo-utils
 urllib3==2.0.3
@@ -218,5 +220,5 @@ wheel==0.40.0
     # via -r common/requirements.in
 wrapt==1.15.0
     # via debtcollector
-zipp==3.15.0
+zipp==3.16.0
     # via importlib-metadata
