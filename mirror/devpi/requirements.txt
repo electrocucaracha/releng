@@ -102,7 +102,7 @@ pygments==2.15.1
     # via
     #   devpi-web
     #   readme-renderer
-pyparsing==3.1.0
+pyparsing==3.1.1
     # via packaging
 pyramid==2.0.1
     # via
