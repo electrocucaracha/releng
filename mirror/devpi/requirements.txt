@@ -46,7 +46,7 @@ devpi-common==3.7.2
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.9.1
+devpi-server==6.9.2
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
@@ -98,7 +98,7 @@ py==1.11.0
     #   devpi-server
 pycparser==2.21
     # via cffi
-pygments==2.15.1
+pygments==2.16.1
     # via
     #   devpi-web
     #   readme-renderer
