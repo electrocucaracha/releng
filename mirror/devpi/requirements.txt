@@ -113,7 +113,7 @@ pyramid-chameleon==0.3
     # via devpi-web
 python-dateutil==2.8.2
     # via strictyaml
-readme-renderer[md]==40.0
+readme-renderer[md]==41.0
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
