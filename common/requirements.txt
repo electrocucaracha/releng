@@ -216,7 +216,7 @@ wcwidth==0.2.6
     # via
     #   cmd2
     #   prettytable
-wheel==0.41.1
+wheel==0.41.2
     # via -r common/requirements.in
 wrapt==1.15.0
     # via debtcollector
