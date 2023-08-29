@@ -100,11 +100,11 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==2.8.1
     # via python-openstackclient
-oslo-config==9.1.1
+oslo-config==9.2.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
-oslo-i18n==6.0.0
+oslo-i18n==6.1.0
     # via
     #   osc-lib
     #   oslo-config
@@ -113,11 +113,11 @@ oslo-i18n==6.0.0
     #   python-keystoneclient
     #   python-novaclient
     #   python-openstackclient
-oslo-serialization==5.1.1
+oslo-serialization==5.2.0
     # via
     #   python-keystoneclient
     #   python-novaclient
-oslo-utils==6.2.0
+oslo-utils==6.2.1
     # via
     #   kolla-ansible
     #   osc-lib
@@ -209,7 +209,9 @@ stevedore==5.1.0
 typing-extensions==4.7.1
     # via dogpile-cache
 tzdata==2023.3
-    # via oslo-utils
+    # via
+    #   oslo-serialization
+    #   oslo-utils
 urllib3==2.0.4
     # via requests
 wcwidth==0.2.6
