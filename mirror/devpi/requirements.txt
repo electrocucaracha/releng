@@ -30,7 +30,7 @@ cffi==1.15.1
     # via
     #   argon2-cffi-bindings
     #   cmarkgfm
-chameleon==4.0.1
+chameleon==4.1.0
     # via pyramid-chameleon
 charset-normalizer==3.2.0
     # via
