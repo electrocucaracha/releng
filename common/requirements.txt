@@ -90,7 +90,7 @@ netifaces==0.11.0
     # via
     #   openstacksdk
     #   oslo-utils
-openstacksdk==1.4.0
+openstacksdk==1.5.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -165,7 +165,7 @@ python-cinderclient==9.3.0
     # via python-openstackclient
 python-keystoneclient==5.1.0
     # via python-openstackclient
-python-novaclient==18.3.0
+python-novaclient==18.4.0
     # via python-openstackclient
 python-openstackclient==6.2.0
     # via -r common/requirements.in
