@@ -155,13 +155,13 @@ prettytable==3.8.0
     #   python-novaclient
 pycparser==2.21
     # via cffi
-pyhcl==0.4.4
+pyhcl==0.4.5
     # via hvac
 pyparsing==3.1.1
     # via oslo-utils
 pyperclip==1.8.2
     # via cmd2
-python-cinderclient==9.3.0
+python-cinderclient==9.4.0
     # via python-openstackclient
 python-keystoneclient==5.1.0
     # via python-openstackclient
