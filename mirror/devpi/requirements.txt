@@ -127,7 +127,7 @@ six==1.16.0
     # via
     #   bleach
     #   python-dateutil
-soupsieve==2.4.1
+soupsieve==2.5
     # via beautifulsoup4
 strictyaml==1.7.3
     # via devpi-server
