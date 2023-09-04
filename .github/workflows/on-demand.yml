@@ -36,7 +36,7 @@ jobs:
       cloud: ${{ steps.filter.outputs.cloud }}
       mirror: ${{ steps.filter.outputs.mirror }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v2
         if: ${{ !env.ACT }}
         id: filter
@@ -61,7 +61,7 @@ jobs:
     needs: changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Run the sh-checker
         uses: luizm/action-sh-checker@master
         env:
@@ -85,7 +85,7 @@ jobs:
     env:
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Provision a Kubernetes cluster
         env:
           RELENG_K8S_TYPE: ${{ matrix.k8s }}
@@ -110,7 +110,7 @@ jobs:
       VAGRANT_EXPERIMENTAL: disks
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Cache Vagrant boxes
         uses: actions/cache@v3
         with:
@@ -167,7 +167,7 @@ jobs:
       releng_kolla_build: "true"
       releng_debug: "true"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: setup the vm folders
         run: |
           ./pre-install.sh "sdc" "/var/local/packages"
