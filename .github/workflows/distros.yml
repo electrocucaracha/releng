@@ -18,16 +18,19 @@ on:
 
 jobs:
   check-versions:
-    runs-on: macos-10.15
+    permissions:
+      contents: write  # for technote-space/create-pr-action to push code
+      pull-requests: write  # for technote-space/create-pr-action to create a PR
+    runs-on: macos-12
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4.1.2
+      - uses: actions/cache@v4.0.2
         with:
           path: ~/.vagrant.d/boxes
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
-      - uses: technote-space/create-pr-action@v2
+      - uses: technote-space/create-pr-action@v2.1.4
         with:
           EXECUTE_COMMANDS: |
             ./update_distros.sh
