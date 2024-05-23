@@ -18,7 +18,7 @@ mirror_ip_address = "192.168.123.3"
 ci_ip_address = "192.168.123.4"
 cloud_ip_address = "192.168.123.5"
 cloud_vip_address = "192.168.123.6"
-public_nic = `ip r get 1.1.1.1 | awk 'NR==1{print $5}'`.strip! || "eth0"
+public_nic = `ip r get 1.1.1.1`.split[4] || "eth0"
 cloud_public_cidr = `ip r | grep "dev $(ip r get 1.1.1.1 | awk 'NR==1{print $5}') .* scope link" | awk '{print $1}'`.strip! || "192.168.0.0/24"
 cloud_public_gw = `ip r | grep "^default" | awk 'NR==1{print $3}'`.strip! || "192.168.0.1"
 fly_version = ENV["PKG_FLY_VERSION"] || "7.7.1"
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :libvirt
   config.vm.provider :virtualbox
 
-  config.vm.box = "generic/ubuntu2004"
+  config.vm.box = "generic/ubuntu2204"
   config.vm.box_check_update = false
   config.vm.box_version = "4.3.12"
 
@@ -89,7 +89,7 @@ Vagrant.configure("2") do |config|
     config.proxy.enabled = { docker: false }
   end
 
-  config.vm.synced_folder "./common", "#{releng_folder}common"
+  config.vm.synced_folder "./common", "#{releng_folder}common", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 4)
   config.vm.define :mirror do |mirror|
     mirror.vm.hostname = "mirror"
     mirror.vm.network :private_network, ip: mirror_ip_address, libvirt__network_name: "management", virtualbox__intnet: true
@@ -108,7 +108,7 @@ Vagrant.configure("2") do |config|
     mirror.vm.disk :disk, name: "images", size: "10GB"
     mirror.vm.disk :disk, name: "pypi", size: "10GB"
     mirror.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./mirror", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
+      override.vm.synced_folder "./mirror", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 4)
       v.storage :file, bus: "sata", device: "sdb", size: "350G"
       v.storage :file, bus: "sata", device: "sdc", size: "10G"
       v.storage :file, bus: "sata", device: "sdd", size: "10G"
@@ -180,7 +180,7 @@ Vagrant.configure("2") do |config|
     ci.vm.disk :disk, name: "worker0", size: "25GB"
     ci.vm.disk :disk, name: "containers", size: "100GB"
     ci.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./ci", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
+      override.vm.synced_folder "./ci", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 4)
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "10G"
       v.storage :file, bus: "sata", device: "sdc", size: "25G"
@@ -238,7 +238,7 @@ Vagrant.configure("2") do |config|
     cloud.vm.network :private_network, ip: cloud_ip_address, libvirt__network_name: "management", virtualbox__intnet: true
     cloud.vm.network :forwarded_port, guest_ip: cloud_vip_address, guest: 80, host: 9090
     cloud.vm.network :forwarded_port, guest_ip: cloud_vip_address, guest: 6080, host: 6080
-    cloud.vm.synced_folder "./cloud", "/vagrant"
+    cloud.vm.synced_folder "./cloud/openstack", "/opt/openstack-multinode"
     # Public - Provides external access to OpenStack services. For
     # instances, it provides the route out to the external network and
     # the IP addresses to enable inbound connections to the instances.
@@ -269,24 +269,17 @@ Vagrant.configure("2") do |config|
     end
     cloud.vm.disk :disk, name: "cinder", size: "50GB"
     cloud.vm.provider :libvirt do |v, override|
-      override.vm.synced_folder "./cloud", "/vagrant", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 3)
+      override.vm.synced_folder "./cloud/openstack", "/opt/openstack-multinode", type: "nfs", nfs_version: ENV.fetch("VAGRANT_NFS_VERSION", 4)
       v.nested = true
       v.storage :file, bus: "sata", device: "sdb", size: "50G"
     end
 
-    cloud.vm.provision "shell", privileged: false do |sh|
-      sh.env = {
-        RELENG_CINDER_VOLUME: "/dev/sdb"
-      }
-      sh.path = "cloud/pre-install.sh"
-    end
-    cloud.vm.provision "shell", privileged: false do |sh|
-      sh.env = {
-        RELENG_DEVPI_HOST: mirror_ip_address,
-        RELENG_NTP_SERVER: mirror_ip_address
-      }
-      sh.path = "install.sh"
-    end
+    cloud.vm.provision 'shell', privileged: false, inline: <<-SHELL
+      set -o errexit
+      set -o pipefail
+      cd /opt/openstack-multinode
+      ./node.sh -c /dev/sdb
+    SHELL
     cloud.vm.provision "shell", privileged: false do |sh|
       sh.env = {
         PKG_DOCKER_REGISTRY_MIRRORS: "\"http://#{mirror_ip_address}:5000\"",
@@ -299,6 +292,7 @@ Vagrant.configure("2") do |config|
         RELENG_NTP_SERVER: mirror_ip_address,
         RELENG_DEVPI_HOST: mirror_ip_address,
         RELENG_FOLDER: releng_folder,
+        OS_KOLLA_NEUTRON_EXTERNAL_INTERFACE: "eth2",
         EXT_NET_RANGE: "start=#{cloud_public_cidr.sub('0/24', '50')},end=#{cloud_public_cidr.sub('0/24', '100')}",
         EXT_NET_CIDR: cloud_public_cidr.to_s,
         EXT_NET_GATEWAY: cloud_public_gw.to_s
@@ -310,19 +304,17 @@ Vagrant.configure("2") do |config|
         sudo ip link set $RELENG_NEUTRON_EXTERNAL_INTERFACE promisc on
         echo "127.0.0.1 localhost" | sudo tee /etc/hosts
 
-        for os_var in $(printenv | grep "RELENG_\|EXT_NET_" ); do
+        for os_var in $(printenv | grep "RELENG_|EXT_NET_" ); do
             echo "export $os_var" | sudo tee --append /etc/environment
         done
 
-        cd /vagrant
-        ./post-install.sh | tee ~/post-install.log
-        ./provision_openstack_cluster.sh | tee ~/provision_openstack_cluster.log
+        source /etc/os-release || source /usr/lib/os-release
+        export OS_KOLLA_KOLLA_BASE_DISTRO=${ID,,}
 
-        cd $HOME
-        source <(sudo cat /etc/kolla/admin-openrc.sh)
-        # PEP 370 -- Per user site-packages directory
-        [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
-        ./.local/share/kolla-ansible/init-runonce
+        echo "127.0.0.1 localhost" | sudo tee /etc/hosts
+
+        cd /opt/openstack-multinode
+        ./install.sh
       SHELL
     end
   end

@@ -1,0 +1,3 @@
+[submodule "cloud/openstack"]
+	path = cloud/openstack
+	url = https://github.com/electrocucaracha/openstack-multinode
