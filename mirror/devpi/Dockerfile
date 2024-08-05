@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.18
+FROM python:3.12-alpine3.20
 
 EXPOSE 3141
 VOLUME /devpi/server
@@ -6,9 +6,9 @@ VOLUME /devpi/server
 WORKDIR /opt/devpi
 COPY ./requirements.txt .
 RUN apk --no-cache add \
-  gcc=12.2.1_git20220924-r10 \
-  musl-dev=1.2.4-r2 \
-  libffi-dev=3.4.4-r2 && \
+  gcc=13.2.1_git20240309-r0 \
+  musl-dev=1.2.5-r0 \
+  libffi-dev=3.4.6-r0 && \
   pip install --no-cache-dir -r requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/devpi-server", "--serverdir=/devpi/server"]
