@@ -7,7 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 resources:
   - name: src
     type: git
@@ -15,12 +14,10 @@ resources:
     source:
       uri: https://github.com/electrocucaracha/bootstrap-vagrant.git
       branch: master
-
 groups:
   - name: unit-test
     jobs:
       - linting
-
 jobs:
   - name: linting
     serial: true

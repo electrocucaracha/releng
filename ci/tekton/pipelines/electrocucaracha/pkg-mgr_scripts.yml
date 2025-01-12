@@ -7,7 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
@@ -16,7 +15,7 @@ spec:
   pipelineRef:
     name: pkg-mgr-scripts
   podTemplate:
-  serviceAccountName: 'default'
+  serviceAccountName: "default"
   resources:
     - name: src
       resourceRef:

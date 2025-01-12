@@ -7,10 +7,8 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 alertmanager:
   enabled: false
-
 # This configuration means all ServiceMonitors in the namespsace will be picked up
 # Use with caution!
 prometheus:

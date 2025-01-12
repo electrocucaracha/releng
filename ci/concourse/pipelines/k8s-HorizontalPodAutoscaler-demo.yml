@@ -7,7 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 resources:
   - name: src
     type: git
@@ -15,7 +14,6 @@ resources:
     source:
       uri: https://github.com/electrocucaracha/k8s-HorizontalPodAutoscaler-demo.git
       branch: master
-
 groups:
   - name: unit-test
     jobs:
@@ -27,7 +25,6 @@ groups:
   - name: system-test
     jobs:
       - smoke-test
-
 jobs:
   - name: linting
     serial: true

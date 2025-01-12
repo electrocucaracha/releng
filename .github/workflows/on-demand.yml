@@ -7,29 +7,23 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 name: Integration tests
 # yamllint disable-line rule:truthy
 on:
   push:
     paths:
-      - '*.sh'
-      - 'ci/*'
-      - 'cloud/*'
-      - 'mirror/*'
+      - "*.sh"
+      - "ci/*"
+      - "cloud/*"
+      - "mirror/*"
   pull_request_review:
     types:
       - submitted
-
 jobs:
   changes:
     runs-on: ubuntu-latest
     if: >-
-      (
-        github.event_name == 'pull_request_review' &&
-        github.event.review.state == 'approved'
-      ) ||
-      github.event_name != 'pull_request_review'
+      ( github.event_name == 'pull_request_review' && github.event.review.state == 'approved' ) || github.event_name != 'pull_request_review'
     outputs:
       scripts: ${{ steps.filter.outputs.scripts }}
       ci: ${{ steps.filter.outputs.ci }}

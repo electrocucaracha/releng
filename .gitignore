@@ -6,3 +6,5 @@ mirror/apt-mirror/sources.list
 *.log
 apt/sources.list
 dictionary.dic
+node_modules/
+package*.json

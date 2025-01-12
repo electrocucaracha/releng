@@ -7,7 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 resources:
   - name: src
     type: git
@@ -15,7 +14,6 @@ resources:
     source:
       uri: https://github.com/electrocucaracha/gw-tester.git
       branch: master
-
 groups:
   - name: unit-test
     jobs:
@@ -23,7 +21,6 @@ groups:
   - name: integration-test
     jobs:
       - build-image-test
-
 jobs:
   - name: linting
     serial: true

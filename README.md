@@ -1,5 +1,7 @@
 # Release Engineering
+
 <!-- markdown-link-check-disable-next-line -->
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub Super-Linter](https://github.com/electrocucaracha/releng/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
@@ -10,17 +12,17 @@
 This project provisions the following servers used for validation and test of
 personal projects.
 
-* *Mirror Server*: Provides services to reduce external network traffic. Those
-are [Ubuntu mirror][3], [Docker registry][4] and [PyPI server][5].
-* *CI Server*: Provides a Continuous Integration server on top of a Kubernetes
-Cluster. [Concourse CI][6] and [Tekton][7] are the options supported.
-* *Cloud Server*: Provides an [OpenStack][8] server as Infrastructure as a
-Service solution.
+- _Mirror Server_: Provides services to reduce external network traffic. Those
+  are [Ubuntu mirror][3], [Docker registry][4] and [PyPI server][5].
+- _CI Server_: Provides a Continuous Integration server on top of a Kubernetes
+  Cluster. [Concourse CI][6] and [Tekton][7] are the options supported.
+- _Cloud Server_: Provides an [OpenStack][8] server as Infrastructure as a
+  Service solution.
 
 ## Virtual Machines
 
 The [Vagrant tool][1] can be used for provisioning an Ubuntu Focal
-Virtual Machine. It's highly recommended to use the  *setup.sh* script
+Virtual Machine. It's highly recommended to use the _setup.sh_ script
 of the [bootstrap-vagrant project][2] for installing Vagrant
 dependencies and plugins required for this project. That script
 supports two Virtualization providers (Libvirt and VirtualBox) which

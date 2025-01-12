@@ -7,7 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -43,7 +42,9 @@ spec:
       default: ".ecrc"
       type: string
     - name: error-on-missing-exec-bit
-      description: If set to `false`, the `bash-exec` linter will report a warning if a shell script is not executable. If set to `true`, the `bash-exec` linter will report an error instead.
+      description:
+        If set to `false`, the `bash-exec` linter will report a warning if a shell script is not executable. If set to `true`, the `bash-exec` linter will
+        report an error instead.
       default: "false"
       type: string
     - name: filter-regex-exclude
@@ -103,7 +104,9 @@ spec:
       default: ".markdown-lint/rules,rules/**"
       type: string
     - name: output-format
-      description: The report format to be generated, besides the stdout one. Output format of tap is currently using v13 of the specification. Supported formats tap
+      description:
+        The report format to be generated, besides the stdout one. Output format of tap is currently using v13 of the specification. Supported formats
+        tap
       default: "none"
       type: string
     - name: output-folder
@@ -155,7 +158,9 @@ spec:
       default: ".eslintrc.yml"
       type: string
     - name: validate-all-codebase
-      description: Will parse the entire repository and find all files to validate across all types. When set to `false`, only new or edited files will be parsed for validation.
+      description:
+        Will parse the entire repository and find all files to validate across all types. When set to `false`, only new or edited files will be parsed
+        for validation.
       default: "true"
       type: string
     - name: validate-ansible

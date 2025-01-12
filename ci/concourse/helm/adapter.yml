@@ -7,12 +7,11 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-
 rules:
   default: false
   custom:
-    - seriesQuery: 'processed_requests_total'
-      resources: {template: "<<.Resource>>"}
+    - seriesQuery: "processed_requests_total"
+      resources: { template: "<<.Resource>>" }
       name:
         matches: "^(.*)_total"
         as: "${1}_per_second"
