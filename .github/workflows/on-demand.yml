@@ -101,7 +101,7 @@ jobs:
           kubectl get all -A -o wide
           kubectl describe nodes
   check-e2e:
-    runs-on: macos-12
+    runs-on: vm-self-hosted
     if: needs.changes.outputs.mirror == 'true' && needs.changes.outputs.cloud == 'true'
     needs: changes
     name: Check End-to-End deployment on Ubuntu Bionic Virtual Machine
@@ -122,15 +122,8 @@ jobs:
         shell: bash
         run: |
           if [[ "$(VBoxManage --version)" == "6.1.28r147628" ]]; then
-              find . -type f -iname "Vagrantfile" -exec sed -i '.bak' 's|v.gui = .*|v.gui = true|g' {} \;
-              find . -type f -name "*.bak" -delete
+              find . -type f -iname "Vagrantfile" -exec sed -i 's|v.gui = .*|v.gui = true|g' {} \;
           fi
-      - name: Install GNU tools
-        run: brew install proctools iproute2mac
-      - name: Install vagrant tool
-        run: brew install vagrant
-      - name: Replace shorten links
-        run: find . -type f -iname "*sh" -exec sed -i '.bak' 's|http://bit.ly/install_pkg|https://raw.githubusercontent.com/electrocucaracha/pkg-mgr_scripts/master/install.sh|g' {} \;
       - name: Install Vagrant Reload plugin
         run: vagrant plugin install vagrant-reload
       - name: Provision mirror
@@ -151,9 +144,8 @@ jobs:
           MEMORY: 12288
       - name: Check HW resources
         run: |
-          vm_stat
-          top -l 1 -n 0
           VBoxManage list runningvms --long
+          cat ~/VirtualBox\ VMs/*/Logs/*.log
   check-mirror-baremetal:
     name: check mirror deployment on ubuntu bionic virtual environment
     if: needs.changes.outputs.mirror == 'true'
