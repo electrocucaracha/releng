@@ -55,7 +55,7 @@ urllib3==2.3.0
     # via
     #   docker
     #   requests
-wrapt==1.17.1
+wrapt==1.17.2
     # via debtcollector
 
 # The following packages are considered to be unsafe in a requirements file:
