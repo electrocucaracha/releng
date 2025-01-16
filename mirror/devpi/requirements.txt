@@ -139,7 +139,7 @@ webob==1.8.9
     # via pyramid
 whoosh==2.7.4
     # via devpi-web
-zope-deprecation==5.0
+zope-deprecation==5.1
     # via pyramid
 zope-interface==7.2
     # via pyramid
