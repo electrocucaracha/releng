@@ -12,11 +12,11 @@ argon2-cffi==23.1.0
     #   passlib
 argon2-cffi-bindings==21.2.0
     # via argon2-cffi
-attrs==24.3.0
+attrs==25.1.0
     # via devpi-server
-beautifulsoup4==4.12.3
+beautifulsoup4==4.13.3
     # via devpi-web
-certifi==2024.12.14
+certifi==2025.1.31
     # via
     #   httpcore
     #   httpx
@@ -128,7 +128,9 @@ strictyaml==1.7.3
 translationstring==1.4
     # via pyramid
 typing-extensions==4.12.2
-    # via anyio
+    # via
+    #   anyio
+    #   beautifulsoup4
 urllib3==2.3.0
     # via requests
 venusian==3.1.1

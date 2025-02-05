@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/requirements.txt mirror/requirements.in
 #
-certifi==2024.12.14
+certifi==2025.1.31
     # via requests
 charset-normalizer==3.4.1
     # via requests
@@ -34,7 +34,7 @@ oslo-i18n==6.5.0
     # via oslo-config
 packaging==24.2
     # via docker-squash
-pbr==6.1.0
+pbr==6.1.1
     # via
     #   kolla
     #   oslo-i18n
