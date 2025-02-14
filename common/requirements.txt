@@ -78,7 +78,7 @@ keystoneauth1==5.9.1
     #   osc-lib
     #   python-cinderclient
     #   python-keystoneclient
-kolla-ansible==19.2.0
+kolla-ansible==19.3.0
     # via -r common/requirements.in
 markupsafe==3.0.2
     # via jinja2
@@ -112,7 +112,7 @@ oslo-i18n==6.5.0
     #   python-openstackclient
 oslo-serialization==5.6.0
     # via python-keystoneclient
-oslo-utils==8.0.0
+oslo-utils==8.1.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -138,6 +138,7 @@ pbr==6.1.1
     #   osc-lib
     #   oslo-i18n
     #   oslo-serialization
+    #   oslo-utils
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
@@ -148,7 +149,7 @@ prettytable==3.14.0
     # via
     #   cliff
     #   python-cinderclient
-psutil==6.1.1
+psutil==7.0.0
     # via
     #   openstacksdk
     #   oslo-utils
