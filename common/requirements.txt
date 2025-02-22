@@ -72,7 +72,7 @@ jsonpatch==1.33
     # via openstacksdk
 jsonpointer==3.0.0
     # via jsonpatch
-keystoneauth1==5.9.1
+keystoneauth1==5.10.0
     # via
     #   openstacksdk
     #   osc-lib
@@ -98,11 +98,11 @@ os-service-types==1.7.0
     #   openstacksdk
 osc-lib==3.2.0
     # via python-openstackclient
-oslo-config==9.7.0
+oslo-config==9.7.1
     # via
     #   kolla-ansible
     #   python-keystoneclient
-oslo-i18n==6.5.0
+oslo-i18n==6.5.1
     # via
     #   osc-lib
     #   oslo-config
@@ -110,9 +110,9 @@ oslo-i18n==6.5.0
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-oslo-serialization==5.6.0
+oslo-serialization==5.7.0
     # via python-keystoneclient
-oslo-utils==8.1.0
+oslo-utils==8.2.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -137,7 +137,6 @@ pbr==6.1.1
     #   os-service-types
     #   osc-lib
     #   oslo-i18n
-    #   oslo-serialization
     #   oslo-utils
     #   python-cinderclient
     #   python-keystoneclient
@@ -163,7 +162,7 @@ python-cinderclient==9.6.0
     # via python-openstackclient
 python-keystoneclient==5.5.0
     # via python-openstackclient
-python-openstackclient==7.3.0
+python-openstackclient==7.3.1
     # via -r common/requirements.in
 pyyaml==6.0.2
     # via
