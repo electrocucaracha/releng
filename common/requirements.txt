@@ -6,7 +6,7 @@
 #
 ansible==2.9.27
     # via -r common/requirements.in
-ansible-core==2.17.8
+ansible-core==2.17.9
     # via kolla-ansible
 autopage==0.5.2
     # via cliff
@@ -41,7 +41,7 @@ debtcollector==3.0.0
     #   oslo-config
     #   oslo-utils
     #   python-keystoneclient
-decorator==5.2.0
+decorator==5.2.1
     # via
     #   dogpile-cache
     #   openstacksdk
