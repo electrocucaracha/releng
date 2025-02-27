@@ -162,7 +162,7 @@ python-cinderclient==9.6.0
     # via python-openstackclient
 python-keystoneclient==5.5.0
     # via python-openstackclient
-python-openstackclient==7.3.1
+python-openstackclient==7.4.0
     # via -r common/requirements.in
 pyyaml==6.0.2
     # via
