@@ -22,7 +22,7 @@ cffi==1.17.1
     # via cryptography
 charset-normalizer==3.4.1
     # via requests
-cliff==4.8.0
+cliff==4.9.0
     # via
     #   kolla-ansible
     #   osc-lib
@@ -88,7 +88,7 @@ netaddr==1.3.0
     # via
     #   oslo-config
     #   oslo-utils
-openstacksdk==4.3.0
+openstacksdk==4.4.0
     # via
     #   osc-lib
     #   python-openstackclient
@@ -144,7 +144,7 @@ pbr==6.1.1
     #   stevedore
 platformdirs==4.3.6
     # via openstacksdk
-prettytable==3.14.0
+prettytable==3.15.1
     # via
     #   cliff
     #   python-cinderclient
@@ -198,7 +198,9 @@ stevedore==5.4.1
     #   python-keystoneclient
     #   python-openstackclient
 typing-extensions==4.12.2
-    # via keystoneauth1
+    # via
+    #   keystoneauth1
+    #   openstacksdk
 tzdata==2025.1
     # via
     #   oslo-serialization
