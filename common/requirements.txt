@@ -29,7 +29,7 @@ cliff==4.9.1
     #   python-openstackclient
 cmd2==2.5.11
     # via cliff
-cryptography==44.0.1
+cryptography==44.0.2
     # via
     #   ansible
     #   ansible-core
