@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/devpi/requirements.txt mirror/devpi/requirements.in
 #
-anyio==4.8.0
+anyio==4.9.0
     # via httpx
 argon2-cffi==23.1.0
     # via
