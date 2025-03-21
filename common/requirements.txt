@@ -14,7 +14,7 @@ bcrypt==4.3.0
     # via
     #   kolla-ansible
     #   passlib
-bindep==2.12.0
+bindep==2.13.0
     # via -r common/requirements.in
 certifi==2025.1.31
     # via requests
@@ -142,7 +142,7 @@ pbr==6.1.1
     #   python-keystoneclient
     #   python-openstackclient
     #   stevedore
-platformdirs==4.3.6
+platformdirs==4.3.7
     # via openstacksdk
 prettytable==3.15.1
     # via
