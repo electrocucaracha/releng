@@ -144,7 +144,7 @@ pbr==6.1.1
     #   stevedore
 platformdirs==4.3.7
     # via openstacksdk
-prettytable==3.15.1
+prettytable==3.16.0
     # via
     #   cliff
     #   python-cinderclient
@@ -154,7 +154,7 @@ psutil==7.0.0
     #   oslo-utils
 pycparser==2.22
     # via cffi
-pyparsing==3.2.1
+pyparsing==3.2.2
     # via oslo-utils
 pyperclip==1.9.0
     # via cmd2
