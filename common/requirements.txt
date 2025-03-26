@@ -6,7 +6,7 @@
 #
 ansible==2.9.27
     # via -r common/requirements.in
-ansible-core==2.17.9
+ansible-core==2.17.10
     # via kolla-ansible
 autopage==0.5.2
     # via cliff
@@ -154,7 +154,7 @@ psutil==7.0.0
     #   oslo-utils
 pycparser==2.22
     # via cffi
-pyparsing==3.2.2
+pyparsing==3.2.3
     # via oslo-utils
 pyperclip==1.9.0
     # via cmd2
