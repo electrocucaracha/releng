@@ -127,11 +127,11 @@ strictyaml==1.7.3
     # via devpi-server
 translationstring==1.4
     # via pyramid
-typing-extensions==4.13.1
+typing-extensions==4.13.2
     # via
     #   anyio
     #   beautifulsoup4
-urllib3==2.3.0
+urllib3==2.4.0
     # via requests
 venusian==3.1.1
     # via pyramid
