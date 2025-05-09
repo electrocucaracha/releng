@@ -142,7 +142,7 @@ pbr==6.1.1
     #   python-keystoneclient
     #   python-openstackclient
     #   stevedore
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via openstacksdk
 prettytable==3.16.0
     # via
