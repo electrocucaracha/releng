@@ -113,7 +113,7 @@ repoze-lru==0.7
     # via devpi-server
 requests==2.32.3
     # via devpi-common
-ruamel-yaml==0.18.10
+ruamel-yaml==0.18.11
     # via devpi-server
 ruamel-yaml-clib==0.2.12
     # via ruamel-yaml
