@@ -197,7 +197,7 @@ stevedore==5.4.1
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-typing-extensions==4.13.2
+typing-extensions==4.14.0
     # via
     #   keystoneauth1
     #   openstacksdk
