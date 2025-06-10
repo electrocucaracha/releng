@@ -29,7 +29,7 @@ cliff==4.10.0
     #   python-openstackclient
 cmd2==2.6.1
     # via cliff
-cryptography==45.0.3
+cryptography==45.0.4
     # via
     #   ansible
     #   ansible-core
@@ -172,7 +172,7 @@ pyyaml==6.0.2
     #   openstacksdk
     #   oslo-config
     #   oslo-utils
-requests==2.32.3
+requests==2.32.4
     # via
     #   hvac
     #   keystoneauth1
