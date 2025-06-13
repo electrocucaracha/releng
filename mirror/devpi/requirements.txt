@@ -13,7 +13,9 @@ argon2-cffi==25.1.0
 argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 attrs==25.3.0
-    # via devpi-server
+    # via
+    #   devpi-server
+    #   devpi-web
 beautifulsoup4==4.13.4
     # via devpi-web
 certifi==2025.4.26
@@ -43,7 +45,7 @@ devpi-server==6.15.0
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==4.3.0
+devpi-web==5.0.0
     # via -r mirror/devpi/requirements.in
 docutils==0.21.2
     # via
@@ -89,9 +91,7 @@ platformdirs==4.3.8
 pluggy==1.6.0
     # via devpi-server
 py==1.11.0
-    # via
-    #   devpi-server
-    #   devpi-web
+    # via devpi-server
 pycparser==2.22
     # via cffi
 pygments==2.19.1
