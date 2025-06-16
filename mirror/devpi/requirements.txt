@@ -18,7 +18,7 @@ attrs==25.3.0
     #   devpi-web
 beautifulsoup4==4.13.4
     # via devpi-web
-certifi==2025.4.26
+certifi==2025.6.15
     # via
     #   httpcore
     #   httpx
@@ -45,7 +45,7 @@ devpi-server==6.15.0
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==5.0.0
+devpi-web==5.0.1
     # via -r mirror/devpi/requirements.in
 docutils==0.21.2
     # via
