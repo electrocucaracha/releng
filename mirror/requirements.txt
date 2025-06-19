@@ -51,7 +51,7 @@ smmap==5.0.2
     # via gitdb
 stevedore==5.4.1
     # via oslo-config
-urllib3==2.4.0
+urllib3==2.5.0
     # via
     #   docker
     #   requests
