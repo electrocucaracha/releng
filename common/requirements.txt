@@ -27,7 +27,7 @@ cliff==4.10.0
     #   kolla-ansible
     #   osc-lib
     #   python-openstackclient
-cmd2==2.6.1
+cmd2==2.6.2
     # via cliff
 cryptography==45.0.4
     # via
