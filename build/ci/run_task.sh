@@ -13,8 +13,8 @@ set -o errexit
 set -o nounset
 
 if ! command -v fly; then
-    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
-    curl -fsSL http://bit.ly/install_pkg | PKG=fly bash
+	# NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+	curl -fsSL http://bit.ly/install_pkg | PKG=fly bash
 fi
 
 fly --target "${RELENG_TARGET:-releng}" execute -c "${TASK_NAME}-task.yml" -i src=../../ "$@"

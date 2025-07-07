@@ -10,12 +10,12 @@
 
 set -o nounset
 if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
-    set -o xtrace
+	set -o xtrace
 fi
 
 if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
-    image_name="$(head -n 1 <kolla_images.txt | awk -F '/' '{ print $NF}')"
-    newgrp docker <<EONG
+	image_name="$(head -n 1 <kolla_images.txt | awk -F '/' '{ print $NF}')"
+	newgrp docker <<EONG
     # PEP 370 -- Per user site-packages directory
     [[ "$PATH" != *.local/bin* ]] && export PATH=$PATH:$HOME/.local/bin
     SNAP=$HOME/.local/ kolla-build --base "${image_name%-binary*}" \
@@ -23,20 +23,20 @@ if [ "${RELENG_KOLLA_BUILD:-false}" == "true" ]; then
     --tag "${image_name#*:}" --squash --quiet --skip-existing --noskip-parents \
     --profile default | jq "." | tee "$HOME/output.json"
 EONG
-    if [[ $(jq '.failed | length ' "$HOME/output.json") != 0 ]]; then
-        jq '.failed[].name' "$HOME/output.json"
-    fi
+	if [[ $(jq '.failed | length ' "$HOME/output.json") != 0 ]]; then
+		jq '.failed[].name' "$HOME/output.json"
+	fi
 fi
 
 while IFS= read -r image; do
-    image_name="${image#*/}"
-    if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ] || [ "$(curl "http://localhost:5000/v2/${image_name%:*}/manifests/${image_name#*:}" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
-        if command -v skopeo; then
-            skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/$image_name"
-        else
-            docker pull "$image"
-            docker tag "$image" "localhost:5000/$image_name"
-            docker push "localhost:5000/$image_name"
-        fi
-    fi
+	image_name="${image#*/}"
+	if [ "$(curl "http://localhost:5000/v2/${image_name%:*}/tags/list" -o /dev/null -w '%{http_code}\n' -s)" != "200" ] || [ "$(curl "http://localhost:5000/v2/${image_name%:*}/manifests/${image_name#*:}" -o /dev/null -w '%{http_code}\n' -s)" != "200" ]; then
+		if command -v skopeo; then
+			skopeo copy --dest-tls-verify=false "docker://$image" "docker://localhost:5000/$image_name"
+		else
+			docker pull "$image"
+			docker tag "$image" "localhost:5000/$image_name"
+			docker push "localhost:5000/$image_name"
+		fi
+	fi
 done <kolla_images.txt

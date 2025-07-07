@@ -12,25 +12,25 @@ set -o pipefail
 set -o errexit
 set -o nounset
 if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
-    set -o xtrace
+	set -o xtrace
 fi
 
 # mount_dev() - Formats and mounts storage devices
 function mount_dev {
-    dev_name="/dev/$1"
-    mount_dir="$2"
+	dev_name="/dev/$1"
+	mount_dir="$2"
 
-    sudo mkdir -p "$mount_dir"
+	sudo mkdir -p "$mount_dir"
 
-    # Format registry volume
-    if lsblk --list | grep -q "^${dev_name##*/} .*disk" && ! mount | grep -q "${dev_name}1 on $mount_dir"; then
-        sudo sfdisk "$dev_name" --no-reread <<EOF
+	# Format registry volume
+	if lsblk --list | grep -q "^${dev_name##*/} .*disk" && ! mount | grep -q "${dev_name}1 on $mount_dir"; then
+		sudo sfdisk "$dev_name" --no-reread <<EOF
 ;
 EOF
-        sudo mkfs -t ext4 "${dev_name}1"
-        sudo mount "${dev_name}1" "$mount_dir"
-        echo "${dev_name}1 $mount_dir           ext4    errors=remount-ro,noatime,barrier=0 0       1" | sudo tee --append /etc/fstab
-    fi
+		sudo mkfs -t ext4 "${dev_name}1"
+		sudo mount "${dev_name}1" "$mount_dir"
+		echo "${dev_name}1 $mount_dir           ext4    errors=remount-ro,noatime,barrier=0 0       1" | sudo tee --append /etc/fstab
+	fi
 }
 
 mount_dev "$1" "$2"

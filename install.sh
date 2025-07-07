@@ -12,23 +12,23 @@ set -o pipefail
 set -o errexit
 set -o nounset
 if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
-    set -o xtrace
-    export PKG_DEBUG=true
+	set -o xtrace
+	export PKG_DEBUG=true
 fi
 
 # Install dependencies
 pkgs=""
 for pkg in pip jq; do
-    if ! command -v "$pkg"; then
-        pkgs+=" $pkg"
-    fi
+	if ! command -v "$pkg"; then
+		pkgs+=" $pkg"
+	fi
 done
 if ! systemctl list-unit-files | grep -q "openntpd.*enabled"; then
-    pkgs+=" openntpd"
+	pkgs+=" openntpd"
 fi
 if [ -n "$pkgs" ]; then
-    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
-    curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
+	# NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+	curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
 echo "server ${RELENG_NTP_SERVER}" | sudo tee /etc/openntpd/ntpd.conf
 sudo systemctl start openntpd

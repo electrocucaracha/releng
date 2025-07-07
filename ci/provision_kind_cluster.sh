@@ -12,30 +12,30 @@ set -o pipefail
 set -o errexit
 set -o nounset
 if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
-    set -o xtrace
+	set -o xtrace
 fi
 
 # Install dependencies
 pkgs=""
 for pkg in docker kind kubectl helm; do
-    if ! command -v "$pkg"; then
-        pkgs+=" $pkg"
-    fi
+	if ! command -v "$pkg"; then
+		pkgs+=" $pkg"
+	fi
 done
 if [ -n "$pkgs" ]; then
-    # NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
-    curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
+	# NOTE: Shorten link -> https://github.com/electrocucaracha/pkg-mgr_scripts
+	curl -fsSL http://bit.ly/install_pkg | PKG=$pkgs bash
 fi
 
 if ! sudo kind get clusters | grep -q kind; then
-    containerd_patch=""
-    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
-        containerd_patch+="containerdConfigPatches:
+	containerd_patch=""
+	if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
+		containerd_patch+="containerdConfigPatches:
     - |
         [plugins.\"io.containerd.grpc.v1.cri\".registry.mirrors.\"local-mirror:5000\"]
             endpoint = [$PKG_DOCKER_REGISTRY_MIRRORS]"
-    fi
-    cat <<EOF | sudo kind create cluster --wait=300s --config=-
+	fi
+	cat <<EOF | sudo kind create cluster --wait=300s --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 $containerd_patch
@@ -58,13 +58,13 @@ nodes:
             hostPort: 443
             protocol: TCP
 EOF
-    mkdir -p "$HOME/.kube"
-    sudo cp /root/.kube/config "$HOME/.kube/config"
-    sudo chown -R "$USER" "$HOME/.kube/"
-    chmod 600 "$HOME/.kube/config"
+	mkdir -p "$HOME/.kube"
+	sudo cp /root/.kube/config "$HOME/.kube/config"
+	sudo chown -R "$USER" "$HOME/.kube/"
+	chmod 600 "$HOME/.kube/config"
 
-    if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
-        cat <<EOF | kubectl apply -f -
+	if [ -n "${PKG_DOCKER_REGISTRY_MIRRORS-}" ]; then
+		cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -75,12 +75,12 @@ data:
     host: "${PKG_DOCKER_REGISTRY_MIRRORS##*/}
     help: "https://kind.sigs.k8s.io/docs/user/local-registry/"
 EOF
-        # TODO: Try to use https://github.com/NextDeveloperTeam/kubernetes-webhooks/tree/main/docker-proxy-webhook solution
-    fi
+		# TODO: Try to use https://github.com/NextDeveloperTeam/kubernetes-webhooks/tree/main/docker-proxy-webhook solution
+	fi
 fi
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 kubectl wait --namespace ingress-nginx \
-    --for=condition=ready pod \
-    --selector=app.kubernetes.io/component=controller \
-    --timeout=90s
+	--for=condition=ready pod \
+	--selector=app.kubernetes.io/component=controller \
+	--timeout=90s
