@@ -100,7 +100,7 @@ os-service-types==1.7.0
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==4.0.2
+osc-lib==4.1.0
     # via python-openstackclient
 oslo-config==9.8.0
     # via
