@@ -18,7 +18,7 @@ attrs==25.3.0
     #   devpi-web
 beautifulsoup4==4.13.4
     # via devpi-web
-certifi==2025.6.15
+certifi==2025.7.9
     # via
     #   httpcore
     #   httpx
