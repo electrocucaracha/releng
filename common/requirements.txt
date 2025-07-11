@@ -38,7 +38,6 @@ cryptography==45.0.5
     #   python-openstackclient
 debtcollector==3.0.0
     # via
-    #   oslo-config
     #   oslo-utils
     #   python-keystoneclient
 decorator==5.2.1
@@ -102,7 +101,7 @@ os-service-types==1.8.0
     #   openstacksdk
 osc-lib==4.1.0
     # via python-openstackclient
-oslo-config==9.8.0
+oslo-config==10.0.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
