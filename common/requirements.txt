@@ -222,7 +222,7 @@ wcwidth==0.2.13
     #   prettytable
 wheel==0.45.1
     # via -r common/requirements.in
-wrapt==1.17.2
+wrapt==1.17.3
     # via debtcollector
 
 # The following packages are considered to be unsafe in a requirements file:
