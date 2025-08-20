@@ -39,7 +39,7 @@ pbr==7.0.0
     #   stevedore
 pyyaml==6.0.2
     # via oslo-config
-requests==2.32.4
+requests==2.32.5
     # via
     #   docker
     #   oslo-config
