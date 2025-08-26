@@ -127,7 +127,7 @@ strictyaml==1.7.3
     # via devpi-server
 translationstring==1.4
     # via pyramid
-typing-extensions==4.14.1
+typing-extensions==4.15.0
     # via
     #   anyio
     #   beautifulsoup4
