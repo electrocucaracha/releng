@@ -164,7 +164,7 @@ pyperclip==1.9.0
     # via cmd2
 python-cinderclient==9.7.0
     # via python-openstackclient
-python-keystoneclient==5.6.0
+python-keystoneclient==5.7.0
     # via python-openstackclient
 python-openstackclient==8.2.0
     # via -r common/requirements.in
