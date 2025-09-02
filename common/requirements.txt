@@ -29,7 +29,7 @@ cliff==4.11.0
     #   python-openstackclient
 cmd2==2.7.0
     # via cliff
-cryptography==45.0.6
+cryptography==45.0.7
     # via
     #   ansible
     #   ansible-core
@@ -162,7 +162,7 @@ pyparsing==3.2.3
     # via oslo-utils
 pyperclip==1.9.0
     # via cmd2
-python-cinderclient==9.7.0
+python-cinderclient==9.8.0
     # via python-openstackclient
 python-keystoneclient==5.7.0
     # via python-openstackclient
