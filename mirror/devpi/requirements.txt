@@ -141,9 +141,9 @@ webob==1.8.9
     # via pyramid
 whoosh==2.7.4
     # via devpi-web
-zope-deprecation==5.1
+zope-deprecation==6.0
     # via pyramid
-zope-interface==7.2
+zope-interface==8.0
     # via pyramid
 
 # The following packages are considered to be unsafe in a requirements file:
