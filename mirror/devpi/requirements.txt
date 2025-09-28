@@ -16,7 +16,7 @@ attrs==25.3.0
     # via
     #   devpi-server
     #   devpi-web
-beautifulsoup4==4.13.5
+beautifulsoup4==4.14.0
     # via devpi-web
 certifi==2025.8.3
     # via
