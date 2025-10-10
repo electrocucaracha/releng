@@ -15,4 +15,4 @@ if [[ ${RELENG_DEBUG:-false} == "true" ]]; then
     set -o xtrace
 fi
 
-sudo "$(command -v docker-compose)" up --detach --build
+sudo docker compose up --detach --build

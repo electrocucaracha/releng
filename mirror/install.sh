@@ -21,7 +21,7 @@ fi
 
 # Install dependencies
 pkgs=""
-for pkg in docker skopeo docker-compose; do
+for pkg in docker skopeo; do
     if ! command -v "$pkg"; then
         pkgs+=" $pkg"
     fi
