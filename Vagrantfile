@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :libvirt
   config.vm.provider :virtualbox
 
-  config.vm.box = "generic/ubuntu2004"
+  config.vm.box = "generic/ubuntu2204"
   config.vm.box_check_update = false
   config.vm.box_version = "4.3.12"
 
@@ -80,6 +80,7 @@ Vagrant.configure("2") do |config|
     v.cpu_mode = "host-passthrough"
     v.disk_device = "sda"
     v.disk_bus = "sata"
+    v.random_hostname = true
   end
 
   if !ENV["http_proxy"].nil? && !ENV["https_proxy"].nil? && Vagrant.has_plugin?("vagrant-proxyconf")
@@ -98,8 +99,8 @@ Vagrant.configure("2") do |config|
 
     %i[virtualbox libvirt].each do |provider|
       mirror.vm.provider provider do |p|
-        p.cpus = ENV["CPUS"] || 1
-        p.memory = ENV["MEMORY"] || 512
+        p.cpus = ENV["CPUS"] || 2
+        p.memory = ENV["MEMORY"] || 4096
       end
     end
 
