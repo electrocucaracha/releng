@@ -7,16 +7,16 @@ set limit_rate 10m
 set cleanscript /var/spool/apt-mirror/var/clean.sh
 set postmirror_script /var/spool/apt-mirror/var/postmirror.sh
 
-# Ubuntu 18.04 LTS (amd64, i386)
-deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu bionic-security main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse
+# Ubuntu 22.04 LTS (amd64, i386)
+deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
 
-# Ubuntu 20.04 LTS (amd64, i386)
-deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu focal-security main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu focal-backports main restricted universe multiverse
+# Ubuntu 24.04 LTS (amd64, i386)
+deb http://archive.ubuntu.com/ubuntu noble main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu noble-backports main restricted universe multiverse
 
 clean http://archive.ubuntu.com/ubuntu
