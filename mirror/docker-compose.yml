@@ -12,7 +12,7 @@ services:
   devpi-init:
     build:
       context: ./devpi
-    image: electrocucaracha/devpi:0.0.1
+    image: ghcr.io/electrocucaracha/releng/devpi:master
     entrypoint:
       - /bin/sh
     command: -c '[ ! -f /devpi/server/.sqlite ] && /usr/local/bin/devpi-init --role standalone --serverdir /devpi/server || true'
@@ -21,7 +21,7 @@ services:
   devpi:
     build:
       context: ./devpi
-    image: electrocucaracha/devpi:0.0.1
+    image: ghcr.io/electrocucaracha/releng/devpi:master
     depends_on:
       - devpi-init
     volumes:
@@ -29,7 +29,7 @@ services:
   mirror:
     build:
       context: ./apt-mirror
-    image: electrocucaracha/apt-mirror:0.0.1
+    image: ghcr.io/electrocucaracha/releng/apt-mirror:master
     volumes:
       - ./apt-mirror/${MIRROR_FILENAME}:/etc/apt/mirror.list:ro
       - packages:/var/apt-mirror/packages
@@ -40,7 +40,7 @@ services:
   ntp:
     build:
       context: ./ntpd
-    image: electrocucaracha/ntpd:0.0.1
+    image: ghcr.io/electrocucaracha/releng/ntpd:master
     privileged: true
     volumes:
       - ./ntpd/ntpd.conf:/etc/ntpd.conf:ro
@@ -49,7 +49,7 @@ services:
       - registry:docker-registry
       - ntp:ntp-server
       - devpi:pipy-server
-    image: nginx:1.19-alpine
+    image: ghcr.io/electrocucaracha/releng/nginx:master
     ports:
       - 80:80/tcp
       - 5000:35000/tcp
