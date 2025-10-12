@@ -1,5 +1,5 @@
 #checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
-FROM alpine:3.20
+FROM alpine:3.22
 
 EXPOSE 123/udp
 
