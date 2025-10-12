@@ -7,10 +7,23 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc g++ make unzip \
-    libaio-dev libc-dev libxslt1-dev libxml2-dev zlib1g-dev \
-    libpcre3-dev libbz2-dev libssl-dev autoconf wget \
-    lsb-release apt-transport-https ca-certificates
+    gcc=4:12.2.0-3 \
+    g++=4:12.2.0-3 \
+    make=4.3-4.1 \
+    unzip=6.0-28 \
+    libaio-dev=0.3.113-4 \
+    libc-devtools=2.36-9+deb12u13 \
+    libxslt1-dev=1.1.35-1+deb12u3 \
+    libxml2-dev=2.9.14+dfsg-1.3~deb12u4 \
+    zlib1g-dev=1:1.2.13.dfsg-1 \
+    libpcre3-dev=2:8.39-15 \
+    libbz2-dev=1.0.8-5+b1 \
+    libssl-dev=3.0.17-1~deb12u3 \
+    autoconf=2.71-3 \
+    wget=1.21.3-1+deb12u1 \
+    lsb-release=12.0-1 \
+    apt-transport-https=2.6.1 \
+    ca-certificates=20230311+deb12u1
 
 ENV USER=nonroot
 ENV UID=10000
