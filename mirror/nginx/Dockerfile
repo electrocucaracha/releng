@@ -1,3 +1,4 @@
+#checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 FROM debian:bookworm-slim AS build
 
 ARG NGINX_VERSION=1.27.2

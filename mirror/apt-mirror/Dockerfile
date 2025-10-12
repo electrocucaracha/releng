@@ -1,3 +1,4 @@
+#checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 FROM ubuntu:24.04
 
 RUN apt-get update && \

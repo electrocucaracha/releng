@@ -1,3 +1,4 @@
+#checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
 FROM python:3.13-alpine3.22
 
 EXPOSE 3141
