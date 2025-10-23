@@ -31,7 +31,7 @@ chameleon==4.6.0
     # via pyramid-chameleon
 charset-normalizer==3.4.4
     # via requests
-cmarkgfm==2025.10.20
+cmarkgfm==2025.10.22
     # via readme-renderer
 defusedxml==0.7.1
     # via
@@ -113,7 +113,7 @@ repoze-lru==0.7
     # via devpi-server
 requests==2.32.5
     # via devpi-common
-ruamel-yaml==0.18.15
+ruamel-yaml==0.18.16
     # via devpi-server
 ruamel-yaml-clib==0.2.14
     # via ruamel-yaml
