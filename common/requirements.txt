@@ -150,7 +150,7 @@ prettytable==3.16.0
     # via
     #   cliff
     #   python-cinderclient
-psutil==7.1.1
+psutil==7.1.2
     # via
     #   openstacksdk
     #   oslo-utils
