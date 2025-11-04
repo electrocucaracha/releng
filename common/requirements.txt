@@ -132,7 +132,7 @@ parsley==1.3
     # via bindep
 passlib[bcrypt]==1.7.4
     # via kolla-ansible
-pbr==7.0.2
+pbr==7.0.3
     # via
     #   bindep
     #   keystoneauth1
