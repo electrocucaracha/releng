@@ -77,7 +77,7 @@ keystoneauth1==5.12.0
     #   osc-lib
     #   python-cinderclient
     #   python-keystoneclient
-kolla-ansible==20.2.0
+kolla-ansible==20.3.0
     # via -r common/requirements.in
 markdown-it-py==4.0.0
     # via rich
