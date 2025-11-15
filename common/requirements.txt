@@ -146,7 +146,7 @@ pbr==7.0.3
     #   python-openstackclient
 platformdirs==4.5.0
     # via openstacksdk
-prettytable==3.16.0
+prettytable==3.17.0
     # via
     #   cliff
     #   python-cinderclient
