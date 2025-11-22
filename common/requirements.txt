@@ -95,7 +95,7 @@ openstacksdk==4.8.0
     # via
     #   osc-lib
     #   python-openstackclient
-os-service-types==1.8.1
+os-service-types==1.8.2
     # via
     #   keystoneauth1
     #   openstacksdk
