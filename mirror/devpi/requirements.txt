@@ -86,7 +86,7 @@ plaster==1.1.2
     #   pyramid
 plaster-pastedeploy==1.0.1
     # via pyramid
-platformdirs==4.5.0
+platformdirs==4.5.1
     # via devpi-server
 pluggy==1.6.0
     # via devpi-server
@@ -129,7 +129,7 @@ typing-extensions==4.15.0
     # via
     #   anyio
     #   beautifulsoup4
-urllib3==2.5.0
+urllib3==2.6.0
     # via requests
 venusian==3.1.1
     # via pyramid

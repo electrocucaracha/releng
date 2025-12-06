@@ -144,7 +144,7 @@ pbr==7.0.3
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-platformdirs==4.5.0
+platformdirs==4.5.1
     # via openstacksdk
 prettytable==3.17.0
     # via
@@ -214,7 +214,7 @@ tzdata==2025.2
     # via
     #   oslo-serialization
     #   oslo-utils
-urllib3==2.5.0
+urllib3==2.6.0
     # via requests
 wcwidth==0.2.14
     # via
