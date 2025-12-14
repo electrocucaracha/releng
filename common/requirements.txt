@@ -212,7 +212,7 @@ typing-extensions==4.15.0
     #   keystoneauth1
     #   openstacksdk
     #   os-service-types
-tzdata==2025.2
+tzdata==2025.3
     # via
     #   oslo-serialization
     #   oslo-utils
