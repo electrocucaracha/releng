@@ -47,7 +47,7 @@ devpi-server==6.17.0
     #   devpi-web
 devpi-web==5.0.1
     # via -r mirror/devpi/requirements.in
-docutils==0.22.3
+docutils==0.22.4
     # via
     #   devpi-web
     #   readme-renderer
@@ -119,7 +119,7 @@ ruamel-yaml-clib==0.2.15
     # via ruamel-yaml
 six==1.17.0
     # via python-dateutil
-soupsieve==2.8
+soupsieve==2.8.1
     # via beautifulsoup4
 strictyaml==1.7.3
     # via devpi-server

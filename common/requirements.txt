@@ -22,7 +22,7 @@ cffi==2.0.0
     # via cryptography
 charset-normalizer==3.4.4
     # via requests
-cliff==4.13.0
+cliff==4.13.1
     # via
     #   kolla-ansible
     #   osc-lib
@@ -99,7 +99,7 @@ os-service-types==1.8.2
     # via
     #   keystoneauth1
     #   openstacksdk
-osc-lib==4.2.0
+osc-lib==4.3.0
     # via python-openstackclient
 oslo-config==10.1.0
     # via
