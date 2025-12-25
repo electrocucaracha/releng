@@ -113,7 +113,7 @@ oslo-i18n==6.7.1
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-oslo-serialization==5.8.0
+oslo-serialization==5.9.0
     # via python-keystoneclient
 oslo-utils==9.2.0
     # via
