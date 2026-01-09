@@ -101,7 +101,7 @@ os-service-types==1.8.2
     #   openstacksdk
 osc-lib==4.3.0
     # via python-openstackclient
-oslo-config==10.1.0
+oslo-config==10.2.0
     # via
     #   kolla-ansible
     #   python-keystoneclient
@@ -166,7 +166,7 @@ python-cinderclient==9.8.0
     # via python-openstackclient
 python-keystoneclient==5.7.0
     # via python-openstackclient
-python-openstackclient==8.2.0
+python-openstackclient==8.3.0
     # via -r common/requirements.in
 pyyaml==6.0.3
     # via
