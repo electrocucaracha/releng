@@ -30,7 +30,7 @@ jobs:
       cloud: ${{ steps.filter.outputs.cloud }}
       mirror: ${{ steps.filter.outputs.mirror }}
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # 3.0.2
         if: ${{ !env.ACT }}
         id: filter
@@ -55,7 +55,7 @@ jobs:
     needs: changes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
       - name: Run the sh-checker
         uses: luizm/action-sh-checker@883217215b11c1fabbf00eb1a9a041f62d74c744 # 0.10.0
         env:
@@ -79,7 +79,7 @@ jobs:
     env:
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
       - name: Provision a Kubernetes cluster
         env:
           RELENG_K8S_TYPE: ${{ matrix.k8s }}
@@ -104,7 +104,7 @@ jobs:
       VAGRANT_EXPERIMENTAL: disks
       RELENG_DEBUG: "true"
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
       - name: Cache Vagrant boxes
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # 5.0.1
         with:
@@ -153,7 +153,7 @@ jobs:
       releng_kolla_build: "true"
       releng_debug: "true"
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # 6.0.2
       - name: setup the vm folders
         run: |
           ./pre-install.sh "sdc" "/var/local/packages"
