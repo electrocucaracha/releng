@@ -63,7 +63,7 @@ jinja2==3.1.6
     #   ansible
     #   ansible-core
     #   kolla-ansible
-jmespath==1.0.1
+jmespath==1.1.0
     # via
     #   kolla-ansible
     #   openstacksdk
@@ -219,9 +219,9 @@ tzdata==2025.3
     #   oslo-utils
 urllib3==2.6.3
     # via requests
-wcwidth==0.3.0
+wcwidth==0.3.1
     # via prettytable
-wheel==0.46.2
+wheel==0.46.3
     # via -r common/requirements.in
 wrapt==2.0.1
     # via debtcollector
