@@ -11,7 +11,7 @@ name: Check Lastest Distros
 # yamllint disable-line rule:truthy
 on:
   schedule:
-    - cron: "0 0 1 * *"
+    - cron: "0 0 6 * *"
   pull_request:
     types: [opened, synchronize, reopened, closed]
 jobs:
