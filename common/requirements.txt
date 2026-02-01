@@ -219,11 +219,11 @@ tzdata==2025.3
     #   oslo-utils
 urllib3==2.6.3
     # via requests
-wcwidth==0.5.2
+wcwidth==0.5.3
     # via prettytable
 wheel==0.46.3
     # via -r common/requirements.in
-wrapt==2.0.1
+wrapt==2.1.0
     # via debtcollector
 
 # The following packages are considered to be unsafe in a requirements file:
