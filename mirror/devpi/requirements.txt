@@ -41,7 +41,7 @@ devpi-common==4.1.0
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.18.0
+devpi-server==6.19.0
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
