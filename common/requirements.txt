@@ -145,7 +145,7 @@ pbr==7.0.3
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-platformdirs==4.5.1
+platformdirs==4.7.0
     # via openstacksdk
 prettytable==3.17.0
     # via
