@@ -16,7 +16,7 @@ bcrypt==5.0.0
     #   passlib
 bindep==2.13.0
     # via -r common/requirements.in
-certifi==2026.1.4
+certifi==2026.2.25
     # via requests
 cffi==2.0.0
     # via cryptography
