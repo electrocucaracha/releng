@@ -163,7 +163,7 @@ pyparsing==3.3.2
     # via oslo-utils
 pyperclip==1.11.0
     # via cmd2
-python-cinderclient==9.8.0
+python-cinderclient==9.9.0
     # via python-openstackclient
 python-keystoneclient==5.8.0
     # via python-openstackclient
