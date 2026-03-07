@@ -20,7 +20,7 @@ certifi==2026.2.25
     # via requests
 cffi==2.0.0
     # via cryptography
-charset-normalizer==3.4.4
+charset-normalizer==3.4.5
     # via requests
 cliff==4.13.2
     # via
@@ -219,7 +219,7 @@ wcwidth==0.6.0
     # via prettytable
 wheel==0.46.3
     # via -r common/requirements.in
-wrapt==2.1.1
+wrapt==2.1.2
     # via debtcollector
 
 # The following packages are considered to be unsafe in a requirements file:
