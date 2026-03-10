@@ -44,7 +44,7 @@ requests==2.32.5
     #   oslo-config
 rfc3986==2.0.0
     # via oslo-config
-smmap==5.0.2
+smmap==5.0.3
     # via gitdb
 stevedore==5.7.0
     # via oslo-config
