@@ -98,7 +98,7 @@ pygments==2.19.2
     # via
     #   devpi-web
     #   readme-renderer
-pyramid==2.0.2
+pyramid==2.1
     # via
     #   devpi-server
     #   devpi-web
