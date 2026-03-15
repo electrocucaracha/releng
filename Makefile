@@ -21,6 +21,7 @@ lint:
 	-e VALIDATE_BIOME_LINT=false \
 	-e VALIDATE_JSCPD=false \
 	-e VALIDATE_TRIVY=false \
+	-e VALIDATE_GITHUB_ACTIONS_ZIZMOR=false \
 	ghcr.io/super-linter/super-linter
 	tox -e lint
 

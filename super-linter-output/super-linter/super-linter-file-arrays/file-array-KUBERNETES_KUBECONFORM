@@ -1,9 +1,0 @@
-/tmp/lint/ci/tekton/pipelines/electrocucaracha/linter.yml
-/tmp/lint/ci/tekton/pipelines/electrocucaracha/pkg-mgr_scripts.yml
-/tmp/lint/ci/tekton/pipelines/electrocucaracha/vind.yml
-/tmp/lint/ci/tekton/pipelines/gw-tester/infra.yml
-/tmp/lint/ci/tekton/pipelines/gw-tester/nse.yml
-/tmp/lint/ci/tekton/pipelines/gw-tester/pgw.yml
-/tmp/lint/ci/tekton/tasks/docker-build.yml
-/tmp/lint/ci/tekton/tasks/go-test.yml
-/tmp/lint/ci/tekton/tasks/super-linter.yml

@@ -1,5 +1,0 @@
-/tmp/lint/.github/workflows/distros.yml:10: Lastest ==> Latest, Last
-/tmp/lint/.github/workflows/update.yml:10: Lastest ==> Latest, Last
-/tmp/lint/ci/provision_krd_cluster.sh:35: Provsion ==> Provision
-/tmp/lint/mirror/kolla/kolla-build.ini:2637: solum ==> solemn
-/tmp/lint/mirror/kolla/kolla-build.ini:3058: solum ==> solemn

@@ -1,6 +1,10 @@
+title = "releng gitleaks config"
+
 [extend]
 useDefault = true
 
-[[rules.allowlists]]
+[[allowlists]]
+id = "allow-env-var-creds"
 description = "Allow curl basic auth with env var credentials"
+regexTarget = "line"
 regexes = ['''-u "\$\{.*\}" -p "\$\{.*\}"''']

@@ -1,1 +1,0 @@
-{ "Seq": 1, "Host": ":", "Starttime": 1773549239.165, "JobRuntime": 0.347, "Send": 0, "Receive": 0, "Exitval": 0, "Signal": 0, "Command": "markdownlint -c /action/lib/.automation/.markdown-lint.yml /tmp/lint/README.md", "V": [ "/tmp/lint/README.md" ], "Stdout": "", "Stderr": "" }

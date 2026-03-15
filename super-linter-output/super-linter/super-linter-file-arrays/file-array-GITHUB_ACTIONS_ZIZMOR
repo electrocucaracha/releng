@@ -1,7 +1,0 @@
-/tmp/lint/.github/workflows/build.yml
-/tmp/lint/.github/workflows/distros.yml
-/tmp/lint/.github/workflows/linter.yml
-/tmp/lint/.github/workflows/on-demand.yml
-/tmp/lint/.github/workflows/rebase.yml
-/tmp/lint/.github/workflows/spell.yml
-/tmp/lint/.github/workflows/update.yml

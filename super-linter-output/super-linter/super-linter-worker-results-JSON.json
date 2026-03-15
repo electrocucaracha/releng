@@ -1,1 +1,0 @@
-{ "Seq": 1, "Host": ":", "Starttime": 1773549236.077, "JobRuntime": 3.430, "Send": 0, "Receive": 0, "Exitval": 0, "Signal": 0, "Command": "eslint -c /action/lib/.automation/eslint.config.mjs /tmp/lint/mlc_config.json", "V": [ "/tmp/lint/mlc_config.json" ], "Stdout": "", "Stderr": "" }

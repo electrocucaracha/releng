@@ -8,3 +8,4 @@ apt/sources.list
 dictionary.dic
 node_modules/
 package*.json
+super-linter-output/
