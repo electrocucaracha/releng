@@ -37,6 +37,7 @@ jobs:
         uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # 47.0.0
         with:
           json: true
+          escape_json: false
           files: |
             ./mirror/ntpd/Dockerfile
             ./mirror/apt-mirror/Dockerfile
