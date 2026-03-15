@@ -50,15 +50,15 @@ cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: cpustats-monitor
+    name: cpustats-monitor
 spec:
-  endpoints:
-  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    interval: 5s
-    port: web
-  selector:
-    matchLabels:
-      app: frontend
+    endpoints:
+        -   bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            interval: 5s
+            port: web
+    selector:
+        matchLabels:
+            app: frontend
 EOF
 
 echo "Deploying Concourse CI services"

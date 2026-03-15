@@ -11,7 +11,7 @@ rules:
   default: false
   custom:
     - seriesQuery: "processed_requests_total"
-      resources: {template: "<<.Resource>>"}
+      resources: { template: "<<.Resource>>" }
       name:
         matches: "^(.*)_total"
         as: "${1}_per_second"

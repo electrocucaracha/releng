@@ -275,7 +275,7 @@ Vagrant.configure("2") do |config|
       v.storage :file, bus: "sata", device: "sdb", size: "50G"
     end
 
-    cloud.vm.provision 'shell', privileged: false, inline: <<-SHELL
+    cloud.vm.provision "shell", privileged: false, inline: <<-SHELL
       set -o errexit
       set -o pipefail
       cd /opt/openstack-multinode

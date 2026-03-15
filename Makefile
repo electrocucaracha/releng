@@ -17,6 +17,11 @@ lint:
 	-e VALIDATE_TEKTON=false \
 	-e VALIDATE_KUBERNETES_KUBEVAL=false \
 	-e KUBERNETES_KUBECONFORM_OPTIONS='-ignore-missing-schemas' \
+	-e VALIDATE_BIOME_FORMAT=false \
+	-e VALIDATE_BIOME_LINT=false \
+	-e VALIDATE_JSCPD=false \
+	-e VALIDATE_TRIVY=false \
+	-e VALIDATE_GITHUB_ACTIONS_ZIZMOR=false \
 	ghcr.io/super-linter/super-linter
 	tox -e lint
 

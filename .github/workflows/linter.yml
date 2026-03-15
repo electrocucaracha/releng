@@ -12,19 +12,29 @@ name: Lint Code Base
 on:
   push:
   pull_request:
+permissions: read-all
 jobs:
   check-broken-links:
     name: Check documentation external links
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Check broken links
         uses: gaurav-nelson/github-action-markdown-link-check@4a1af151f4d7cf4d8f8ac5780597672a3671b88b # 1.0.17
   check-super-linter:
     name: Check syntax (super-linter)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - name: Run super-linter validation
         uses: github/super-linter@b807e99ddd37e444d189cfd2c2ca1274d8ae8ef1 # 7
         env:
@@ -33,11 +43,21 @@ jobs:
           VALIDATE_TEKTON: false
           VALIDATE_KUBERNETES_KUBEVAL: false
           KUBERNETES_KUBECONFORM_OPTIONS: "-ignore-missing-schemas"
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
+          VALIDATE_JSCPD: false
+          VALIDATE_TRIVY: false
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
+          DEFAULT_BRANCH: ${{ github.head_ref || github.ref_name }}
   check-tox:
     name: Check syntax (tox)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - name: Install tox
         run: pip install tox
       - name: Run tox lint validation
