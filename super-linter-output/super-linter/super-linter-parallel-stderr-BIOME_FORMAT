@@ -1,0 +1,316 @@
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/.tox-info.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   {
+     2    │ - ··"ToxEnv":·{
+     3    │ - ····"name":·"lint",
+     4    │ - ····"type":·"VirtualEnvRunner"
+     5    │ - ··},
+     6    │ - ··"Python":·{
+     7    │ - ····"version_info":·[
+     8    │ - ······3,
+     9    │ - ······12,
+    10    │ - ······3,
+    11    │ - ······"final",
+    12    │ - ······0
+    13    │ - ····],
+    14    │ - ····"executable":·"/usr/bin/python3.12",
+    15    │ - ····"virtualenv·version":·"21.2.0"
+    16    │ - ··},
+    17    │ - ··"PythonRun":·{
+    18    │ - ····"deps":·{
+    19    │ - ······"options":·[],
+    20    │ - ······"requirements":·[
+    21    │ - ········"bashate",
+    22    │ - ········"yamllint"
+    23    │ - ······],
+    24    │ - ······"constraints":·[],
+    25    │ - ······"constraint_options":·{
+    26    │ - ········"constrain_package_deps":·false,
+    27    │ - ········"use_frozen_constraints":·false
+    28    │ - ······}
+    29    │ - ····}
+    30    │ - ··}
+    31    │ - }
+        2 │ + → "ToxEnv":·{
+        3 │ + → → "name":·"lint",
+        4 │ + → → "type":·"VirtualEnvRunner"
+        5 │ + → },
+        6 │ + → "Python":·{
+        7 │ + → → "version_info":·[3,·12,·3,·"final",·0],
+        8 │ + → → "executable":·"/usr/bin/python3.12",
+        9 │ + → → "virtualenv·version":·"21.2.0"
+       10 │ + → },
+       11 │ + → "PythonRun":·{
+       12 │ + → → "deps":·{
+       13 │ + → → → "options":·[],
+       14 │ + → → → "requirements":·["bashate",·"yamllint"],
+       15 │ + → → → "constraints":·[],
+       16 │ + → → → "constraint_options":·{
+       17 │ + → → → → "constrain_package_deps":·false,
+       18 │ + → → → → "use_frozen_constraints":·false
+       19 │ + → → → }
+       20 │ + → → }
+       21 │ + → }
+       22 │ + }
+       23 │ + 
+  
+
+.tox/lint/lib/python3.12/site-packages/bashate-2.1.1.dist-info/pbr.json format ━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1   │ - {"git_version":·"fbd7c25",·"is_release":·true}
+      1 │ + {·"git_version":·"fbd7c25",·"is_release":·true·}
+      2 │ + 
+  
+
+.tox/lint/lib/python3.12/site-packages/setuptools/config/distutils.schema.json format ━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   {
+     2    │ - ··"$schema":·"http://json-schema.org/draft-07/schema#",
+        2 │ + → "$schema":·"http://json-schema.org/draft-07/schema#",
+     3  3 │   
+     4    │ - ··"$id":·"https://setuptools.pypa.io/en/latest/deprecated/distutils/configfile.html",
+     5    │ - ··"title":·"``tool.distutils``·table",
+     6    │ - ··"$$description":·[
+     7    │ - ····"**EXPERIMENTAL**·(NOT·OFFICIALLY·SUPPORTED):·Use·``tool.distutils``",
+     8    │ - ····"subtables·to·configure·arguments·for·``distutils``·commands.",
+     9    │ - ····"Originally,·``distutils``·allowed·developers·to·configure·arguments·for",
+    10    │ - ····"``setup.py``·commands·via·`distutils·configuration·files",
+    11    │ - ····"<https://setuptools.pypa.io/en/latest/deprecated/distutils/configfile.html>`_.",
+    12    │ - ····"See·also·`the·old·Python·docs·<https://docs.python.org/3.11/install/>_`."
+    13    │ - ··],
+        4 │ + → "$id":·"https://setuptools.pypa.io/en/latest/deprecated/distutils/configfile.html",
+        5 │ + → "title":·"``tool.distutils``·table",
+        6 │ + → "$$description":·[
+        7 │ + → → "**EXPERIMENTAL**·(NOT·OFFICIALLY·SUPPORTED):·Use·``tool.distutils``",
+        8 │ + → → "subtables·to·configure·arguments·for·``distutils``·commands.",
+        9 │ + → → "Originally,·``distutils``·allowed·developers·to·configure·arguments·for",
+       10 │ + → → "``setup.py``·commands·via·`distutils·configuration·files",
+       11 │ + → → "<https://setuptools.pypa.io/en/latest/deprecated/distutils/configfile.html>`_.",
+       12 │ + → → "See·also·`the·old·Python·docs·<https://docs.python.org/3.11/install/>_`."
+       13 │ + → ],
+    14 14 │   
+    15    │ - ··"type":·"object",
+    16    │ - ··"properties":·{
+    17    │ - ····"global":·{
+    18    │ - ······"type":·"object",
+    19    │ - ······"description":·"Global·options·applied·to·all·``distutils``·commands"
+    20    │ - ····}
+    21    │ - ··},
+    22    │ - ··"patternProperties":·{
+    23    │ - ····".+":·{"type":·"object"}
+    24    │ - ··},
+    25    │ - ··"$comment":·"TODO:·Is·there·a·practical·way·of·making·this·schema·more·specific?"
+       15 │ + → "type":·"object",
+       16 │ + → "properties":·{
+       17 │ + → → "global":·{
+       18 │ + → → → "type":·"object",
+       19 │ + → → → "description":·"Global·options·applied·to·all·``distutils``·commands"
+       20 │ + → → }
+       21 │ + → },
+       22 │ + → "patternProperties":·{
+       23 │ + → → ".+":·{·"type":·"object"·}
+       24 │ + → },
+       25 │ + → "$comment":·"TODO:·Is·there·a·practical·way·of·making·this·schema·more·specific?"
+    26 26 │   }
+    27 27 │   
+  
+
+.tox/lint/lib/python3.12/site-packages/setuptools/config/setuptools.schema.json format ━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      1   1 │   {
+      2     │ - ··"$schema":·"http://json-schema.org/draft-07/schema#",
+          2 │ + → "$schema":·"http://json-schema.org/draft-07/schema#",
+      3   3 │   
+      4     │ - ··"$id":·"https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html",
+      5     │ - ··"title":·"``tool.setuptools``·table",
+      6     │ - ··"$$description":·[
+      7     │ - ····"``setuptools``-specific·configurations·that·can·be·set·by·users·that·require",
+      8     │ - ····"customization.",
+      9     │ - ····"These·configurations·are·completely·optional·and·probably·can·be·skipped·when",
+     10     │ - ····"creating·simple·packages.·They·are·equivalent·to·some·of·the·`Keywords",
+     11     │ - ····"<https://setuptools.pypa.io/en/latest/references/keywords.html>`_",
+     12     │ - ····"used·by·the·``setup.py``·file,·and·can·be·set·via·the·``tool.setuptools``·table.",
+     13     │ - ····"It·considers·only·``setuptools``·`parameters",
+     14     │ - ····"<https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#setuptools-specific-configuration>`_",
+     15     │ - ····"that·are·not·covered·by·:pep:`621`;·and·intentionally·excludes·``dependency_links``",
+     16     │ - ····"and·``setup_requires``·(incompatible·with·modern·workflows/standards)."
+     17     │ - ··],
+          4 │ + → "$id":·"https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html",
+          5 │ + → "title":·"``tool.setuptools``·table",
+          6 │ + → "$$description":·[
+          7 │ + → → "``setuptools``-specific·configurations·that·can·be·set·by·users·that·require",
+          8 │ + → → "customization.",
+          9 │ + → → "These·configurations·are·completely·optional·and·probably·can·be·skipped·when",
+         10 │ + → → "creating·simple·packages.·They·are·equivalent·to·some·of·the·`Keywords",
+         11 │ + → → "<https://setuptools.pypa.io/en/latest/references/keywords.html>`_",
+         12 │ + → → "used·by·the·``setup.py``·file,·and·can·be·set·via·the·``tool.setuptools``·table.",
+         13 │ + → → "It·considers·only·``setuptools``·`parameters",
+         14 │ + → → "<https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html#setuptools-specific-configuration>`_",
+         15 │ + → → "that·are·not·covered·by·:pep:`621`;·and·intentionally·excludes·``dependency_links``",
+         16 │ + → → "and·``setup_requires``·(incompatible·with·modern·workflows/standards)."
+         17 │ + → ],
+     18  18 │   
+     19     │ - ··"type":·"object",
+     20     │ - ··"additionalProperties":·false,
+     21     │ - ··"properties":·{
+     22     │ - ····"platforms":·{
+     23     │ - ······"type":·"array",
+     24     │ - ······"items":·{"type":·"string"}
+     25     │ - ····},
+     26     │ - ····"provides":·{
+     27     │ - ······"$$description":·[
+     28     │ - ········"Package·and·virtual·package·names·contained·within·this·package",
+     29     │ - ········"**(not·supported·by·pip)**"
+     30     │ - ······],
+     31     │ - ······"type":·"array",
+     32     │ - ······"items":·{"type":·"string",·"format":·"pep508-identifier"}
+     33     │ - ····},
+     34     │ - ····"obsoletes":·{
+     35     │ - ······"$$description":·[
+     36     │ - ········"Packages·which·this·package·renders·obsolete",
+     37     │ - ········"**(not·supported·by·pip)**"
+     38     │ - ······],
+     39     │ - ······"type":·"array",
+     40     │ - ······"items":·{"type":·"string",·"format":·"pep508-identifier"}
+     41     │ - ····},
+     42     │ - ····"zip-safe":·{
+     43     │ - ······"$$description":·[
+     44     │ - ········"Whether·the·project·can·be·safely·installed·and·run·from·a·zip·file.",
+     45     │ - ········"**OBSOLETE**:·only·relevant·for·``pkg_resources``,·``easy_install``·and",
+     46     │ - ········"``setup.py·install``·in·the·context·of·``eggs``·(**DEPRECATED**)."
+     47     │ - ······],
+     48     │ - ······"type":·"boolean"
+     49     │ - ····},
+     50     │ - ····"script-files":·{
+     51     │ - ······"$$description":·[
+     52     │ - ········"Legacy·way·of·defining·scripts·(entry-points·are·preferred).",
+     53     │ - ········"Equivalent·to·the·``script``·keyword·in·``setup.py``",
+     54     │ - ········"(it·was·renamed·to·avoid·confusion·with·entry-point·based·``project.scripts``",
+     55     │ - ········"defined·in·:pep:`621`).",
+     56     │ - ········"**DISCOURAGED**:·generic·script·wrappers·are·tricky·and·may·not·work·properly.",
+     57     │ - ········"Whenever·possible,·please·use·``project.scripts``·instead."
+     58     │ - ······],
+     59     │ - ······"type":·"array",
+     60     │ - ······"items":·{"type":·"string"},
+     61     │ - ······"$comment":·"TODO:·is·this·field·deprecated/should·be·removed?"
+     62     │ - ····},
+     63     │ - ····"eager-resources":·{
+     64     │ - ······"$$description":·[
+     65     │ - ········"Resources·that·should·be·extracted·together,·if·any·of·them·is·needed,",
+     66     │ - ········"or·if·any·C·extensions·included·in·the·project·are·imported.",
+     67     │ - ········"**OBSOLETE**:·only·relevant·for·``pkg_resources``,·``easy_install``·and",
+     68     │ - ········"``setup.py·install``·in·the·context·of·``eggs``·(**DEPRECATED**)."
+     69     │ - ······],
+     70     │ - ······"type":·"array",
+     71     │ - ······"items":·{"type":·"string"}
+     72     │ - ····},
+     73     │ - ····"packages":·{
+     74     │ - ······"$$description":·[
+     75     │ - ········"Packages·that·should·be·included·in·the·distribution.",
+     76     │ - ········"It·can·be·given·either·as·a·list·of·package·identifiers",
+     77     │ - ········"or·as·a·``dict``-like·structure·with·a·single·key·``find``",
+     78     │ - ········"which·corresponds·to·a·dynamic·call·to",
+     79     │ - ········"``setuptools.config.expand.find_packages``·function.",
+     80     │ - ········"The·``find``·key·is·associated·with·a·nested·``dict``-like·structure·that·can",
+     81     │ - ········"contain·``where``,·``include``,·``exclude``·and·``namespaces``·keys,",
+     82     │ - ········"mimicking·the·keyword·arguments·of·the·associated·function."
+     83     │ - ······],
+     84     │ - ······"oneOf":·[
+     85     │ - ········{
+     86     │ - ··········"title":·"Array·of·Python·package·identifiers",
+     87     │ - ··········"type":·"array",
+     88     │ - ··········"items":·{"$ref":·"#/definitions/package-name"}
+     89     │ - ········},
+     90     │ - ········{"$ref":·"#/definitions/find-directive"}
+     91     │ - ······]
+     92     │ - ····},
+     93     │ - ····"package-dir":·{
+     94     │ - ······"$$description":·[
+     95     │ - ········":class:`dict`-like·structure·mapping·from·package·names·to·directories·where·their",
+     96     │ - ········"code·can·be·found.",
+     97     │ - ········"The·empty·string·(as·key)·means·that·all·packages·are·contained·inside",
+     98     │ - ········"the·given·directory·will·be·included·in·the·distribution."
+     99     │ - ······],
+    100     │ - ······"type":·"object",
+    101     │ - ······"additionalProperties":·false,
+    102     │ - ······"propertyNames":·{
+    103     │ - ········"anyOf":·[{"const":·""},·{"$ref":·"#/definitions/package-name"}]
+    104     │ - ······},
+    105     │ - ······"patternProperties":·{
+    106     │ - ········"^.*$":·{"type":·"string"·}
+    107     │ - ······}
+    108     │ - ····},
+    109     │ - ····"package-data":·{
+    110     │ - ······"$$description":·[
+    111     │ - ········"Mapping·from·package·names·to·lists·of·glob·patterns.",
+    112     │ - ········"Usually·this·option·is·not·needed·when·using·``include-package-data·=·true``",
+    113     │ - ········"For·more·information·on·how·to·include·data·files,·check·``setuptools``·`docs",
+    114     │ - ········"<https://setuptools.pypa.io/en/latest/userguide/datafiles.html>`_."
+    115     │ - ······],
+    116     │ - ······"type":·"object",
+    117     │ - ······"additionalProperties":·false,
+    118     │ - ······"propertyNames":·{
+    119     │ - ········"anyOf":·[{"$ref":·"#/definitions/package-name"},·{"const":·"*"}]
+    120     │ - ······},
+    121     │ - ······"patternProperties":·{
+    122     │ - ········"^.*$":·{"type":·"array",·"items":·{"type":·"string"}}
+    123     │ - ······}
+    124     │ - ····},
+    125     │ - ····"include-package-data":·{
+    126     │ - ······"$$description":·[
+    127     │ - ········"Automatically·include·any·data·files·inside·the·package·directories",
+    128     │ - ········"that·are·specified·by·``MANIFEST.in``",
+    129     │ - ········"For·more·information·on·how·to·include·data·files,·check·``setuptools``·`docs",
+    130     │ - ········"<https://setuptools.pypa.io/en/latest/userguide/datafiles.html>`_."
+    131     │ - ······],
+    132     │ - ······"type":·"boolean"
+    133     │ - ····},
+    134     │ - ····"exclude-package-data":·{
+    135     │ - ······"$$description":·[
+  718 more lines truncated
+  
+
+mlc_config.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    1 1 │   {
+    2   │ - ··"aliveStatusCodes":·[429,·200]
+      2 │ + → "aliveStatusCodes":·[429,·200]
+    3 3 │   }
+    4 4 │   
+  
+
+format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some warnings were emitted while running checks.
+  

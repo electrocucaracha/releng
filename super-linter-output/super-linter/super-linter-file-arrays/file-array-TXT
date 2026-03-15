@@ -1,0 +1,10 @@
+/tmp/lint/.github/.wordlist.txt
+/tmp/lint/common/requirements.txt
+/tmp/lint/ci/tekton/remote-tasks.txt
+/tmp/lint/mirror/devpi/requirements.txt
+/tmp/lint/mirror/kind_images.txt
+/tmp/lint/mirror/bindep.txt
+/tmp/lint/mirror/kolla_images.txt
+/tmp/lint/pinned_vagrant_boxes.txt
+/tmp/lint/mirror/krd_images.txt
+/tmp/lint/mirror/requirements.txt

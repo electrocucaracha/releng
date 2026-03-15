@@ -1,0 +1,1 @@
+{ "Seq": 1, "Host": ":", "Starttime": 1773549233.426, "JobRuntime": 0.013, "Send": 0, "Receive": 40, "Exitval": 0, "Signal": 0, "Command": "dotenv-linter check /tmp/lint/mirror/.env", "V": [ "/tmp/lint/mirror/.env" ], "Stdout": "Checking mirror/.env\u000a\u000aNo problems found\u000a", "Stderr": "" }

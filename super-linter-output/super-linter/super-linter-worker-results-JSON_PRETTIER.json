@@ -1,0 +1,1 @@
+{ "Seq": 1, "Host": ":", "Starttime": 1773549237.562, "JobRuntime": 0.239, "Send": 0, "Receive": 66, "Exitval": 0, "Signal": 0, "Command": "prettier --check /tmp/lint/mlc_config.json", "V": [ "/tmp/lint/mlc_config.json" ], "Stdout": "Checking formatting...\u000aAll matched files use Prettier code style!\u000a", "Stderr": "" }

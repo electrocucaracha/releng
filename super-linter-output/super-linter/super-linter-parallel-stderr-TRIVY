@@ -1,0 +1,6 @@
+2026-03-15T04:34:03Z	INFO	Loaded	file_path="/action/lib/.automation/trivy.yaml"
+2026-03-15T04:34:03Z	INFO	[vulndb] Need to update DB
+2026-03-15T04:34:03Z	INFO	[vulndb] Downloading vulnerability DB...
+2026-03-15T04:34:03Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-03-15T04:34:03Z	FATAL	Fatal error	run error: init error: DB error: failed to download vulnerability DB: OCI artifact error: failed to download vulnerability DB: failed to download artifact from mirror.gcr.io/aquasec/trivy-db:2: OCI repository error: 1 error occurred:
+	* Get "https://mirror.gcr.io/v2/": dial tcp: lookup mirror.gcr.io on 168.63.129.16:53: server misbehaving

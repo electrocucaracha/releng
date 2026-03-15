@@ -42,22 +42,22 @@ cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tekton-ingress
-  namespace: tekton-pipelines
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    name: tekton-ingress
+    namespace: tekton-pipelines
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: tekton-dashboard
-                port:
-                  number: 9097
+    ingressClassName: nginx
+    rules:
+        -   http:
+                paths:
+                    -   path: /
+                        pathType: Prefix
+                        backend:
+                            service:
+                                name: tekton-dashboard
+                                port:
+                                    number: 9097
 EOF
 
 attempt_counter=0

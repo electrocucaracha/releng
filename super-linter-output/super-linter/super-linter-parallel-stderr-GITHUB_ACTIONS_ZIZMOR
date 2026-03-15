@@ -1,0 +1,8 @@
+🌈 zizmor v1.23.1
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/build.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/distros.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/linter.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/on-demand.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/rebase.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/spell.yml
+ INFO audit: zizmor: 🌈 completed /tmp/lint/.github/workflows/update.yml

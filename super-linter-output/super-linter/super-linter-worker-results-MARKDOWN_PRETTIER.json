@@ -1,0 +1,1 @@
+{ "Seq": 1, "Host": ":", "Starttime": 1773549239.864, "JobRuntime": 0.268, "Send": 0, "Receive": 66, "Exitval": 0, "Signal": 0, "Command": "prettier --check /tmp/lint/README.md", "V": [ "/tmp/lint/README.md" ], "Stdout": "Checking formatting...\u000aAll matched files use Prettier code style!\u000a", "Stderr": "" }

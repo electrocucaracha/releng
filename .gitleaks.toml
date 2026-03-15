@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[[rules.allowlists]]
+description = "Allow curl basic auth with env var credentials"
+regexes = ['''-u "\$\{.*\}" -p "\$\{.*\}"''']

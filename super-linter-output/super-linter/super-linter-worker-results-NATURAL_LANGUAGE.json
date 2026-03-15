@@ -1,0 +1,1 @@
+{ "Seq": 1, "Host": ":", "Starttime": 1773549239.831, "JobRuntime": 0.782, "Send": 0, "Receive": 0, "Exitval": 0, "Signal": 0, "Command": "textlint -c /action/lib/.automation/.textlintrc /tmp/lint/README.md", "V": [ "/tmp/lint/README.md" ], "Stdout": "", "Stderr": "" }

@@ -1,0 +1,54 @@
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/bin/python internalError/fs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Dereferenced symlink.
+  
+  i Biome encountered a file system entry that is a broken symbolic link.
+  
+
+.tox/lint/lib/python3.12/site-packages/setuptools/tests/indexes/test_links_priority/external.html:1:1 lint/a11y/useHtmlLang ━━━━━━━━━━
+
+  × Provide a lang attribute when using the html element.
+  
+  > 1 │ <html><body>
+      │ ^^^^^^^^^^^^
+  > 2 │ <a href="/foobar-0.1.tar.gz#md5=1__bad_md5___">bad old link</a>
+  > 3 │ </body></html>
+      │ ^^^^^^^^^^^^^^
+    4 │ 
+  
+  i Setting a lang attribute on HTML document elements configures the language used by screen readers when no user default is specified.
+  
+
+.tox/lint/lib/python3.12/site-packages/setuptools/tests/indexes/test_links_priority/simple/foobar/index.html:1:1 lint/a11y/useHtmlLang ━━━━━━━━━━
+
+  × Provide a lang attribute when using the html element.
+  
+  > 1 │ <html><body>
+      │ ^^^^^^^^^^^^
+  > 2 │ <a href="/foobar-0.1.tar.gz#md5=0_correct_md5">foobar-0.1.tar.gz</a><br/>
+  > 3 │ <a href="../../external.html" rel="homepage">external homepage</a><br/>
+  > 4 │ </body></html>
+      │ ^^^^^^^^^^^^^^
+    5 │ 
+  
+  i Setting a lang attribute on HTML document elements configures the language used by screen readers when no user default is specified.
+  
+
+lint ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some warnings were emitted while running checks.
+  

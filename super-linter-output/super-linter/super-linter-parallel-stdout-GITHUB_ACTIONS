@@ -1,0 +1,20 @@
+.github/workflows/build.yml:47:9: shellcheck reported issue in this script: SC2046:warning:1:45: Quote this to prevent word splitting [shellcheck]
+   |
+47 |         run: |
+   |         ^~~~
+.github/workflows/build.yml:47:9: shellcheck reported issue in this script: SC2086:info:2:46: Double quote to prevent globbing and word splitting [shellcheck]
+   |
+47 |         run: |
+   |         ^~~~
+.github/workflows/build.yml:47:9: shellcheck reported issue in this script: SC2116:style:1:45: Useless echo? Instead of 'cmd $(echo foo)', just use 'cmd foo' [shellcheck]
+   |
+47 |         run: |
+   |         ^~~~
+.github/workflows/on-demand.yml:70:14: label "ubuntu-20.04" is unknown. available labels are "windows-latest", "windows-latest-8-cores", "windows-2025", "windows-2025-vs2026", "windows-2022", "windows-11-arm", "ubuntu-slim", "ubuntu-latest", "ubuntu-latest-4-cores", "ubuntu-latest-8-cores", "ubuntu-latest-16-cores", "ubuntu-24.04", "ubuntu-24.04-arm", "ubuntu-22.04", "ubuntu-22.04-arm", "macos-latest", "macos-latest-xlarge", "macos-latest-large", "macos-26-xlarge", "macos-26-large", "macos-26", "macos-15-intel", "macos-15-xlarge", "macos-15-large", "macos-15", "macos-14-xlarge", "macos-14-large", "macos-14", "self-hosted", "x64", "arm", "arm64", "linux", "macos", "windows", "vm-self-hosted". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]
+   |
+70 |     runs-on: ubuntu-20.04
+   |              ^~~~~~~~~~~~
+.github/workflows/on-demand.yml:147:14: label "ubuntu-20.04" is unknown. available labels are "windows-latest", "windows-latest-8-cores", "windows-2025", "windows-2025-vs2026", "windows-2022", "windows-11-arm", "ubuntu-slim", "ubuntu-latest", "ubuntu-latest-4-cores", "ubuntu-latest-8-cores", "ubuntu-latest-16-cores", "ubuntu-24.04", "ubuntu-24.04-arm", "ubuntu-22.04", "ubuntu-22.04-arm", "macos-latest", "macos-latest-xlarge", "macos-latest-large", "macos-26-xlarge", "macos-26-large", "macos-26", "macos-15-intel", "macos-15-xlarge", "macos-15-large", "macos-15", "macos-14-xlarge", "macos-14-large", "macos-14", "self-hosted", "x64", "arm", "arm64", "linux", "macos", "windows", "vm-self-hosted". if it is a custom label for self-hosted runner, set list of labels in actionlint.yaml config file [runner-label]
+    |
+147 |     runs-on: ubuntu-20.04
+    |              ^~~~~~~~~~~~

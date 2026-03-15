@@ -7,13 +7,14 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-name: Check Lastest CI versions
+name: Check Latest CI versions
 # yamllint disable-line rule:truthy
 on:
   schedule:
     - cron: "0 0 * * *"
   pull_request:
     types: [opened, synchronize, reopened, closed]
+permissions: read-all
 jobs:
   check-versions:
     permissions:

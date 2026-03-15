@@ -7,13 +7,14 @@
 # which accompanies this distribution, and is available at
 # http://www.apache.org/licenses/LICENSE-2.0
 ##############################################################################
-name: Check Lastest Distros
+name: Check Latest Distros
 # yamllint disable-line rule:truthy
 on:
   schedule:
     - cron: "0 0 6 * *"
   pull_request:
     types: [opened, synchronize, reopened, closed]
+permissions: read-all
 jobs:
   check-versions:
     permissions:
@@ -22,6 +23,8 @@ jobs:
     runs-on: vm-self-hosted
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+        with:
+          persist-credentials: false
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # 4.3.0
         with:
           path: ~/.vagrant.d/boxes

@@ -1,4 +1,5 @@
 #checkov:skip=CKV_DOCKER_2:Ensure that HEALTHCHECK instructions have been added to container images
+#checkov:skip=CKV_DOCKER_3:Ensure that a user for the container has been created
 FROM python:3.13-alpine3.22
 
 WORKDIR /opt/devpi

@@ -1,0 +1,4 @@
+/tmp/lint/mirror/devpi/Dockerfile
+/tmp/lint/mirror/apt-mirror/Dockerfile
+/tmp/lint/mirror/ntpd/Dockerfile
+/tmp/lint/mirror/nginx/Dockerfile

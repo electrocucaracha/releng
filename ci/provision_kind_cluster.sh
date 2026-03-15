@@ -42,21 +42,21 @@ $containerd_patch
 networking:
     kubeProxyMode: "ipvs"
 nodes:
-    - role: control-plane
-      image: kindest/node:${PKG_KUBECTL_VERSION:-v1.20.7}
-      kubeadmConfigPatches:
-          - |
-              kind: InitConfiguration
-              nodeRegistration:
-                  kubeletExtraArgs:
-                      node-labels: "ingress-ready=true"
-      extraPortMappings:
-          - containerPort: 80
-            hostPort: 80
-            protocol: TCP
-          - containerPort: 443
-            hostPort: 443
-            protocol: TCP
+    -   role: control-plane
+        image: kindest/node:${PKG_KUBECTL_VERSION:-v1.20.7}
+        kubeadmConfigPatches:
+            -   |
+                    kind: InitConfiguration
+                    nodeRegistration:
+                        kubeletExtraArgs:
+                            node-labels: "ingress-ready=true"
+        extraPortMappings:
+            -   containerPort: 80
+                hostPort: 80
+                protocol: TCP
+            -   containerPort: 443
+                hostPort: 443
+                protocol: TCP
 EOF
     mkdir -p "$HOME/.kube"
     sudo cp /root/.kube/config "$HOME/.kube/config"
@@ -68,12 +68,12 @@ EOF
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: local-registry-hosting
-  namespace: kube-public
+    name: local-registry-hosting
+    namespace: kube-public
 data:
-  localRegistryHosting.v1: |
-    host: "${PKG_DOCKER_REGISTRY_MIRRORS##*/}
-    help: "https://kind.sigs.k8s.io/docs/user/local-registry/"
+    localRegistryHosting.v1: |
+        host: "${PKG_DOCKER_REGISTRY_MIRRORS##*/}
+        help: "https://kind.sigs.k8s.io/docs/user/local-registry/"
 EOF
         # TODO: Try to use https://github.com/NextDeveloperTeam/kubernetes-webhooks/tree/main/docker-proxy-webhook solution
     fi

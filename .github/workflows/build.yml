@@ -44,9 +44,11 @@ jobs:
             ./mirror/nginx/Dockerfile
       - name: Determine changed services
         id: services
+        env:
+          ALL_MODIFIED_FILES: ${{ steps.changed-files.outputs.all_modified_files }}
         run: |
-          changed_services=$(jq -c -n --argjson files $(echo ${{ steps.changed-files.outputs.all_modified_files }}) '$files | map(sub("^mirror/";"") | sub("/Dockerfile$";"")) | map({service: .})')
-          echo "changed_services=$changed_services" >> $GITHUB_OUTPUT
+          changed_services=$(jq -c -n --argjson files "${ALL_MODIFIED_FILES}" '$files | map(sub("^mirror/";"") | sub("/Dockerfile$";"")) | map({service: .})')
+          echo "changed_services=$changed_services" >> "$GITHUB_OUTPUT"
   build:
     name: Push Docker images to Docker Hub
     runs-on: ubuntu-latest

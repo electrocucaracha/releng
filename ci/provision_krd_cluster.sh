@@ -32,5 +32,5 @@ export KRD_HUGEPAGES_ENABLED=false
 export KRD_ACTIONS_LIST=install_k8s,install_helm
 export KRD_HELM_VERSION=3
 
-# Provsion KRD cluster
+# Provision KRD cluster
 curl -fsSL http://bit.ly/KRDaio | bash

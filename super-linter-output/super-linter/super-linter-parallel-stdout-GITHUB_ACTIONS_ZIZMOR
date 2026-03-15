@@ -1,0 +1,421 @@
+info[template-injection]: code injection via template expansion
+  --> /tmp/lint/.github/workflows/build.yml:48:66
+   |
+47 |         run: |
+   |         --- this run block
+48 |           changed_services=$(jq -c -n --argjson files $(echo ${{ steps.changed-files.outputs.all_modified_files }}) '$files | map(su...
+   |                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/distros.yml:24:9
+   |
+24 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/linter.yml:20:9
+   |
+20 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/linter.yml:27:9
+   |
+27 |         - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |  _________^
+28 | |         with:
+29 | |           fetch-depth: 0
+   | |________________________^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/linter.yml:43:9
+   |
+43 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/linter.yml:10:1
+   |
+10 | / name: Lint Code Base
+11 | | # yamllint disable-line rule:truthy
+12 | | on:
+13 | |   push:
+...  |
+46 | |       - name: Run tox lint validation
+47 | |         run: tox -e lint
+   | |_________________________^ default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/linter.yml:16:3
+   |
+16 | /   check-broken-links:
+17 | |     name: Check documentation external links
+18 | |     runs-on: ubuntu-latest
+19 | |     steps:
+20 | |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+21 | |       - name: Check broken links
+22 | |         uses: gaurav-nelson/github-action-markdown-link-check@4a1af151f4d7cf4d8f8ac5780597672a3671b88b # 1.0.17
+   | |                                                                                                               ^
+   | |                                                                                                               |
+   | |_______________________________________________________________________________________________________________this job
+   |                                                                                                                 default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/linter.yml:23:3
+   |
+23 | /   check-super-linter:
+24 | |     name: Check syntax (super-linter)
+25 | |     runs-on: ubuntu-latest
+26 | |     steps:
+...  |
+37 | |           KUBERNETES_KUBECONFORM_OPTIONS: "-ignore-missing-schemas"
+38 | |           DEFAULT_BRANCH: ${{ github.head_ref || github.ref_name }}
+   | |                                                                   ^
+   | |                                                                   |
+   | |___________________________________________________________________this job
+   |                                                                     default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/linter.yml:39:3
+   |
+39 | /   check-tox:
+40 | |     name: Check syntax (tox)
+41 | |     runs-on: ubuntu-latest
+42 | |     steps:
+...  |
+46 | |       - name: Run tox lint validation
+47 | |         run: tox -e lint
+   | |                         ^
+   | |                         |
+   | |_________________________this job
+   |                           default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/on-demand.yml:33:9
+   |
+33 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/on-demand.yml:58:9
+   |
+58 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/on-demand.yml:82:9
+   |
+82 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+   --> /tmp/lint/.github/workflows/on-demand.yml:107:9
+    |
+107 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+    |
+    = note: audit confidence → Low
+    = note: this finding has an auto-fix
+    = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+   --> /tmp/lint/.github/workflows/on-demand.yml:156:9
+    |
+156 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+    |
+    = note: audit confidence → Low
+    = note: this finding has an auto-fix
+    = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[excessive-permissions]: overly broad permissions
+   --> /tmp/lint/.github/workflows/on-demand.yml:10:1
+    |
+ 10 | / name: Integration tests
+ 11 | | # yamllint disable-line rule:truthy
+ 12 | | on:
+ 13 | |   push:
+...   |
+177 | |         if: ${{ failure() }}
+178 | |         run: docker-compose -f mirror/docker-compose.yml logs
+    | |______________________________________________________________^ default permissions used due to no permissions: block
+    |
+    = note: audit confidence → Medium
+    = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/on-demand.yml:23:3
+   |
+23 | /   changes:
+24 | |     runs-on: ubuntu-latest
+25 | |     if: >-
+26 | |       ( github.event_name == 'pull_request_review' && github.event.review.state == 'approved' ) || github.event_name != 'pull_requ...
+...  |
+50 | |               - 'pre-install.sh'
+51 | |               - 'mirror/*'
+   | |                          ^
+   | |                          |
+   | |__________________________this job
+   |                            default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/on-demand.yml:52:3
+   |
+52 | /   check-format:
+53 | |     name: Check scripts format
+54 | |     if: needs.changes.outputs.scripts == 'true'
+55 | |     needs: changes
+...  |
+64 | |         with:
+65 | |           sh_checker_shellcheck_disable: true
+   | |                                             ^
+   | |                                             |
+   | |_____________________________________________this job
+   |                                               default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/on-demand.yml:66:3
+   |
+66 | /   check-ci-baremetal:
+67 | |     name: Check CI deployment on Ubuntu Bionic Virtual Environment
+68 | |     if: needs.changes.outputs.ci == 'true'
+69 | |     needs: changes
+...  |
+95 | |           kubectl get all -A -o wide
+96 | |           kubectl describe nodes
+   | |                                ^
+   | |                                |
+   | |________________________________this job
+   |                                  default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+   --> /tmp/lint/.github/workflows/on-demand.yml:97:3
+    |
+ 97 | /   check-e2e:
+ 98 | |     runs-on: vm-self-hosted
+ 99 | |     if: needs.changes.outputs.mirror == 'true' && needs.changes.outputs.cloud == 'true'
+100 | |     needs: changes
+...   |
+141 | |           VBoxManage list runningvms --long
+142 | |           cat ~/VirtualBox\ VMs/*/Logs/*.log
+    | |                                            ^
+    | |                                            |
+    | |____________________________________________this job
+    |                                              default permissions used due to no permissions: block
+    |
+    = note: audit confidence → Medium
+    = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+   --> /tmp/lint/.github/workflows/on-demand.yml:143:3
+    |
+143 | /   check-mirror-baremetal:
+144 | |     name: check mirror deployment on ubuntu bionic virtual environment
+145 | |     if: needs.changes.outputs.mirror == 'true'
+146 | |     needs: changes
+...   |
+177 | |         if: ${{ failure() }}
+178 | |         run: docker-compose -f mirror/docker-compose.yml logs
+    | |                                                              ^
+    | |                                                              |
+    | |______________________________________________________________this job
+    |                                                                default permissions used due to no permissions: block
+    |
+    = note: audit confidence → Medium
+    = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/rebase.yml:21:9
+   |
+21 |         - name: Checkout the latest code
+   |  _________^
+22 | |         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+23 | |         with:
+24 | |           token: ${{ secrets.GITHUB_TOKEN }}
+25 | |           fetch-depth: 0
+   | |________________________^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/rebase.yml:16:3
+   |
+16 | /   rebase:
+17 | |     name: Rebase
+18 | |     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase')
+19 | |     runs-on: ubuntu-latest
+...  |
+28 | |         env:
+29 | |           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   | |                                                    ^
+   | |                                                    |
+   | |____________________________________________________this job
+   |                                                      default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[archived-uses]: action or reusable workflow from archived repository
+  --> /tmp/lint/.github/workflows/rebase.yml:27:15
+   |
+26 |       - name: Automatic Rebase
+   |         ---------------------- this step
+27 |         uses: cirrus-actions/rebase@b87d48154a87a85666003575337e27b8cd65f691 # 1.8
+   |               ^^^^^^^^^^^^^^^^^^^^^ repository is archived
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#archived-uses
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/spell.yml:25:9
+   |
+25 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/spell.yml:33:9
+   |
+33 |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/spell.yml:10:1
+   |
+10 | / name: Run misspell
+11 | | # yamllint disable-line rule:truthy
+12 | | on:
+13 | |   push:
+...  |
+34 | |       - uses: igsekor/pyspelling-any@44278deea34ea69d8f0d5179ac409c140b0a2f5a # 1.0.5
+35 | |         name: Spellcheck
+   | |_________________________^ default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/spell.yml:21:3
+   |
+21 | /   check-reviewdog:
+22 | |     name: Check spelling (reviewdog)
+23 | |     runs-on: ubuntu-latest
+24 | |     steps:
+...  |
+27 | |         with:
+28 | |           github_token: ${{ secrets.github_token }}
+   | |                                                   ^
+   | |                                                   |
+   | |___________________________________________________this job
+   |                                                     default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[excessive-permissions]: overly broad permissions
+  --> /tmp/lint/.github/workflows/spell.yml:29:3
+   |
+29 | /   check-spellcheck:
+30 | |     name: Check spelling (pyspelling)
+31 | |     runs-on: ubuntu-latest
+32 | |     steps:
+33 | |       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+34 | |       - uses: igsekor/pyspelling-any@44278deea34ea69d8f0d5179ac409c140b0a2f5a # 1.0.5
+35 | |         name: Spellcheck
+   | |                         ^
+   | |                         |
+   | |_________________________this job
+   |                           default permissions used due to no permissions: block
+   |
+   = note: audit confidence → Medium
+   = help: audit documentation → https://docs.zizmor.sh/audits/#excessive-permissions
+
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --> /tmp/lint/.github/workflows/update.yml:24:9
+   |
+24 |         - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # 5.0.0
+   |  _________^
+25 | |         with:
+26 | |           # Fine-grained PAT with contents:write and workflows:write scopes
+27 | |           token: ${{ secrets.WORKFLOW_TOKEN }}
+   | |______________________________________________^ does not set persist-credentials: false
+   |
+   = note: audit confidence → Low
+   = note: this finding has an auto-fix
+   = help: audit documentation → https://docs.zizmor.sh/audits/#artipacked
+
+warning[secrets-outside-env]: secrets referenced without a dedicated environment
+  --> /tmp/lint/.github/workflows/update.yml:27:22
+   |
+18 |   check-versions:
+   |   -------------- this job
+...
+27 |           token: ${{ secrets.WORKFLOW_TOKEN }}
+   |                      ^^^^^^^^^^^^^^^^^^^^^^ secret is accessed outside of a dedicated environment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#secrets-outside-env
+
+54 findings (24 suppressed, 14 fixable): 1 informational, 0 low, 29 medium, 0 high
