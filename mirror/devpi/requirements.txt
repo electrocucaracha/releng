@@ -41,11 +41,11 @@ devpi-common==4.1.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.19.1
+devpi-server==6.19.2
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==5.0.1
+devpi-web==5.0.2
     # via -r mirror/devpi/requirements.in
 docutils==0.22.4
     # via
@@ -112,7 +112,9 @@ readme-renderer[md]==44.0
 repoze-lru==0.7
     # via devpi-server
 requests==2.32.5
-    # via devpi-common
+    # via
+    #   devpi-common
+    #   devpi-server
 ruamel-yaml==0.19.1
     # via devpi-server
 six==1.17.0
