@@ -14,7 +14,7 @@ bcrypt==5.0.0
     # via
     #   kolla-ansible
     #   passlib
-bindep==2.13.0
+bindep==2.14.0
     # via -r common/requirements.in
 certifi==2026.2.25
     # via requests
