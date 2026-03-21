@@ -69,7 +69,7 @@ jmespath==1.1.0
     #   openstacksdk
 jsonpatch==1.33
     # via openstacksdk
-jsonpointer==3.0.0
+jsonpointer==3.1.0
     # via jsonpatch
 keystoneauth1==5.13.1
     # via
