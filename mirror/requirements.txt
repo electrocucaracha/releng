@@ -38,7 +38,7 @@ pbr==7.0.3
     #   oslo-i18n
 pyyaml==6.0.3
     # via oslo-config
-requests==2.32.5
+requests==2.33.0
     # via
     #   docker
     #   oslo-config

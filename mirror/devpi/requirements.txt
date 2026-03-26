@@ -70,7 +70,7 @@ lazy==1.6
     # via
     #   devpi-common
     #   devpi-server
-nh3==0.3.3
+nh3==0.3.4
     # via readme-renderer
 packaging==26.0
     # via packaging-legacy
@@ -111,7 +111,7 @@ readme-renderer[md]==44.0
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
-requests==2.32.5
+requests==2.33.0
     # via
     #   devpi-common
     #   devpi-server
