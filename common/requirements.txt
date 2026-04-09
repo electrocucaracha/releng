@@ -22,7 +22,7 @@ cffi==2.0.0
     # via cryptography
 charset-normalizer==3.4.7
     # via requests
-cliff==4.13.2
+cliff==4.13.3
     # via
     #   kolla-ansible
     #   osc-lib
@@ -115,7 +115,7 @@ oslo-i18n==6.7.2
     #   python-openstackclient
 oslo-serialization==5.9.1
     # via python-keystoneclient
-oslo-utils==10.0.0
+oslo-utils==10.0.1
     # via
     #   kolla-ansible
     #   osc-lib
@@ -145,7 +145,7 @@ pbr==7.0.3
     #   python-cinderclient
     #   python-keystoneclient
     #   python-openstackclient
-platformdirs==4.9.4
+platformdirs==4.9.6
     # via openstacksdk
 prettytable==3.17.0
     # via
