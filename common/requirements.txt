@@ -6,7 +6,7 @@
 #
 ansible==2.9.27
     # via -r common/requirements.in
-ansible-core==2.19.8
+ansible-core==2.19.9
     # via kolla-ansible
 autopage==0.6.0
     # via cliff
