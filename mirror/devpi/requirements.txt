@@ -18,7 +18,7 @@ attrs==26.1.0
     #   devpi-web
 beautifulsoup4==4.14.3
     # via devpi-web
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   httpcore
     #   httpx
@@ -59,7 +59,7 @@ httpx==0.28.1
     # via devpi-server
 hupper==1.12.1
     # via pyramid
-idna==3.12
+idna==3.13
     # via
     #   anyio
     #   httpx

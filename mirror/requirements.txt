@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=mirror/requirements.txt mirror/requirements.in
 #
-certifi==2026.2.25
+certifi==2026.4.22
     # via requests
 charset-normalizer==3.4.7
     # via requests
@@ -14,9 +14,9 @@ docker-squash==1.2.2
     # via -r mirror/requirements.in
 gitdb==4.0.12
     # via gitpython
-gitpython==3.1.46
+gitpython==3.1.47
     # via kolla
-idna==3.12
+idna==3.13
     # via requests
 jinja2==3.1.6
     # via kolla
