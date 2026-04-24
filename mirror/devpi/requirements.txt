@@ -4,60 +4,62 @@
 #
 #    pip-compile --output-file=mirror/devpi/requirements.txt mirror/devpi/requirements.in
 #
-anyio==4.9.0
+anyio==4.13.0
     # via httpx
-argon2-cffi==23.1.0
+argon2-cffi==25.1.0
     # via
     #   devpi-server
     #   passlib
-argon2-cffi-bindings==21.2.0
+argon2-cffi-bindings==25.1.0
     # via argon2-cffi
-attrs==25.3.0
-    # via devpi-server
-beautifulsoup4==4.13.3
+attrs==26.1.0
+    # via
+    #   devpi-server
+    #   devpi-web
+beautifulsoup4==4.14.3
     # via devpi-web
-certifi==2025.1.31
+certifi==2026.4.22
     # via
     #   httpcore
     #   httpx
     #   requests
-cffi==1.17.1
+cffi==2.0.0
     # via
     #   argon2-cffi-bindings
     #   cmarkgfm
 chameleon==4.6.0
     # via pyramid-chameleon
-charset-normalizer==3.4.1
+charset-normalizer==3.4.7
     # via requests
-cmarkgfm==2024.11.20
+cmarkgfm==2025.10.22
     # via readme-renderer
 defusedxml==0.7.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-common==4.0.4
+devpi-common==4.1.1
     # via
     #   devpi-server
     #   devpi-web
-devpi-server==6.14.0
+devpi-server==6.19.3
     # via
     #   -r mirror/devpi/requirements.in
     #   devpi-web
-devpi-web==4.3.0
+devpi-web==5.0.2
     # via -r mirror/devpi/requirements.in
-docutils==0.21.2
+docutils==0.22.4
     # via
     #   devpi-web
     #   readme-renderer
-h11==0.14.0
+h11==0.16.0
     # via httpcore
-httpcore==1.0.7
+httpcore==1.0.9
     # via httpx
 httpx==0.28.1
     # via devpi-server
 hupper==1.12.1
     # via pyramid
-idna==3.10
+idna==3.13
     # via
     #   anyio
     #   httpx
@@ -68,9 +70,9 @@ lazy==1.6
     # via
     #   devpi-common
     #   devpi-server
-nh3==0.2.21
+nh3==0.3.4
     # via readme-renderer
-packaging==24.2
+packaging==26.1
     # via packaging-legacy
 packaging-legacy==23.0.post0
     # via devpi-common
@@ -84,21 +86,19 @@ plaster==1.1.2
     #   pyramid
 plaster-pastedeploy==1.0.1
     # via pyramid
-platformdirs==4.3.6
+platformdirs==4.9.6
     # via devpi-server
-pluggy==1.5.0
+pluggy==1.6.0
     # via devpi-server
 py==1.11.0
-    # via
-    #   devpi-server
-    #   devpi-web
-pycparser==2.22
+    # via devpi-server
+pycparser==3.0
     # via cffi
-pygments==2.19.1
+pygments==2.20.0
     # via
     #   devpi-web
     #   readme-renderer
-pyramid==2.0.2
+pyramid==2.1
     # via
     #   devpi-server
     #   devpi-web
@@ -111,27 +111,25 @@ readme-renderer[md]==44.0
     # via devpi-web
 repoze-lru==0.7
     # via devpi-server
-requests==2.32.3
-    # via devpi-common
-ruamel-yaml==0.18.10
+requests==2.33.1
+    # via
+    #   devpi-common
+    #   devpi-server
+ruamel-yaml==0.19.1
     # via devpi-server
-ruamel-yaml-clib==0.2.12
-    # via ruamel-yaml
 six==1.17.0
     # via python-dateutil
-sniffio==1.3.1
-    # via anyio
-soupsieve==2.6
+soupsieve==2.8.3
     # via beautifulsoup4
 strictyaml==1.7.3
     # via devpi-server
 translationstring==1.4
     # via pyramid
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via
     #   anyio
     #   beautifulsoup4
-urllib3==2.3.0
+urllib3==2.6.3
     # via requests
 venusian==3.1.1
     # via pyramid
@@ -141,9 +139,9 @@ webob==1.8.9
     # via pyramid
 whoosh==2.7.4
     # via devpi-web
-zope-deprecation==5.1
+zope-deprecation==6.0
     # via pyramid
-zope-interface==7.2
+zope-interface==8.3
     # via pyramid
 
 # The following packages are considered to be unsafe in a requirements file:
