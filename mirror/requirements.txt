@@ -30,7 +30,7 @@ oslo-config==10.3.0
     # via kolla
 oslo-i18n==6.7.2
     # via oslo-config
-packaging==26.1
+packaging==26.2
     # via docker-squash
 pbr==7.0.3
     # via

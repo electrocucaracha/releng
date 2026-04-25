@@ -27,9 +27,9 @@ cliff==4.13.3
     #   kolla-ansible
     #   osc-lib
     #   python-openstackclient
-cmd2==3.5.0
+cmd2==3.5.1
     # via cliff
-cryptography==46.0.7
+cryptography==47.0.0
     # via
     #   ansible
     #   ansible-core
@@ -122,7 +122,7 @@ oslo-utils==10.0.1
     #   oslo-serialization
     #   python-cinderclient
     #   python-keystoneclient
-packaging==26.1
+packaging==26.2
     # via
     #   ansible-core
     #   bindep

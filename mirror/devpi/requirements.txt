@@ -72,7 +72,7 @@ lazy==1.6
     #   devpi-server
 nh3==0.3.4
     # via readme-renderer
-packaging==26.1
+packaging==26.2
     # via packaging-legacy
 packaging-legacy==23.0.post0
     # via devpi-common
